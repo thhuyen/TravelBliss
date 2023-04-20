@@ -1,0 +1,49 @@
+@import "normalize.css";
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,100&family=Poppins:wght@200;500;700&display=swap");
+
+:root {
+    --primary-orange-50: #fef4ee;
+    --primary-orange-100: #fce6d8;
+    --primary-orange-200: #f9c9af;
+    --primary-orange-300: #f4a37d;
+    --primary-orange-400: #ef7348;
+    --primary-orange-500: #ea4e22;
+    --primary-orange-600: #dc381a;
+    --primary-orange-700: #b62818;
+    --primary-orange-800: #91221b;
+    --primary-orange-900: #751f19;
+
+    --grey-50: #f5f5f6;
+    --grey-100: #e4e5e9;
+    --grey-200: #cdd0d4;
+    --grey-300: #aaaeb6;
+    --grey-400: #7f8591;
+    --grey-500: #646976;
+    --grey-600: #555965;
+    --grey-700: #494b55;
+    --grey-800: #414349;
+    --grey-950: #28292e;
+
+    --button-color: var(--primary-orange-500);
+
+    --width-header: 1200px;
+    --height-header: 100px;
+    --height-footer-mini: 65px;
+}
+
+html {
+    font-size: 62.5%;
+}
+* {
+    margin: 0;
+    box-sizing: border-box;
+}
+body {
+    font-family: "Lato", sans-serif;
+    font-size: 1.6rem;
+    line-height: 1.5;
+    text-rendering: optimizeSpeed;
+}
+.icon {
+    cursor: pointer;
+}

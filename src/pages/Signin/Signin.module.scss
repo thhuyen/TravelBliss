@@ -1,0 +1,96 @@
+// ---------------- header ------------------
+.header {
+    display: flex;
+    justify-content: center;
+    height: var(--height-header);
+    box-shadow: 0 0 10px #ddd;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+.inner-header {
+    width: var(--width-header);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--primary-orange-500);
+    // background-color: #ccc;
+}
+.icon-header {
+    padding: 0 10px;
+}
+.logo {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+.language {
+    text-align: center;
+    cursor: pointer;
+}
+
+// -------------- body ---------------
+
+// ---------- sign in ----------
+.wrapper-signin {
+    position: absolute;
+    top: 25%;
+    right: 10%;
+}
+.signin_box {
+    width: 400px;
+    height: 415px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #ccc;
+    border-radius: 8px;
+
+    h2 {
+        margin-bottom: 20px;
+    }
+}
+.form-signin {
+    font-family: "Poppins", sans-serif;
+    .label-field,
+    .input-field,
+    button {
+        font-family: "Poppins", sans-serif;
+        display: block;
+    }
+
+    .input-field {
+        min-width: 357px;
+        padding: 8px;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        outline: none;
+        border: 1px solid black;
+    }
+
+    .checkbox-remember {
+        transform: scale(1.5);
+        margin-right: 10px;
+    }
+    .forget_password {
+        color: blue;
+        float: right;
+    }
+
+    button {
+        width: 100%;
+        color: white;
+        padding: 10px;
+        border: none;
+        margin: 20px 0;
+        outline: none;
+        background: var(--primary-orange-500);
+        cursor: pointer;
+    }
+
+    .ask-signup {
+        text-align: center;
+    }
+}
