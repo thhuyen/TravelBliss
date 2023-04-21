@@ -8,9 +8,11 @@
     left: 0;
     right: 0;
     top: 0;
+    z-index: 10;
+    background: white;
 }
 .inner-header {
-    width: var(--width-header);
+    width: var(--max-width);
     height: 100%;
     display: flex;
     justify-content: space-between;
@@ -19,7 +21,7 @@
     // background-color: #ccc;
 }
 .icon-header {
-    padding: 0 10px;
+    padding-right: 10px;
 }
 .logo {
     font-size: 2.5rem;
@@ -34,9 +36,14 @@
 
 // ---------- sign in ----------
 .wrapper-signin {
-    position: absolute;
-    top: 25%;
-    right: 10%;
+    width: 100%;
+    height: 77vh;
+    background-image: url("https://images.unsplash.com/photo-1588776873786-a51f317c3dbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    margin-top: var(--height-header);
+    padding-bottom: var(--height-footer-mini);
 }
 .signin_box {
     width: 400px;
@@ -45,15 +52,26 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: #ccc;
+    position: absolute;
+    top: 20%;
+    right: 10%;
+    background: white;
     border-radius: 8px;
 
     h2 {
-        margin-bottom: 20px;
+        margin-bottom: 10px;
     }
 }
 .form-signin {
     font-family: "Poppins", sans-serif;
+
+    .alert-wrong-authen {
+        visibility: hidden;
+        font-size: 1.4rem;
+        color: var(--primary-orange-500);
+        text-align: center;
+    }
+
     .label-field,
     .input-field,
     button {
@@ -65,9 +83,15 @@
         min-width: 357px;
         padding: 8px;
         border-radius: 8px;
-        margin-bottom: 30px;
         outline: none;
         border: 1px solid black;
+    }
+    .message-invalid {
+        visibility: hidden;
+        color: var(--primary-orange-500);
+        font-size: 1.3rem;
+        margin-top: 5px;
+        margin-bottom: 10px;
     }
 
     .checkbox-remember {
@@ -75,7 +99,7 @@
         margin-right: 10px;
     }
     .forget_password {
-        color: blue;
+        color: #1877f2;
         float: right;
     }
 
@@ -92,5 +116,9 @@
 
     .ask-signup {
         text-align: center;
+
+        a {
+            color: #1877f2;
+        }
     }
 }
