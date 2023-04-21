@@ -1,14 +1,12 @@
 import classNames from "classnames/bind";
+import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrain, faGlobe } from "@fortawesome/free-solid-svg-icons";
-import clsx from "clsx";
 import { Fragment, useEffect, useState, useMemo } from "react";
 import { useNavigate, Link, Routes, Route } from "react-router-dom";
 
 import styles from "./Signin.module.scss";
 import FooterMini from "~/components/Layout/components/FooterMini";
-import Signup from "../Signup";
-import ForgetPassword from "../ForgetPassword";
 
 const cx = classNames.bind(styles);
 
@@ -92,7 +90,7 @@ function Signin() {
                                 setValidEmail(true);
                                 setAuthen(true);
                             }}
-                            className={cx("input-field")}
+                            className={clsx(styles.inputField, "border")}
                             type="text"
                             spellCheck="false"
                             placeholder="example: abc@xyzmail.com"
@@ -112,14 +110,14 @@ function Signin() {
                                 setValidPassword(true);
                                 setAuthen(true);
                             }}
-                            className={cx("input-field")}
+                            className={clsx(styles.inputField, "border")}
                             type="password"
                         />
                         <p
                             className={cx("message-invalid")}
                             style={{ visibility: `${validPassword ? "" : "visible"}` }}
                         >
-                            {password === "" ? "Please fill out your password" : "Invalid password"}
+                            {password === "" ? "Please fill out your password" : "Invalid"}
                         </p>
 
                         <input type="checkbox" className={cx("checkbox-remember")} />
@@ -129,14 +127,18 @@ function Signin() {
                             Forget password?
                         </Link>
 
-                        <button onClick={handleLogin}>Sign in</button>
-
-                        <div className={cx("ask-signup")}>
-                            <span>
-                                Not a member? <Link to="/signup">Sign up</Link>
-                            </span>
-                        </div>
+                        <button
+                            className={clsx(styles.btnSignin, "btnActive")}
+                            onClick={handleLogin}
+                        >
+                            Sign in
+                        </button>
                     </form>
+                    <div className={cx("ask-signup")}>
+                        <span>
+                            Not a member? <Link to="/signup">Sign up</Link>
+                        </span>
+                    </div>
                 </div>
             </section>
 

@@ -4,6 +4,8 @@
 import Signin from "~/pages/Signin";
 import Signup from "~/pages/Signup";
 import ForgetPassword from "~/pages/ForgetPassword";
+import Vertification from "~/pages/Verification";
+import Congrats from "~/pages/Signin/Congrats";
 
 // dont need to login
 const publicRoutes = [
@@ -18,6 +20,14 @@ const publicRoutes = [
     {
         path: "/forget",
         component: ForgetPassword,
+    },
+    {
+        path: "/vertification",
+        component: Vertification,
+    },
+    {
+        path: "/congrats",
+        component: Congrats,
     },
 ];
 
