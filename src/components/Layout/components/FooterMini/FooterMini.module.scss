@@ -1,0 +1,32 @@
+.footer {
+    width: 100%;
+    height: var(--height-footer-mini);
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    color: var(--primary-orange-500);
+    font-weight: 600;
+    box-shadow: 0 0 10px #ccc;
+}
+.inner-footer {
+    width: var(--max-width);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.terms {
+    margin-left: 70px;
+    float: right;
+
+    span {
+        cursor: pointer;
+        padding-left: 20px;
+    }
+}
+.icon-media {
+    font-size: 2rem;
+    padding: 0 5px;
+    cursor: pointer;
+}
