@@ -46,7 +46,7 @@
     padding-bottom: var(--height-footer-mini);
 }
 .signin_box {
-    width: 400px;
+    width: 430px;
     height: 415px;
     display: flex;
     flex-direction: column;
@@ -56,11 +56,7 @@
     top: 20%;
     right: 10%;
     background: white;
-    border-radius: 8px;
-
-    h2 {
-        margin-bottom: 10px;
-    }
+    border-radius: var(--border-radius);
 }
 .form-signin {
     font-family: "Poppins", sans-serif;
@@ -70,28 +66,27 @@
         font-size: 1.4rem;
         color: var(--primary-orange-500);
         text-align: center;
+        margin: 5px 0;
     }
 
     .label-field,
-    .input-field,
+    .inputField,
     button {
         font-family: "Poppins", sans-serif;
         display: block;
     }
 
-    .input-field {
+    .inputField {
         min-width: 357px;
         padding: 8px;
-        border-radius: 8px;
+        border-radius: var(--border-radius);
         outline: none;
-        border: 1px solid black;
     }
     .message-invalid {
         visibility: hidden;
         color: var(--primary-orange-500);
         font-size: 1.3rem;
-        margin-top: 5px;
-        margin-bottom: 10px;
+        margin: 5px 0;
     }
 
     .checkbox-remember {
@@ -99,26 +94,19 @@
         margin-right: 10px;
     }
     .forget_password {
-        color: #1877f2;
+        color: var(--blue-link);
         float: right;
     }
 
-    button {
+    .btnSignin {
         width: 100%;
-        color: white;
-        padding: 10px;
-        border: none;
-        margin: 20px 0;
-        outline: none;
-        background: var(--primary-orange-500);
-        cursor: pointer;
+        margin: 15px 0;
     }
+}
+.ask-signup {
+    text-align: center;
 
-    .ask-signup {
-        text-align: center;
-
-        a {
-            color: #1877f2;
-        }
+    a {
+        color: var(--blue-link);
     }
 }

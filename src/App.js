@@ -5,7 +5,7 @@ import { publicRoutes, privateRoutes } from "~/routes";
 function App() {
     return (
         <Router>
-            <div className="App">
+            <div className="App" style={{ height: "100vh" }}>
                 <Routes>
                     {publicRoutes.map((route, index) => {
                         const Page = route.component;

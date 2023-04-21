@@ -24,12 +24,18 @@
     --grey-800: #414349;
     --grey-950: #28292e;
 
+    --green-100: #dbf0e5;
+    --green-600: #276955;
+    --blue-link: #1877f2;
+
     --button-color: var(--primary-orange-500);
 
     --max-width: 1200px;
 
     --height-header: 100px;
     --height-footer-mini: 65px;
+
+    --border-radius: 8px;
 }
 
 html {
@@ -47,4 +53,23 @@ body {
 }
 .icon {
     cursor: pointer;
+}
+button {
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all ease 0.3s;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+.btnActive {
+    color: white;
+    padding: 10px;
+    border: none;
+    outline: none;
+    background: var(--primary-orange-500);
+}
+.border {
+    border: 1px solid var(--grey-300);
 }
