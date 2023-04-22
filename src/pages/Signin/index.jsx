@@ -2,11 +2,12 @@ import classNames from "classnames/bind";
 import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrain, faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { Fragment, useEffect, useState, useMemo } from "react";
-import { useNavigate, Link, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
 import styles from "./Signin.module.scss";
 import FooterMini from "~/components/Layout/components/FooterMini";
+import { users } from "~/components/Data/users";
 
 const cx = classNames.bind(styles);
 
@@ -17,17 +18,8 @@ function Signin() {
     const [validPassword, setValidPassword] = useState(true);
     const [authen, setAuthen] = useState(true);
 
-    useEffect(() => {
-        const user = {
-            username: "anhtran@gmail.com",
-            password: "Anhtran@123",
-        };
-        localStorage.setItem("user", JSON.stringify(user));
-    }, []);
-
     const handleLogin = (e) => {
         e.preventDefault();
-        const user = JSON.parse(localStorage.getItem("user"));
 
         if (!email) {
             setValidEmail(false);
@@ -50,8 +42,12 @@ function Signin() {
             setValidPassword(true);
         }
 
-        if (email === user.username && password === user.password) {
-            window.location.href = "/signup";
+        const accountExist = users.filter(
+            (acc) => acc.email === email && acc.password === password,
+        );
+
+        if (accountExist.length > 0) {
+            window.location.href = "/home";
         } else {
             setAuthen(false);
         }
@@ -112,6 +108,7 @@ function Signin() {
                             }}
                             className={clsx(styles.inputField, "border")}
                             type="password"
+                            placeholder="********"
                         />
                         <p
                             className={cx("message-invalid")}

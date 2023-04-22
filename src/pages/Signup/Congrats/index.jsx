@@ -1,12 +1,9 @@
 import classNames from "classnames/bind";
-// import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 import styles from "./Congrats.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import { useState, useEffect, useMemo } from "react";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -17,13 +14,13 @@ function Congrats() {
                 <div className={cx("title")}>
                     <h2>Congrats</h2>
                 </div>
-                <div className={cx("guide-box")}>
-                    <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                    <span className={cx("guide-text")}>
-                        You have created account successfully. Please go back to Login page to
-                        proceed further.
-                    </span>
-                </div>
+
+                <BoxMessage
+                    text={
+                        "You have created account successfully. Please go back to Login page to proceed further."
+                    }
+                />
+
                 <Link to="/">
                     <button className={cx(styles.btnSubmit, "btnActive")}>To Signin page</button>
                 </Link>

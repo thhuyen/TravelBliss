@@ -6,6 +6,7 @@ import Signup from "~/pages/Signup/Main";
 import ForgetPassword from "~/pages/ForgetPassword";
 import Vertification from "~/pages/Signup/Verification";
 import Congrats from "~/pages/Signup/Congrats";
+import Home from "~/pages/Home";
 
 // dont need to login
 const publicRoutes = [
@@ -32,6 +33,11 @@ const publicRoutes = [
 ];
 
 // must login to view info
-const privateRoutes = [];
+const privateRoutes = [
+    {
+        path: "/home",
+        component: Home,
+    },
+];
 
 export { publicRoutes, privateRoutes };

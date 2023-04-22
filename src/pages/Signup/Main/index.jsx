@@ -1,10 +1,10 @@
 import classNames from "classnames/bind";
-import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import { useState } from "react";
 
 const cx = classNames.bind(styles);
 function Signup() {
@@ -15,6 +15,7 @@ function Signup() {
             fullname: "",
             birthday: "",
             phone: "",
+            accept: false,
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -33,14 +34,13 @@ function Signup() {
                     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
                     "Phone number is not valid",
                 ),
+            accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
-        onSubmit: (values, actions) => {
+        onSubmit: (values) => {
+            localStorage.setItem("newAccount", JSON.stringify(values));
             window.location.href = "/vertification";
         },
     });
-    // const handleSubmit = (e) => {
-    //     e.preventDefault();
-    // };
 
     return (
         <AuthenLayout img="https://images.unsplash.com/photo-1588776873786-a51f317c3dbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80">
@@ -50,7 +50,7 @@ function Signup() {
             </div>
 
             <form onSubmit={formik.handleSubmit}>
-                <label>Full name *</label>
+                <label htmlFor="fullname">Full name *</label>
                 <input
                     id="fullname"
                     name="fullname"
@@ -94,7 +94,7 @@ function Signup() {
                     {formik.errors.date || "nothing"}
                 </p>
 
-                <label>Email *</label>
+                <label htmlFor="email">Email *</label>
                 <input
                     id="email"
                     name="email"
@@ -115,7 +115,7 @@ function Signup() {
                 >
                     {formik.errors.email || "nothing"}
                 </p>
-                <label>Phone number *</label>
+                <label htmlFor="phone">Phone number *</label>
                 <input
                     id="phone"
                     name="phone"
@@ -137,7 +137,7 @@ function Signup() {
                     {formik.errors.phone || "nothing"}
                 </p>
 
-                <label>Password *</label>
+                <label htmlFor="password">Password *</label>
                 <input
                     id="password"
                     name="password"
@@ -159,8 +159,8 @@ function Signup() {
                     {formik.errors.password || "nothing"}
                 </p>
 
-                <input type="checkbox" />
-                <label className={cx("ask-agree")}>
+                <input id="accept" type="checkbox" name="accept" onChange={formik.handleChange} />
+                <label className={cx("ask-agree")} htmlFor="accept">
                     I agree to the <a href="/">Terms and Conditions</a>.
                 </label>
 
