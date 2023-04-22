@@ -4,12 +4,10 @@ import * as Yup from "yup";
 import { Link } from "react-router-dom";
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
+import { useState } from "react";
 
 const cx = classNames.bind(styles);
 function Signup() {
-    function formatDate(date) {
-        return new Date(date).toLocaleDateString();
-    }
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -28,10 +26,7 @@ function Signup() {
             fullname: Yup.string()
                 .min(5, "Full name must be at least 5 characters")
                 .required("Please fill out your full name"),
-            birthday: Yup.date().min(
-                Yup.ref("originalEndDate"),
-                ({ min }) => `Date needs to be before ${formatDate(min)}!!`,
-            ),
+
             phone: Yup.string()
                 .required("Please fill out your phone number")
                 .matches(
@@ -40,9 +35,12 @@ function Signup() {
                 ),
         }),
         onSubmit: (values, actions) => {
-            // actions.setSubmitting(false);
+            window.location.href = "/vertification";
         },
     });
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    // };
 
     return (
         <AuthenLayout img="https://images.unsplash.com/photo-1588776873786-a51f317c3dbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80">
@@ -51,7 +49,7 @@ function Signup() {
                 <h2>Vietnam Railways</h2>
             </div>
 
-            <form method="post">
+            <form onSubmit={formik.handleSubmit}>
                 <label>Full name *</label>
                 <input
                     id="fullname"
@@ -166,7 +164,11 @@ function Signup() {
                     I agree to the <a href="/">Terms and Conditions</a>.
                 </label>
 
-                <button type="submit" className={cx(styles.btnSignup, "btnActive")}>
+                <button
+                    type="submit"
+                    disabled={formik.isSubmitting || !formik.isValid}
+                    className={cx(styles.btnSignup, "btnActive")}
+                >
                     SIGN UP
                 </button>
             </form>

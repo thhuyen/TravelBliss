@@ -5,7 +5,7 @@ import Signin from "~/pages/Signin";
 import Signup from "~/pages/Signup";
 import ForgetPassword from "~/pages/ForgetPassword";
 import Vertification from "~/pages/Verification";
-import Congrats from "~/pages/Signin/Congrats";
+import Congrats from "~/pages/Congrats";
 
 // dont need to login
 const publicRoutes = [
