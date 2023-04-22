@@ -1,12 +1,10 @@
 import classNames from "classnames/bind";
-// import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
 
 import styles from "./Vertification.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import { useState, useEffect, useMemo } from "react";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -66,13 +64,11 @@ function Vertification() {
                 <div className={cx("title")}>
                     <h2>Verification</h2>
                 </div>
-                <div className={cx("guide-box")}>
-                    <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                    <span className={cx("guide-text")}>
-                        Please check your e-mail account for the verification code we just sent you
-                        and enter that code in the box below.
-                    </span>
-                </div>
+                <BoxMessage
+                    text={
+                        "Please check your e-mail account for the verification code we just sent you and enter that code in the box below."
+                    }
+                />
 
                 <p>Verification code</p>
                 <div className={cx("box-code")}>
