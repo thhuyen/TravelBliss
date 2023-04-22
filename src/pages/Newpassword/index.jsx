@@ -1,10 +1,9 @@
-import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./Newpassword.module.scss";
@@ -21,34 +20,20 @@ function Newpassword() {
         },
         validationSchema: Yup.object().shape({
             password: Yup.string()
-                .min(8, "Password must be at least 8 characters")
-                .required("Please enter your password")
-                .matches(
-                    "^(?=.*[A-Za-z])(?=.*d)[A-Za-zd@$!%*#?&]{8,}$",
-                    "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number",
-                ),
-            confirmPassword: Yup.string().required("Please confirm your password"),
+                .min(8, "Password must be 8 characters long")
+                .matches(/[0-9]/, "Password requires a number")
+                .matches(/[a-z]/, "Password requires a lowercase letter")
+                .matches(/[A-Z]/, "Password requires an uppercase letter"),
+
+            confirmPassword: Yup.string().oneOf([Yup.ref("pass"), null], "Password is not matched"),
         }),
     });
 
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setconfirmPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
+    // const [errorMessage, setErrorMessage] = useState("");
 
-    const handleconfirmPasswordChange = (e) => {
-        setconfirmPassword(e.target.value);
-    };
     const handleSubmit = (event) => {
         event.preventDefault();
-
-        if (password !== confirmPassword) {
-            setErrorMessage("Your passwords do not match. Please try again!");
-        } else {
-            navigate("/successnewpassword", { replace: true });
-        }
+        navigate("/successnewpassword", { replace: true });
     };
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
@@ -64,68 +49,55 @@ function Newpassword() {
                             at least one uppercase, one lowercase and a number.
                         </span>
                     </div>
-                    <div>
-                        <label>Enter New Password </label>
+
+                    <form>
                         <div>
+                            <label>Enter New Password </label>
+                            <div>
+                                <input
+                                    id="password"
+                                    name="password"
+                                    className={cx(styles.inputFullwidth, "border")}
+                                    type="password"
+                                    placeholder="********"
+                                    onChange={formik.handleChange}
+                                    onBlur={formik.handleBlur}
+                                    value={formik.values.password}
+                                />
+                                {formik.errors.password && formik.touched.password && (
+                                    <p className={cx("errormessage")}>{formik.errors.password}</p>
+                                )}
+                            </div>
+                        </div>
+                        <div>
+                            <label>Confirm New Password </label>
                             <input
-                                id="password"
-                                name="password"
+                                id="confirmPassword"
+                                name="confirmPassword"
                                 className={cx(styles.inputFullwidth, "border")}
                                 type="password"
                                 placeholder="********"
-                                onChange={handlePasswordChange}
+                                onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
-                                value={password}
+                                value={formik.values.confirmPassword}
                             />
-
-                            <p
-                                className={cx("message-invalid")}
-                                style={{
-                                    visibility: `${
-                                        formik.errors.password && formik.touched.password
-                                            ? "visible"
-                                            : "hidden"
-                                    }`,
-                                }}
-                            >
-                                {formik.errors.password || "nothing"}
-                            </p>
+                            {formik.errors.confirmPassword && formik.touched.confirmPassword && (
+                                <p className={cx("errormessage")}>
+                                    {formik.errors.confirmPassword}
+                                </p>
+                            )}
                         </div>
-                    </div>
-                    <div>
-                        <label>Confirm New Password </label>
-                        <input
-                            id="confirmPassword"
-                            name="confirmPassword"
-                            className={cx(styles.inputFullwidth, "border")}
-                            type="password"
-                            placeholder="********"
-                            onChange={handleconfirmPasswordChange}
-                            onBlur={formik.handleBlur}
-                            value={confirmPassword}
-                        />
-                        <p
-                            className={cx("message-invalid")}
-                            style={{
-                                visibility: `${
-                                    formik.touched.confirmPassword ? "visible" : "hidden"
-                                }`,
-                            }}
-                        >
-                            {formik.errors.confirmPassword || "nothing"}
-                        </p>
-                    </div>
-                    {errorMessage && <div className={cx("errormessage")}>{errorMessage}</div>}
 
-                    <div className={cx("button")}>
-                        <Link to="/">
-                            <button className={cx("btn-left")}>Cancel</button>
-                        </Link>
+                        <div className={cx("button")}>
+                            <Link to="/">
+                                <button className={cx("btn-left")}>Cancel</button>
+                            </Link>
 
-                        <button className={cx("btn-right")} onClick={handleSubmit}>
-                            Continue
-                        </button>
-                    </div>
+                            <button onClick={handleSubmit} className={cx("btn-right")}>
+                                Continue
+                            </button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </AuthenLayout>
