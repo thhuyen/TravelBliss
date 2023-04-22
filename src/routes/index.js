@@ -2,10 +2,10 @@
 // import { HeaderOnly } from "~/components/Layout";
 
 import Signin from "~/pages/Signin";
-import Signup from "~/pages/Signup";
+import Signup from "~/pages/Signup/Main";
 import ForgetPassword from "~/pages/ForgetPassword";
-import Vertification from "~/pages/Verification";
-import Congrats from "~/pages/Congrats";
+import Vertification from "~/pages/Signup/Verification";
+import Congrats from "~/pages/Signup/Congrats";
 
 // dont need to login
 const publicRoutes = [
