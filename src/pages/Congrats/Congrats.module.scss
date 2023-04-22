@@ -1,0 +1,30 @@
+.inner {
+    padding: 100px 0;
+}
+.title {
+    text-align: center;
+
+    h2 {
+        font-weight: 700;
+        font-size: 4.8rem;
+        font-family: "Lato", sans-serif;
+    }
+}
+.guide-box {
+    display: flex;
+    align-items: center;
+    background: var(--green-100);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin: 15px 0;
+}
+.icon-infor {
+    margin-right: 20px;
+}
+.guide-text {
+    font-size: 1.4rem;
+    color: var(--green-600);
+}
+.btnSubmit {
+    width: 100%;
+}
