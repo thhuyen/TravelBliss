@@ -1,13 +1,11 @@
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
-import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+
 import * as Yup from "yup";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./Newpassword.module.scss";
-// import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -42,13 +40,11 @@ function Newpassword() {
                     <h2>Choose a new password</h2>
                 </div>
                 <div className={cx("guide")}>
-                    <div className={cx("guide-box")}>
-                        <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                        <span className={cx("guide-text")}>
-                            Create a new password that has an eight-character password that contains
-                            at least one uppercase, one lowercase and a number.
-                        </span>
-                    </div>
+                    <BoxMessage
+                        text={
+                            "Create a new password that has an eight-character password that contains at least one uppercase, one lowercase and a number."
+                        }
+                    />
 
                     <form>
                         <div>

@@ -1,12 +1,9 @@
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
-import { useFormik } from "formik";
-import { useEffect, useState } from "react";
+
 import { Link } from "react-router-dom";
-import * as Yup from "yup";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./SuccessNewPassword.module.scss";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -18,13 +15,12 @@ function SuccessNewPassword() {
                     <h2>Congrats!</h2>
                 </div>
                 <div className={cx("guide")}>
-                    <div className={cx("guide-box")}>
-                        <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                        <span className={cx("guide-text")}>
-                            Your password have been changed successfully. Please go back to Sign-in
-                            page to proceed further.
-                        </span>
-                    </div>
+                    <BoxMessage
+                        text={
+                            "Your password have been changed successfully. Please go back to Sign-in page to proceed further."
+                        }
+                    />
+
                     <Link to="/">
                         <button className={cx(styles.btnSubmit, "btnActive")}>
                             {" "}
