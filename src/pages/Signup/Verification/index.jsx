@@ -1,22 +1,19 @@
 import classNames from "classnames/bind";
-// import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
 
 import styles from "./Vertification.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import { useState, useEffect, useMemo } from "react";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
 function Vertification() {
-    const randomCode = () => Math.floor(100000 + Math.random() * 900000);
-
     const [count, setCount] = useState(10);
-    const [countOTP, setCountOTP] = useState(10);
+    const [countOTP, setCountOTP] = useState(90);
     const [code, setCode] = useState("");
-    const [OTP, setOTP] = useState(randomCode);
+    const [valid, setValid] = useState(true);
+    const [OTP, setOTP] = useState(() => Math.floor(100000 + Math.random() * 900000).toString());
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -32,10 +29,20 @@ function Vertification() {
         return () => clearInterval(interval);
     }, [count, countOTP]);
 
+    // set time out valid OTP
     useEffect(() => {
         const timeoutOTP = setTimeout(() => {
-            setOTP(undefined);
-        }, 10000);
+            setValid(false);
+        }, 90000);
+
+        // set cookie to view data
+        function createCookie(name, value, second) {
+            var date = new Date();
+            date.setTime(date.getTime() + second * 1000);
+            var expires = "; expires=" + date.toGMTString();
+            document.cookie = name + "=" + value + expires + "; path=/";
+        }
+        createCookie("otp", OTP, 90);
 
         // clean up
         return () => clearInterval(timeoutOTP);
@@ -45,8 +52,9 @@ function Vertification() {
     const handleResend = () => {
         if (count === 0) {
             setCount(10);
+            setValid(true);
             setCountOTP(90);
-            setOTP(randomCode);
+            setOTP(Math.floor(100000 + Math.random() * 900000).toString());
         }
     };
 
@@ -56,13 +64,11 @@ function Vertification() {
                 <div className={cx("title")}>
                     <h2>Verification</h2>
                 </div>
-                <div className={cx("guide-box")}>
-                    <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                    <span className={cx("guide-text")}>
-                        Please check your e-mail account for the verification code we just sent you
-                        and enter that code in the box below.
-                    </span>
-                </div>
+                <BoxMessage
+                    text={
+                        "Please check your e-mail account for the verification code we just sent you and enter that code in the box below."
+                    }
+                />
 
                 <p>Verification code</p>
                 <div className={cx("box-code")}>
@@ -83,7 +89,7 @@ function Vertification() {
                     OTP valid (<span>{countOTP}</span>s)
                 </p>
 
-                {code === OTP ? (
+                {code === OTP && valid ? (
                     <Link to="/congrats">
                         <button className={cx(styles.btnSubmit, "btnActive")}>SUBMIT</button>
                     </Link>

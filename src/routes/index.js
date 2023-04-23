@@ -2,13 +2,18 @@
 // import { HeaderOnly } from "~/components/Layout";
 
 import Signin from "~/pages/Signin";
-import Signup from "~/pages/Signup";
+import Signup from "~/pages/Signup/Main";
 import ForgetPassword from "~/pages/ForgetPassword";
-import Vertification from "~/pages/Verification";
-import Congrats from "~/pages/Signin/Congrats";
+
+
 import VerificationPassword from "~/pages/VerificationPassword";
 import Newpassword from "~/pages/Newpassword";
 import SuccessNewPassword from "~/pages/SuccessNewPassword";
+
+import Vertification from "~/pages/Signup/Verification";
+import Congrats from "~/pages/Signup/Congrats";
+import Home from "~/pages/Home";
+
 
 // dont need to login
 const publicRoutes = [
@@ -48,6 +53,11 @@ const publicRoutes = [
 ];
 
 // must login to view info
-const privateRoutes = [];
+const privateRoutes = [
+    {
+        path: "/home",
+        component: Home,
+    },
+];
 
 export { publicRoutes, privateRoutes };

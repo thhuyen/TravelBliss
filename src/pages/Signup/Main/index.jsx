@@ -1,15 +1,13 @@
 import classNames from "classnames/bind";
-import { Formik, Form, Field, useFormik, ErrorMessage } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 
 const cx = classNames.bind(styles);
 function Signup() {
-    function formatDate(date) {
-        return new Date(date).toLocaleDateString();
-    }
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -17,6 +15,7 @@ function Signup() {
             fullname: "",
             birthday: "",
             phone: "",
+            accept: false,
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -28,19 +27,18 @@ function Signup() {
             fullname: Yup.string()
                 .min(5, "Full name must be at least 5 characters")
                 .required("Please fill out your full name"),
-            birthday: Yup.date().min(
-                Yup.ref("originalEndDate"),
-                ({ min }) => `Date needs to be before ${formatDate(min)}!!`,
-            ),
+
             phone: Yup.string()
                 .required("Please fill out your phone number")
                 .matches(
                     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
                     "Phone number is not valid",
                 ),
+            accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
-        onSubmit: (values, actions) => {
-            // actions.setSubmitting(false);
+        onSubmit: (values) => {
+            localStorage.setItem("newAccount", JSON.stringify(values));
+            window.location.href = "/vertification";
         },
     });
 
@@ -51,8 +49,8 @@ function Signup() {
                 <h2>Vietnam Railways</h2>
             </div>
 
-            <form method="post">
-                <label>Full name *</label>
+            <form onSubmit={formik.handleSubmit}>
+                <label htmlFor="fullname">Full name *</label>
                 <input
                     id="fullname"
                     name="fullname"
@@ -96,7 +94,7 @@ function Signup() {
                     {formik.errors.date || "nothing"}
                 </p>
 
-                <label>Email *</label>
+                <label htmlFor="email">Email *</label>
                 <input
                     id="email"
                     name="email"
@@ -117,7 +115,7 @@ function Signup() {
                 >
                     {formik.errors.email || "nothing"}
                 </p>
-                <label>Phone number *</label>
+                <label htmlFor="phone">Phone number *</label>
                 <input
                     id="phone"
                     name="phone"
@@ -139,7 +137,7 @@ function Signup() {
                     {formik.errors.phone || "nothing"}
                 </p>
 
-                <label>Password *</label>
+                <label htmlFor="password">Password *</label>
                 <input
                     id="password"
                     name="password"
@@ -161,12 +159,16 @@ function Signup() {
                     {formik.errors.password || "nothing"}
                 </p>
 
-                <input type="checkbox" />
-                <label className={cx("ask-agree")}>
+                <input id="accept" type="checkbox" name="accept" onChange={formik.handleChange} />
+                <label className={cx("ask-agree")} htmlFor="accept">
                     I agree to the <a href="/">Terms and Conditions</a>.
                 </label>
 
-                <button type="submit" className={cx(styles.btnSignup, "btnActive")}>
+                <button
+                    type="submit"
+                    disabled={formik.isSubmitting || !formik.isValid}
+                    className={cx(styles.btnSignup, "btnActive")}
+                >
                     SIGN UP
                 </button>
             </form>
