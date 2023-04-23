@@ -7,6 +7,7 @@ import Banner from "~/components/Layout/components/Banner";
 import StepChain from "~/components/Layout/components/StepChain";
 import styles from "./FirstStep.module.scss";
 import InforTicker from "~/components/Layout/components/InforTicker";
+import FooterMini from "~/components/Layout/components/FooterMini";
 
 const cx = classNames.bind(styles);
 
@@ -21,6 +22,8 @@ function FirstStep() {
             <InforTicker />
             <InforTicker />
             <InforTicker />
+
+            <FooterMini />
         </div>
     );
 }

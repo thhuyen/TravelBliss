@@ -3,11 +3,12 @@
     height: var(--height-footer-mini);
     display: flex;
     justify-content: center;
-    position: absolute;
-    bottom: 0;
+    // position: absolute;
+    // bottom: 0;
     color: var(--primary-orange-500);
     font-weight: 500;
     box-shadow: 0 0 10px #ccc;
+    background: white;
 }
 .inner-footer {
     width: var(--max-width);
