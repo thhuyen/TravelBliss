@@ -1,23 +1,17 @@
-import styles from "./FooterMini.module.scss";
 import classNames from "classnames/bind";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faLinkedin, faTwitterSquare } from "@fortawesome/free-brands-svg-icons";
 
-import { Fragment, useState } from "react";
+import stylesFooterMini from "./FooterMini.module.scss";
 
-const cx = classNames.bind(styles);
+const cfxootermini = classNames.bind(stylesFooterMini);
 
 function FooterMini() {
     return (
-        <footer className={cx("footer")}>
-            <div className={cx("inner-footer")}>
-                <span>Copyright 2023 VietnamRailways. All rights reserved.</span>
+        <footer className={cfxootermini("footer")}>
+            <div className={cfxootermini("inner-footer")}>
+                <span>Copyright 2023 TravelBliss. All rights reserved.</span>
 
-                <div className={cx("inner-right")}>
-                    <FontAwesomeIcon className={cx("icon-media")} icon={faLinkedin} />
-                    <FontAwesomeIcon className={cx("icon-media")} icon={faTwitterSquare} />
-
-                    <div className={cx("terms")}>
+                <div className={cfxootermini("inner-right")}>
+                    <div className={cfxootermini("terms")}>
                         <span>Privacy Policy</span>
                         <span>Data & Security</span>
                         <span>Terms of Service</span>

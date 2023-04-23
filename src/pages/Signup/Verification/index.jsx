@@ -35,14 +35,7 @@ function Vertification() {
             setValid(false);
         }, 90000);
 
-        // set cookie to view data
-        function createCookie(name, value, second) {
-            var date = new Date();
-            date.setTime(date.getTime() + second * 1000);
-            var expires = "; expires=" + date.toGMTString();
-            document.cookie = name + "=" + value + expires + "; path=/";
-        }
-        createCookie("otp", OTP, 90);
+        console.log(OTP);
 
         // clean up
         return () => clearInterval(timeoutOTP);
@@ -64,6 +57,7 @@ function Vertification() {
                 <div className={cx("title")}>
                     <h2>Verification</h2>
                 </div>
+                <div className={cx("sign-in-button")}></div>
                 <BoxMessage
                     text={
                         "Please check your e-mail account for the verification code we just sent you and enter that code in the box below."
