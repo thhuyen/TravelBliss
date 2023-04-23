@@ -53,7 +53,7 @@ function Signup() {
         <AuthenLayout img="https://images.unsplash.com/photo-1588776873786-a51f317c3dbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80">
             <div className={cx("title")}>
                 <h2>Welcome to</h2>
-                <h2>Vietnam Railways</h2>
+                <h2 className={cx("title-brand")}>TravelBliss</h2>
             </div>
 
             <form onSubmit={formik.handleSubmit}>

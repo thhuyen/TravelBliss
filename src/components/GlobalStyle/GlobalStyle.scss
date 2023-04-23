@@ -73,3 +73,8 @@ button:hover {
 .border {
     border: 1px solid var(--grey-300);
 }
+.d-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

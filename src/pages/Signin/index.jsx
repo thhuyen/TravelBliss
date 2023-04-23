@@ -19,6 +19,7 @@ function Signin() {
     const [validPassword, setValidPassword] = useState(true);
     const [authen, setAuthen] = useState(true);
 
+    // console.log(users);
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -53,13 +54,14 @@ function Signin() {
             setAuthen(false);
         }
     };
+
     return (
         <>
             <header className={cx("header")}>
                 <div className={cx("inner-header")}>
                     <div className={cx("logo")}>
                         <FontAwesomeIcon icon={faTrain} className={cx("icon-header")} />
-                        <span>VietnamRailways</span>
+                        <span>TravelBliss</span>
                     </div>
                     <div className={cx("language")}>
                         <FontAwesomeIcon icon={faGlobe} />

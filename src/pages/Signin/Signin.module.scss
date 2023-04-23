@@ -57,6 +57,12 @@
     right: 10%;
     background: white;
     border-radius: var(--border-radius);
+
+    h2 {
+        font-size: 3.5rem;
+        font-weight: 600;
+        font-family: "Lato", sans-serif;
+    }
 }
 .form-signin {
     font-family: "Poppins", sans-serif;
