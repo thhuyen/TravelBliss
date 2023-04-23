@@ -1,12 +1,12 @@
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import * as Yup from "yup";
+
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./ForgetPassword.module.scss";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -41,12 +41,9 @@ function ForgetPassword() {
                     <h2>Forgot Password</h2>
                 </div>
                 <div className={cx("guide")}>
-                    <div className={cx("guide-box")}>
-                        <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                        <span className={cx("guide-text")}>
-                            Please enter your email address to search for your account.
-                        </span>
-                    </div>
+                    <BoxMessage
+                        text={"Please enter your email address to search for your account."}
+                    />
                     <div>
                         <form>
                             {/* onSubmit={handleSubmit} */}

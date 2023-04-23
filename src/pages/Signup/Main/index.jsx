@@ -2,13 +2,14 @@ import classNames from "classnames/bind";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 
 const cx = classNames.bind(styles);
 function Signup() {
+    const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -23,8 +24,13 @@ function Signup() {
                 .email("Invalid email address")
                 .required("Please fill out your email"),
             password: Yup.string()
+                .required("Please fill out your password")
                 .min(8, "Password must be at least 8 characters")
-                .required("Please fill out your password"),
+                .max(20, "Password must be less than 20 characters")
+                .matches(/[0-9]/, "Password requires a number")
+                .matches(/[a-z]/, "Password requires a lowercase letter")
+                .matches(/[A-Z]/, "Password requires an uppercase letter")
+                .matches(/[^\w]/, "Password requires a symbol"),
             fullname: Yup.string()
                 .min(5, "Full name must be at least 5 characters")
                 .required("Please fill out your full name"),
@@ -39,7 +45,7 @@ function Signup() {
         }),
         onSubmit: (values) => {
             localStorage.setItem("newAccount", JSON.stringify(values));
-            window.location.href = "/vertification";
+            navigate("/vertification", { replace: true });
         },
     });
 
@@ -162,7 +168,7 @@ function Signup() {
 
                 <input id="accept" type="checkbox" name="accept" onChange={formik.handleChange} />
                 <label className={cx("ask-agree")} htmlFor="accept">
-                    I agree to the <a href="/">Terms and Conditions</a>.
+                    I agree to the <Link to="*">Terms and Conditions</Link>.
                 </label>
 
                 <button

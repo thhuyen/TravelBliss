@@ -1,10 +1,10 @@
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./VerificationPassword.module.scss";
+import BoxMessage from "~/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
@@ -41,13 +41,11 @@ function VerificationPassword() {
                     <h2>Verification</h2>
                 </div>
                 <div className={cx("guide")}>
-                    <div className={cx("guide-box")}>
-                        <FontAwesomeIcon icon={faCircleInfo} className={cx("icon-infor")} />
-                        <span className={cx("guide-text")}>
-                            Please check your e-mail account for the verification code we just sent
-                            you and enter that code in the box below. Your code is 6 numbers long.
-                        </span>
-                    </div>
+                    <BoxMessage
+                        text={
+                            "Please check your e-mail account for the verification code we just sent you and enter that code in the box below. Your code is 6 numbers long."
+                        }
+                    />
                     <div>
                         <form>
                             <label className={cx("")} htmlFor="code">

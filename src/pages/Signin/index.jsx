@@ -3,7 +3,7 @@ import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrain, faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import styles from "./Signin.module.scss";
 import FooterMini from "~/components/Layout/components/FooterMini";
@@ -12,6 +12,7 @@ import { users } from "~/components/Data/users";
 const cx = classNames.bind(styles);
 
 function Signin() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [validEmail, setValidEmail] = useState(true);
@@ -48,7 +49,7 @@ function Signin() {
         );
 
         if (accountExist.length > 0) {
-            window.location.href = "/home";
+            navigate("/home", { replace: true });
         } else {
             setAuthen(false);
         }
