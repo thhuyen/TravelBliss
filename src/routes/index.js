@@ -3,17 +3,15 @@
 
 import Signin from "~/pages/Signin";
 import Signup from "~/pages/Signup/Main";
-import ForgetPassword from "~/pages/ForgetPassword";
+import ForgetPassword from "~/pages/ForgetPassword/Main";
 
-
-import VerificationPassword from "~/pages/VerificationPassword";
-import Newpassword from "~/pages/Newpassword";
-import SuccessNewPassword from "~/pages/SuccessNewPassword";
+import VerificationPassword from "~/pages/ForgetPassword/VerificationPassword";
+import Newpassword from "~/pages/ForgetPassword/Newpassword";
+import SuccessNewPassword from "~/pages/ForgetPassword/SuccessNewPassword";
 
 import Vertification from "~/pages/Signup/Verification";
 import Congrats from "~/pages/Signup/Congrats";
 import Home from "~/pages/Home";
-
 
 // dont need to login
 const publicRoutes = [
