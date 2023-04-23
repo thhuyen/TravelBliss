@@ -1,0 +1,32 @@
+.ticket {
+    width: var(--max-width);
+    padding: 10px 0;
+    margin: 30px auto;
+    border: 1px solid var(--grey-300);
+    border-radius: var(--border-radius);
+}
+.inner {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto auto;
+
+    > div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 1.5rem;
+        line-height: 2;
+    }
+
+    .title,
+    .second-text {
+        font-size: 1.7rem;
+        font-weight: 600;
+    }
+    button {
+        color: white;
+        padding: 5px 10px;
+        border: none;
+        background: var(--primary-orange-500);
+    }
+}

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./VerificationPassword.module.scss";
-import BoxMessage from "~/components/BoxMessage";
+import BoxMessage from "~/components/Layout/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
