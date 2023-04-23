@@ -1,17 +1,18 @@
 import classNames from "classnames/bind";
+import { memo } from "react";
 
 import stylesFooterMini from "./FooterMini.module.scss";
 
-const cfxootermini = classNames.bind(stylesFooterMini);
+const cxfootermini = classNames.bind(stylesFooterMini);
 
 function FooterMini() {
     return (
-        <footer className={cfxootermini("footer")}>
-            <div className={cfxootermini("inner-footer")}>
+        <footer className={cxfootermini("footer")}>
+            <div className={cxfootermini("inner-footer")}>
                 <span>Copyright 2023 TravelBliss. All rights reserved.</span>
 
-                <div className={cfxootermini("inner-right")}>
-                    <div className={cfxootermini("terms")}>
+                <div className={cxfootermini("inner-right")}>
+                    <div className={cxfootermini("terms")}>
                         <span>Privacy Policy</span>
                         <span>Data & Security</span>
                         <span>Terms of Service</span>
@@ -23,4 +24,4 @@ function FooterMini() {
     );
 }
 
-export default FooterMini;
+export default memo(FooterMini);

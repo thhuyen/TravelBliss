@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import styles from "./Congrats.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import BoxMessage from "~/components/BoxMessage";
+import BoxMessage from "~/components/Layout/components/BoxMessage";
 
 const cx = classNames.bind(styles);
 
