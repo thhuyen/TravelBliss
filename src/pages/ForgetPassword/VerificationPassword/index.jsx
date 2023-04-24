@@ -12,13 +12,20 @@ function VerificationPassword() {
     let [count, setCount] = useState(10);
     let [codeOtp, setCodeOtp] = useState();
     let [countOTP, setCountOTP] = useState(90);
+    const [OTP, setOTP] = useState(() => Math.floor(100000 + Math.random() * 900000).toString());
+
     const handleResend = (e) => {
         e.preventDefault();
         if (count > 0) {
             setCount(count - 1);
             setCodeOtp((codeOtp = ""));
             setCountOTP(90);
+            setOTP(Math.floor(100000 + Math.random() * 900000).toString());
         }
+    };
+
+    const handlErrorCode = () => {
+        alert("Your OTP is not correct");
     };
     const handleCodeChange = (e) => {
         setCodeOtp(e.target.value);
@@ -26,13 +33,14 @@ function VerificationPassword() {
     useEffect(() => {
         const interval = setInterval(() => {
             if (countOTP > 0) {
-                setCountOTP((count) => count - 1);
+                setCountOTP((count) => Math.max(count - 1, 0));
             }
         }, 1000);
+        console.log(OTP);
 
         // clean up
         return () => clearInterval(interval);
-    }, [countOTP]);
+    }, [OTP]);
 
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
@@ -57,7 +65,7 @@ function VerificationPassword() {
                                     type="number"
                                     name="code"
                                     className={cx(styles.inputThirdwidth, "border")}
-                                    placeholder="xxxxxx"
+                                    placeholder="******"
                                     value={codeOtp || ""}
                                     onChange={handleCodeChange}
                                 />
@@ -72,12 +80,14 @@ function VerificationPassword() {
                                 <Link to="/">
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
-                                {codeOtp == 123456 ? (
+                                {codeOtp === OTP ? (
                                     <Link to="/newpassword">
                                         <button className={cx("btn-right")}>Continue</button>
                                     </Link>
                                 ) : (
-                                    <button className={cx("btn-right")}>Continue</button>
+                                    <button onClick={handlErrorCode} className={cx("btn-right")}>
+                                        Continue
+                                    </button>
                                 )}
                             </div>
                         </form>

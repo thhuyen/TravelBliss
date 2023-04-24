@@ -21,9 +21,13 @@ function Newpassword() {
                 .min(8, "Password must be 8 characters long")
                 .matches(/[0-9]/, "Password requires a number")
                 .matches(/[a-z]/, "Password requires a lowercase letter")
-                .matches(/[A-Z]/, "Password requires an uppercase letter"),
+                .matches(/[A-Z]/, "Password requires an uppercase letter")
+                .matches(/[^\w]/, "Password requires a symbol"),
 
-            confirmPassword: Yup.string().oneOf([Yup.ref("pass"), null], "Password is not matched"),
+            confirmPassword: Yup.string().oneOf(
+                [Yup.ref("password"), null],
+                "Password is not matched",
+            ),
         }),
     });
 
@@ -32,6 +36,9 @@ function Newpassword() {
     const handleSubmit = (event) => {
         event.preventDefault();
         navigate("/successnewpassword", { replace: true });
+    };
+    const handleErrorPass = (e) => {
+        e.preventDefault();
     };
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
@@ -89,9 +96,15 @@ function Newpassword() {
                                 <button className={cx("btn-left")}>Cancel</button>
                             </Link>
 
-                            <button onClick={handleSubmit} className={cx("btn-right")}>
-                                Continue
-                            </button>
+                            {formik.values.password === formik.values.confirmPassword ? (
+                                <button onClick={handleSubmit} className={cx("btn-right")}>
+                                    Continue
+                                </button>
+                            ) : (
+                                <button onClick={handleErrorPass} className={cx("btn-right")}>
+                                    Continue
+                                </button>
+                            )}
                         </div>
                     </form>
                 </div>

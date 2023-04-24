@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import * as Yup from "yup";
 
 import AuthenLayout from "~/components/Layout/AuthenLayout";
-import styles from "./ForgetPassword.module.scss";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
+import styles from "./ForgetPassword.module.scss";
 
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {
+    // let navigate = Navigate();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -29,10 +30,14 @@ function ForgetPassword() {
     const handleEmailChange = (event) => {
         setEmail(event.target.value);
     };
-    //get user email from local storage then compair to the email client submit
-    const handleSaveClick = () => {
-        localStorage.setItem("userEmail", email);
+    const handleErrorMessage = () => {
+        alert("This email does not exist");
     };
+
+    let user = JSON.parse(localStorage.getItem("newAccount"));
+    // console.log(user);
+    let emailUser = user.email;
+    // console.log(emailUser);
 
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
@@ -66,17 +71,15 @@ function ForgetPassword() {
                                 <Link to="/">
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
-                                {email ? (
+                                {email === emailUser ? (
                                     <Link to="/verificationPassword">
-                                        <button
-                                            onClick={handleSaveClick}
-                                            className={cx("btn-right")}
-                                        >
-                                            Search
-                                        </button>
+                                        <button className={cx("btn-right")}>Search</button>
                                     </Link>
                                 ) : (
-                                    <button onClick={handleSaveClick} className={cx("btn-right")}>
+                                    <button
+                                        onClick={handleErrorMessage}
+                                        className={cx("btn-right")}
+                                    >
                                         Search
                                     </button>
                                 )}
