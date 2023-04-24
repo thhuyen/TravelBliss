@@ -45,6 +45,7 @@ function Signup() {
         }),
         onSubmit: (values) => {
             localStorage.setItem("newAccount", JSON.stringify(values));
+            console.log("value");
             navigate("/vertification", { replace: true });
         },
     });
