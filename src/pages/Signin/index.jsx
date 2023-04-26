@@ -132,7 +132,7 @@ function Signin() {
                         <input type="checkbox" className={cx("checkbox-remember")} />
 
                         <label>Remember me</label>
-                        <Link to="/forget" className={cx("forget_password")}>
+                        <Link to="/forgot" className={cx("forget_password")}>
                             Forget password?
                         </Link>
 
