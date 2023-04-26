@@ -1,0 +1,19 @@
+.datepicker-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.datepicker-header span {
+    font-size: 16px;
+    margin: 4px 0;
+}
+
+.datepicker-header .month {
+    font-weight: bold;
+}
+
+.datepicker-header .date {
+    font-weight: normal;
+}

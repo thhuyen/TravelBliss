@@ -11,9 +11,10 @@ import SuccessNewPassword from "~/pages/ForgetPassword/SuccessNewPassword";
 
 import Vertification from "~/pages/Signup/Verification";
 import Congrats from "~/pages/Signup/Congrats";
-import Home from "~/pages/Home";
+import Home from "~/pages/HomePage";
 import FirstStep from "~/pages/Order/FirstStep";
 import SecondStep from "~/pages/Order/SecondStep";
+import HomePage from "~/pages/HomePage";
 
 // dont need to login
 const publicRoutes = [
@@ -49,6 +50,10 @@ const publicRoutes = [
     {
         path: "/successnewpassword",
         component: SuccessNewPassword,
+    },
+    {
+        path: "/homepage",
+        component: HomePage,
     },
 ];
 

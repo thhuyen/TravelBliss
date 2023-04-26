@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 import AuthenLayout from "~/components/Layout/AuthenLayout";
@@ -11,7 +11,7 @@ import styles from "./ForgetPassword.module.scss";
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {
-    // let navigate = Navigate();
+    let navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -25,6 +25,7 @@ function ForgetPassword() {
             // actions.setSubmitting(false);
         },
     });
+
     const [email, setEmail] = useState("");
 
     const handleEmailChange = (event) => {
@@ -35,8 +36,14 @@ function ForgetPassword() {
     };
 
     let user = JSON.parse(localStorage.getItem("newAccount"));
+    let emailUser;
     // console.log(user);
-    let emailUser = user.email;
+    if (!user) {
+        navigate("./signup", { replace: true });
+    } else {
+        emailUser = user.email;
+    }
+
     // console.log(emailUser);
 
     return (
