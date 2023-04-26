@@ -4,11 +4,13 @@
     display: flex;
 }
 .inner-left {
-    width: 45%;
-    height: 100%;
+    width: 50%;
 }
 .inner-right {
-    width: 55%;
+    width: 50%;
     height: 100%;
-    padding: 50px 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }

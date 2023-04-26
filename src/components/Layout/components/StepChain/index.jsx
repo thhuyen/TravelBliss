@@ -8,21 +8,21 @@ import { faCircleCheck } from "@fortawesome/free-solid-svg-icons";
 import stylesStep from "./StepChain.module.scss";
 
 const cxStep = classNames.bind(stylesStep);
-function StepChain({ route, done1, done2, active1, active2 }) {
+function StepChain({ ...props }) {
     return (
         <div className={cxStep("road-map")}>
-            <Link to={route}>
+            <Link to={props.route}>
                 <button className={cxStep("btn-back")}>Back</button>
             </Link>
 
             <div className={cxStep("step-chain")}>
                 <div className={cxStep("step")}>
-                    {done1 ? (
+                    {props.done1 ? (
                         <FontAwesomeIcon icon={faCircleCheck} className={cxStep("icon-done")} />
                     ) : (
                         <div
                             className={clsx(stylesStep.number, {
-                                [stylesStep.active1]: active1,
+                                [stylesStep.active1]: props.active1,
                             })}
                         >
                             1
@@ -34,16 +34,22 @@ function StepChain({ route, done1, done2, active1, active2 }) {
                     </div>
                     <div
                         className={cxStep(stylesStep.line, {
-                            [stylesStep.done1]: done1,
+                            [stylesStep.done1]: props.done1,
                         })}
                     ></div>
                 </div>
 
                 <div className={cxStep("step", "step-after")}>
-                    {done2 ? (
+                    {props.done2 ? (
                         <FontAwesomeIcon icon={faCircleCheck} className={cxStep("icon-done")} />
                     ) : (
-                        <div className={cxStep("number")}>2</div>
+                        <div
+                            className={clsx(stylesStep.number, {
+                                [stylesStep.active2]: props.active2,
+                            })}
+                        >
+                            2
+                        </div>
                     )}
                     <div>
                         <p className={cxStep("sequence-text")}>Second step</p>
@@ -51,7 +57,7 @@ function StepChain({ route, done1, done2, active1, active2 }) {
                     </div>
                     <div
                         className={clsx(stylesStep.line, {
-                            [stylesStep.done2]: done2,
+                            [stylesStep.done2]: props.done2,
                         })}
                     ></div>
                 </div>

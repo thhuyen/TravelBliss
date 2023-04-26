@@ -6,10 +6,25 @@ import arrow from "~/assets/imgs/arrow.png";
 import stylesTicket from "./InforTicket.module.scss";
 
 const cxTicket = classNames.bind(stylesTicket);
-function InforTicket() {
+function InforTicket({ isButton }) {
     return (
-        <div className={cxTicket("ticket")}>
-            <div className={cxTicket("inner")}>
+        <div
+            className={cxTicket("ticket")}
+            style={{
+                width: `${
+                    isButton ? "calc(var(--max-width) - 160px)" : "calc(var(--max-width) - 400px)"
+                }`,
+                transform: `${isButton ? "translateX(0)" : "translateX(45px"}`,
+            }}
+        >
+            <div
+                className={cxTicket("inner")}
+                style={{
+                    gridTemplateColumns: `${
+                        isButton ? "auto auto auto auto auto auto" : "auto auto auto auto"
+                    }`,
+                }}
+            >
                 <div>
                     <p className={cxTicket("title")}>Departure</p>
                     <p className={cxTicket("second-text")}>15:30</p>
@@ -30,13 +45,20 @@ function InforTicket() {
                     <p className={cxTicket("second-text")}>SE05</p>
                     <p>51 available seats</p>
                 </div>
-                <div>
-                    <p className={cxTicket("title")}>Price</p>
-                    <p>From 1.000.000 VND</p>
-                </div>
-                <div>
-                    <button>Choose seat</button>
-                </div>
+                {isButton ? (
+                    <>
+                        <div>
+                            <p className={cxTicket("title")}>Price</p>
+                            <p>From 1.000.000 VND</p>
+                        </div>
+
+                        <div>
+                            <Link to="/order/secondstep">
+                                <button>Choose seat</button>
+                            </Link>
+                        </div>
+                    </>
+                ) : null}
             </div>
         </div>
     );

@@ -72,7 +72,7 @@ function ForgetPassword() {
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
                                 {email === emailUser ? (
-                                    <Link to="/verificationPassword">
+                                    <Link to="/forgot/verificationPassword">
                                         <button className={cx("btn-right")}>Search</button>
                                     </Link>
                                 ) : (

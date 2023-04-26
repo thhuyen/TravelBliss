@@ -81,7 +81,7 @@ function VerificationPassword() {
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
                                 {codeOtp === OTP ? (
-                                    <Link to="/newpassword">
+                                    <Link to="/forgot/newpassword">
                                         <button className={cx("btn-right")}>Continue</button>
                                     </Link>
                                 ) : (
