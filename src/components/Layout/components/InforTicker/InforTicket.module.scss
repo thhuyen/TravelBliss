@@ -1,31 +1,37 @@
 .ticket {
-    // width: calc(var(--max-width) - 160px);
+    width: 1040px;
+    text-align: center;
     padding: 10px 0;
     margin: 30px auto;
     border: 1px solid var(--grey-300);
     border-radius: var(--border-radius);
-}
-.inner {
-    display: grid;
 
-    > div {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 1.4rem;
-        line-height: 2;
+    td:first-child {
+        padding-left: 10px;
     }
 
-    .title,
-    .second-text {
-        font-size: 1.6rem;
-        font-weight: 600;
-    }
     button {
+        min-width: 141px;
+        min-height: 42px;
         color: white;
-        padding: 10px 15px;
         border: none;
         background: var(--primary-orange-500);
     }
+}
+
+.title,
+.second-text,
+.price {
+    font-weight: 600;
+}
+.second-text,
+.price {
+    font-size: 2rem;
+}
+.last-text {
+    font-weight: 400;
+    font-size: 1.4rem;
+}
+.hide {
+    opacity: 0;
 }

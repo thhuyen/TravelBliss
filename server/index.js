@@ -22,6 +22,14 @@ app.get("/api/users", (req, res) => {
     });
 });
 
+app.get("/api/seats", (req, res) => {
+    const sqlGet =
+        "SELECT CoachName, c.CoachId, CoachPrice, SeatNumber, Status, Level FROM coachs c, seats s WHERE c.CoachId = s.CoachId";
+    db.query(sqlGet, (error, result) => {
+        res.send(result);
+    });
+});
+
 app.post("/api/post", (req, res) => {
     const { username, password } = req.body;
     const sqlInsert = "INSERT INTO `users`(`id`, `username`, `password`) VALUES(0, ?, ?)";
@@ -31,12 +39,6 @@ app.post("/api/post", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-    // const sqlInsert = "INSERT INTO `users`(`id`, `username`, `password`)" +
-    //         "VALUES (0, 'admin', 'admin')";
-    // db.query(sqlInsert, (err, result) => {
-    //     console.log("error: ", err)
-    //     console.log("result: ", result)
-    // })
     res.send("Hello world");
 });
 
