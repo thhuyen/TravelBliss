@@ -1,6 +1,5 @@
-import { Fragment } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes, privateRoutes } from "~/routes";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { privateRoutes, publicRoutes } from "~/routes";
 
 function App() {
     return (

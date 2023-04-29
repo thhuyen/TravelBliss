@@ -1,0 +1,46 @@
+.wrapper {
+    text-align: center;
+    padding: 0px;
+    width: 100%;
+    height: 450px;
+    background: #fef4ee;
+    .title {
+        padding-top: 4rem;
+        margin-bottom: 1rem;
+        font-weight: 900;
+        font-size: 48px;
+        color: #ea4e22;
+    }
+    p {
+        font-size: 1.8rem;
+    }
+    .boxs {
+        margin: 5rem 16rem 4rem;
+
+        display: flex;
+        gap: 3rem;
+        .box {
+            width: 353.33px;
+            height: 224px;
+            background-color: #ffffff;
+            box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+            .icon {
+                padding-top: 5rem;
+                padding-bottom: 0.6rem;
+                font-size: 2.2rem;
+                background-color: transparent;
+                color: #ea4e22;
+                font-weight: 200;
+            }
+            h4 {
+                font-size: 1.8rem;
+                font-weight: 400;
+                margin-bottom: 0.4rem;
+            }
+            p {
+                font-weight: 400;
+                font-size: 1.4rem;
+            }
+        }
+    }
+}

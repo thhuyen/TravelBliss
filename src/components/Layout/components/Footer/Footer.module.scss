@@ -1,0 +1,69 @@
+.footer {
+    width: 1440px;
+    height: 520px;
+    background: #ffffff;
+    text-align: center;
+
+    .copyright {
+        color: #ea4e22;
+        font-size: 13px;
+        line-height: 20px;
+    }
+}
+.inner {
+    padding: 60px 160px 40px;
+    gap: 36rem;
+    width: var(--max-width);
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    h2 {
+        font-family: "Lato";
+        font-style: normal;
+        font-weight: 700;
+        font-size: 31.4px;
+        line-height: 38px;
+        color: #ea4e22;
+    }
+}
+
+.footer-right {
+    position: relative;
+
+    display: flex;
+    gap: 3rem;
+    .information,
+    .support {
+        text-align: left;
+    }
+    h4 {
+        font-size: 1.8rem;
+    }
+    span {
+        font-size: 1.6rem;
+        font-weight: 400;
+        display: block;
+    }
+    img {
+        position: absolute;
+        width: 15rem;
+        height: 5.7rem;
+        right: -20rem;
+        bottom: -10rem;
+    }
+}
+.terms {
+    margin-left: 70px;
+    float: right;
+
+    span {
+        cursor: pointer;
+        padding-left: 20px;
+    }
+}
+.icon-media {
+    font-size: 2rem;
+    padding: 0 5px;
+    cursor: pointer;
+}
