@@ -1,5 +1,6 @@
 import React from "react";
 import Banner from "~/components/Layout/components/Banner";
+import Footer from "~/components/Layout/components/Footer";
 import FooterMini from "~/components/Layout/components/FooterMini";
 import Header from "~/components/Layout/components/Header";
 import About from "./About";
@@ -12,11 +13,11 @@ function HomePage() {
         <>
             <Header />
             <Banner />
-            {/* <About />
+            <About />
             <News />
             <Destination />
             <WhyChoose />
-            <FooterMini /> */}
+            <Footer />
         </>
     );
 }

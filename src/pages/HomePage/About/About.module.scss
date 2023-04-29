@@ -1,0 +1,27 @@
+.header {
+    font-style: normal;
+    font-weight: 800;
+    font-size: 48px;
+    line-height: 58px;
+    color: #ea4e22;
+    margin-bottom: 2.4rem;
+}
+.content {
+    font-weight: 400;
+    font-size: 1.8rem;
+    line-height: 2.7rem;
+    text-align: justify;
+    margin-bottom: 2.4rem;
+}
+.content > p {
+    margin-bottom: 2.4rem;
+}
+.btn {
+    font-size: 18px;
+    line-height: 27px;
+    color: #ea4e22;
+}
+.icon {
+    margin-left: 1rem;
+    width: 2.7rem;
+}
