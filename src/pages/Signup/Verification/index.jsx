@@ -84,7 +84,7 @@ function Vertification() {
                 </p>
 
                 {code === OTP && valid ? (
-                    <Link to="/congrats">
+                    <Link to="/signup/congrats">
                         <button className={cx(styles.btnSubmit, "btnActive")}>SUBMIT</button>
                     </Link>
                 ) : (

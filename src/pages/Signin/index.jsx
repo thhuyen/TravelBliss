@@ -2,12 +2,13 @@ import classNames from "classnames/bind";
 import clsx from "clsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrain, faGlobe } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 import styles from "./Signin.module.scss";
 import FooterMini from "~/components/Layout/components/FooterMini";
-import { users } from "~/components/Data/users";
+// import { users } from "~/components/Data/users";
 
 const cx = classNames.bind(styles);
 
@@ -18,8 +19,16 @@ function Signin() {
     const [validEmail, setValidEmail] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
     const [authen, setAuthen] = useState(true);
+    const [users, setUsers] = useState([]);
 
-    // console.log(users);
+    const loadData = async () => {
+        const response = await axios.get("http://localhost:5000/api/users");
+        setUsers(response.data);
+    };
+    useEffect(() => {
+        loadData();
+    }, []);
+
     const handleLogin = (e) => {
         e.preventDefault();
 
@@ -45,7 +54,7 @@ function Signin() {
         }
 
         const accountExist = users.filter(
-            (acc) => acc.email === email && acc.password === password,
+            (acc) => acc.username === email && acc.password === password,
         );
 
         if (accountExist.length > 0) {
@@ -56,7 +65,7 @@ function Signin() {
     };
 
     return (
-        <>
+        <div className={cx("inner-body")}>
             <header className={cx("header")}>
                 <div className={cx("inner-header")}>
                     <div className={cx("logo")}>
@@ -123,7 +132,7 @@ function Signin() {
                         <input type="checkbox" className={cx("checkbox-remember")} />
 
                         <label>Remember me</label>
-                        <Link to="/forget" className={cx("forget_password")}>
+                        <Link to="/forgot" className={cx("forget_password")}>
                             Forget password?
                         </Link>
 
@@ -142,8 +151,10 @@ function Signin() {
                 </div>
             </section>
 
-            <FooterMini />
-        </>
+            <div className={cx("wrapper-footer")}>
+                <FooterMini />
+            </div>
+        </div>
     );
 }
 

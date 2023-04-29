@@ -14,8 +14,8 @@ function Signup() {
         initialValues: {
             email: "",
             password: "",
+            confirmPassword: "",
             fullname: "",
-            birthday: "",
             phone: "",
             accept: false,
         },
@@ -31,6 +31,9 @@ function Signup() {
                 .matches(/[a-z]/, "Password requires a lowercase letter")
                 .matches(/[A-Z]/, "Password requires an uppercase letter")
                 .matches(/[^\w]/, "Password requires a symbol"),
+            confirmPassword: Yup.string()
+                .required("Please confirm password")
+                .oneOf([Yup.ref("password"), null], "Passwords doesn't match"),
             fullname: Yup.string()
                 .min(5, "Full name must be at least 5 characters")
                 .required("Please fill out your full name"),
@@ -45,19 +48,19 @@ function Signup() {
         }),
         onSubmit: (values) => {
             localStorage.setItem("newAccount", JSON.stringify(values));
-            console.log("value");
-            navigate("/vertification", { replace: true });
+            navigate("/signup/vertification", { replace: true });
         },
     });
 
     return (
         <AuthenLayout img="https://images.unsplash.com/photo-1588776873786-a51f317c3dbf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80">
             <div className={cx("title")}>
-                <h2>Welcome to</h2>
-                <h2 className={cx("title-brand")}>TravelBliss</h2>
+                <h2>
+                    Welcome to <span>TravelBliss</span>
+                </h2>
             </div>
 
-            <form onSubmit={formik.handleSubmit}>
+            <form onSubmit={formik.handleSubmit} className={cx("form-singup")}>
                 <label htmlFor="fullname">Full name *</label>
                 <input
                     id="fullname"
@@ -78,28 +81,6 @@ function Signup() {
                     }}
                 >
                     {formik.errors.fullname || "nothing"}
-                </p>
-
-                <label>Day of birth *</label>
-                <input
-                    id="birthday"
-                    name="birthday"
-                    className={cx(styles.inputFullwidth, "border")}
-                    type="date"
-                    onChange={formik.handleChange}
-                    onBlur={formik.handleBlur}
-                    value={formik.values.birthday}
-                />
-
-                <p
-                    className={cx("message-invalid")}
-                    style={{
-                        visibility: `${
-                            formik.errors.date && formik.touched.date ? "visible" : "hidden"
-                        }`,
-                    }}
-                >
-                    {formik.errors.date || "nothing"}
                 </p>
 
                 <label htmlFor="email">Email *</label>
@@ -167,10 +148,41 @@ function Signup() {
                     {formik.errors.password || "nothing"}
                 </p>
 
-                <input id="accept" type="checkbox" name="accept" onChange={formik.handleChange} />
-                <label className={cx("ask-agree")} htmlFor="accept">
-                    I agree to the <Link to="*">Terms and Conditions</Link>.
-                </label>
+                <label htmlFor="password">Confirm password *</label>
+                <input
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    className={cx(styles.inputFullwidth, "border")}
+                    type="password"
+                    placeholder="********"
+                    onChange={formik.handleChange}
+                    onBlur={formik.handleBlur}
+                    value={formik.values.confirmPassword}
+                />
+                <p
+                    className={cx("message-invalid")}
+                    style={{
+                        visibility: `${
+                            formik.errors.confirmPassword && formik.touched.confirmPassword
+                                ? "visible"
+                                : "hidden"
+                        }`,
+                    }}
+                >
+                    {formik.errors.confirmPassword || "nothing"}
+                </p>
+
+                <div className={cx("ask-agree")}>
+                    <input
+                        id="accept"
+                        type="checkbox"
+                        name="accept"
+                        onChange={formik.handleChange}
+                    />
+                    <label htmlFor="accept">
+                        I agree to the <Link to="*">Terms and Conditions</Link>.
+                    </label>
+                </div>
 
                 <button
                     type="submit"

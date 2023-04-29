@@ -17,12 +17,13 @@ function FirstStep() {
             <Header />
             <Banner />
             <StepChain route="/home" active1={true} />
-            <InforTicker />
-            <InforTicker />
-            <InforTicker />
-            <InforTicker />
-            <InforTicker />
+            <InforTicker isButton={true} />
+            <InforTicker isButton={true} />
+            <InforTicker isButton={true} />
+            <InforTicker isButton={true} />
+            <InforTicker isButton={true} />
 
+            <div className={cx("space")}></div>
             <FooterMini />
         </div>
     );

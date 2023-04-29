@@ -7,6 +7,7 @@
 .vscode/launch.json
 # testing
 /coverage
+/server/node_modules
 
 # production
 /build

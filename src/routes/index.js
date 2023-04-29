@@ -3,7 +3,7 @@
 
 import Signin from "~/pages/Signin";
 import Signup from "~/pages/Signup/Main";
-import ForgetPassword from "~/pages/ForgetPassword/Main";
+import ForgotPassword from "~/pages/ForgetPassword/Main";
 
 import VerificationPassword from "~/pages/ForgetPassword/VerificationPassword";
 import Newpassword from "~/pages/ForgetPassword/Newpassword";
@@ -27,28 +27,28 @@ const publicRoutes = [
         component: Signup,
     },
     {
-        path: "/forget",
-        component: ForgetPassword,
+        path: "/forgot",
+        component: ForgotPassword,
     },
 
     {
-        path: "/vertification",
+        path: "/signup/vertification",
         component: Vertification,
     },
     {
-        path: "/congrats",
+        path: "/signup/congrats",
         component: Congrats,
     },
     {
-        path: "/verificationpassword",
+        path: "/forgot/verificationpassword",
         component: VerificationPassword,
     },
     {
-        path: "/newpassword",
+        path: "/forgot/newpassword",
         component: Newpassword,
     },
     {
-        path: "/successnewpassword",
+        path: "/forgot/successnewpassword",
         component: SuccessNewPassword,
     },
     {
@@ -64,11 +64,11 @@ const privateRoutes = [
         component: Home,
     },
     {
-        path: "/firststep",
+        path: "/order/firststep",
         component: FirstStep,
     },
     {
-        path: "/secondstep",
+        path: "/order/secondstep",
         component: SecondStep,
     },
 ];
