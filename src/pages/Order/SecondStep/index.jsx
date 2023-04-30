@@ -309,31 +309,79 @@ function Order() {
             ) : (
                 <div className={cx("seats-four_cabins")}>
                     <table>
-                        <tr>
-                            <td colSpan={2}>Cabin 1</td>
-                        </tr>
-                        <tr>
-                            <td>Level 2</td>
-                            {four_cabins
-                                .filter((seat) => seat.Level === 1)
-                                .map((seat) => (
-                                    <td key={seat.SeatId}>{seat.SeatNumber}</td>
-                                ))}
-                        </tr>
-                        <tr>
-                            <td>Level 1</td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th colSpan={2}>Cabin 1</th>
+                                <th colSpan={2}>Cabin 2</th>
+                                <th colSpan={2}>Cabin 3</th>
+                                <th colSpan={2}>Cabin 4</th>
+                                <th colSpan={2}>Cabin 5</th>
+                                <th colSpan={2}>Cabin 6</th>
+                                <th colSpan={2}>Cabin 7</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <tr>
+                                <th>Level 2</th>
+
+                                {four_cabins
+                                    .filter((seat) => seat.Level === 2)
+                                    .map((seat) => (
+                                        <td
+                                            key={seat.SeatId}
+                                            style={{
+                                                background: `${
+                                                    seat.Status === 1 ? "var(--selected)" : "white"
+                                                }`,
+                                                color: `${seat.Status === 1 ? "white" : "black"}`,
+                                                border: `${
+                                                    seat.Status === 1
+                                                        ? "none"
+                                                        : "1px solid var(--grey-300)"
+                                                }`,
+                                            }}
+                                        >
+                                            {seat.SeatNumber}
+                                        </td>
+                                    ))}
+                            </tr>
+                            <tr>
+                                <th>Level 1</th>
+                                {four_cabins
+                                    .filter((seat) => seat.Level === 1)
+                                    .map((seat) => (
+                                        <td
+                                            key={seat.SeatId}
+                                            style={{
+                                                background: `${
+                                                    seat.Status === 1 ? "var(--selected)" : "white"
+                                                }`,
+                                                color: `${seat.Status === 1 ? "white" : "black"}`,
+                                                border: `${
+                                                    seat.Status === 1
+                                                        ? "none"
+                                                        : "1px solid var(--grey-300)"
+                                                }`,
+                                            }}
+                                        >
+                                            {seat.SeatNumber}
+                                        </td>
+                                    ))}
+                            </tr>
+                        </tbody>
                     </table>
 
-                    <div className={cx("confirm-box")}>
-                        Selected <span className={cx("quantity")}>2</span> tickets &nbsp; &nbsp;
-                        &nbsp; &nbsp; Subtotal: &nbsp;
-                        <span className={cx("subtotal")}>2.000.000</span> VND
-                    </div>
+                    <div className={cx("confirm-box-wrapper", "d-flex")}>
+                        <div className={cx("confirm-box")}>
+                            Selected <span className={cx("quantity")}>2</span> tickets &nbsp; &nbsp;
+                            &nbsp; &nbsp; Subtotal: &nbsp;
+                            <span className={cx("subtotal")}>2.000.000</span> VND
+                        </div>
 
-                    <button className={cx("btn-continue")}>Continue</button>
+                        <button className={cx("btn-continue")}>Continue</button>
+                    </div>
                 </div>
             )}
 
