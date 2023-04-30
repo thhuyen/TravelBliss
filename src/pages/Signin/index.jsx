@@ -14,9 +14,9 @@ const cx = classNames.bind(styles);
 
 function Signin() {
     const navigate = useNavigate();
-    const [email, setEmail] = useState("");
+    const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [validEmail, setValidEmail] = useState(true);
+    const [validPhone, setValidPhone] = useState(true);
     const [validPassword, setValidPassword] = useState(true);
     const [authen, setAuthen] = useState(true);
     const [users, setUsers] = useState([]);
@@ -34,18 +34,16 @@ function Signin() {
     const handleLogin = (e) => {
         e.preventDefault();
 
-        if (!email) {
-            setValidEmail(false);
+        if (!username) {
+            setValidPhone(false);
         } else {
-            const validateEmail = (email) => {
-                return email.match(
-                    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                );
+            const validatePhone = (number) => {
+                return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/.test(number);
             };
-            if (validateEmail(email)) {
-                setValidEmail(true);
+            if (validatePhone(username)) {
+                setValidPhone(true);
             } else {
-                setValidEmail(false);
+                setValidPhone(false);
             }
         }
 
@@ -56,7 +54,7 @@ function Signin() {
         }
 
         const accountExist = users.filter(
-            (acc) => acc.username === email && acc.password === password,
+            (acc) => acc.Username === username && acc.Password === password,
         );
 
         if (accountExist.length > 0) {
@@ -94,22 +92,22 @@ function Signin() {
 
                         <label className={cx("label-field")}>Email</label>
                         <input
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
+                            value={username}
+                            onChange={(e) => setUsername(e.target.value)}
                             onInput={() => {
-                                setValidEmail(true);
+                                setValidPhone(true);
                                 setAuthen(true);
                             }}
                             className={clsx(styles.inputField, "border")}
                             type="text"
                             spellCheck="false"
-                            placeholder="example: abc@xyzmail.com"
+                            placeholder="example: 0988111829"
                         />
                         <p
                             className={cx("message-invalid")}
-                            style={{ visibility: ` ${validEmail ? "" : "visible"}` }}
+                            style={{ visibility: ` ${validPhone ? "" : "visible"}` }}
                         >
-                            {email === "" ? "Please fill out your email" : "Invalid email"}
+                            {username === "" ? "Please fill out your username" : "Invalid email"}
                         </p>
 
                         <label className={cx("label-field")}>Password</label>

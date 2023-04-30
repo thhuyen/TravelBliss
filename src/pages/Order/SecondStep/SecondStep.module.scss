@@ -81,22 +81,40 @@
         padding-left: 5px;
     }
     .space-table {
-        height: 40px;
+        height: 20px;
     }
 }
 .seats-four_cabins {
-    display: grid;
-    justify-content: center;
-    grid-template-columns: auto auto auto auto auto auto auto;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 30px;
+
+    table {
+        border-spacing: 10px;
+        border-collapse: separate;
+    }
+    table th {
+        text-align: center;
+    }
+    table td {
+        width: 60px;
+        height: 59.83px;
+        text-align: center;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+    }
 }
 
+.confirm-box-wrapper {
+    width: 1040px;
+}
 .confirm-box {
     width: fit-content;
     padding: 10px 20px;
     border: 1px solid var(--primary-orange-500);
     border-radius: var(--border-radius);
     margin-top: 30px;
-    margin-left: 10px;
     margin-bottom: 60px;
 
     .quantity,
@@ -114,7 +132,6 @@
     border: none;
     outline: none;
     margin-top: 30px;
-    margin-right: 10px;
     margin-bottom: 60px;
     justify-self: end;
 }
