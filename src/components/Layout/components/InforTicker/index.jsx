@@ -19,6 +19,7 @@ function InforTicket({ ...props }) {
             arrivalPlace: props.arrivalPlace,
             seats: props.seats,
             train: props.train,
+            price: props.price,
         };
         sessionStorage.setItem("train", JSON.stringify(infor));
     }, []);
@@ -53,7 +54,8 @@ function InforTicket({ ...props }) {
                             <td>
                                 <p className={cxTicket("title")}>Price</p>
                                 <p>
-                                    From <span className={cxTicket("price")}>1.000.000 VND</span>
+                                    From{" "}
+                                    <span className={cxTicket("price")}>{props.price} VND</span>
                                 </p>
                                 <p className={cxTicket("hide")}>nothing</p>
                                 <p className={cxTicket("hide")}>nothing</p>

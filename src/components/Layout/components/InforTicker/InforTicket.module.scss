@@ -5,6 +5,7 @@
     margin: 30px auto;
     border: 1px solid var(--grey-300);
     border-radius: var(--border-radius);
+    border-collapse: separate;
 
     td:first-child {
         padding-left: 10px;
