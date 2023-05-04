@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./VerificationPassword.module.scss";
@@ -42,6 +42,8 @@ function VerificationPassword() {
         return () => clearInterval(interval);
     }, [OTP]);
 
+    const { idUser } = useParams();
+
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
             <div className={cx("inner")}>
@@ -81,7 +83,7 @@ function VerificationPassword() {
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
                                 {codeOtp === OTP ? (
-                                    <Link to="/forgot/newpassword">
+                                    <Link to={`/forgot/newpassword/${idUser}`}>
                                         <button className={cx("btn-right")}>Continue</button>
                                     </Link>
                                 ) : (

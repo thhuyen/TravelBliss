@@ -1,8 +1,9 @@
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import axios from "axios";
 
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
@@ -11,40 +12,43 @@ import styles from "./ForgetPassword.module.scss";
 const cx = classNames.bind(styles);
 
 function ForgetPassword() {
+    const [users, setUsers] = useState([]);
+
     let navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
-            email: "",
+            phone: "",
         },
         validationSchema: Yup.object({
-            email: Yup.string()
-                .email("Invalid email address")
-                .required("Please fill out your email"),
+            phone: Yup.string()
+                .required("Please fill out your phone number")
+                .min(10, "phone number must consist of 10 numbers")
+                .matches(
+                    /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
+                    "Phone number is not valid",
+                )
+                .test(
+                    "Exist phoneNumber",
+                    "Phone number doesn't exist", // <- key, message
+                    function (value) {
+                        const newUsers = users.filter((acc) => acc.Username === value);
+                        return newUsers.length > 0;
+                    },
+                ),
         }),
         onSubmit: (values, actions) => {
-            // actions.setSubmitting(false);
+            const newUsers = users.filter((acc) => acc.Username === values.phone);
+            navigate(`/forgot/verificationpassword/${newUsers[0].idUser}`, { replace: true });
         },
     });
 
-    const [email, setEmail] = useState("");
-
-    const handleEmailChange = (event) => {
-        setEmail(event.target.value);
+    const loadData = async () => {
+        const response = await axios.get("http://localhost:5000/api/users");
+        setUsers(response.data);
     };
-    const handleErrorMessage = () => {
-        alert("This email does not exist");
-    };
-
-    let user = JSON.parse(localStorage.getItem("newAccount"));
-    let emailUser;
-    // console.log(user);
-    if (!user) {
-        navigate("./signup", { replace: true });
-    } else {
-        emailUser = user.email;
-    }
-
-    // console.log(emailUser);
+    useEffect(() => {
+        loadData();
+    }, []);
 
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
@@ -57,39 +61,44 @@ function ForgetPassword() {
                         text={"Please enter your email address to search for your account."}
                     />
                     <div>
-                        <form>
-                            {/* onSubmit={handleSubmit} */}
+                        <form onSubmit={formik.handleSubmit}>
                             <label className={cx("email-content")} htmlFor="email">
-                                Email
+                                Phone number
                             </label>
                             <div>
                                 <input
-                                    id="email"
-                                    type="email"
-                                    name="email"
+                                    id="phone"
+                                    name="phone"
                                     className={cx(styles.inputFullwidth, "border")}
-                                    placeholder="example: abc@xyzmail.com"
+                                    placeholder="0123456789"
                                     onBlur={formik.handleBlur}
-                                    value={email}
-                                    onChange={handleEmailChange}
+                                    value={formik.values.phone}
+                                    onChange={formik.handleChange}
                                 />
+                                <p
+                                    className={cx("message-invalid")}
+                                    style={{
+                                        visibility: `${
+                                            formik.errors.phone && formik.touched.phone
+                                                ? "visible"
+                                                : "hidden"
+                                        }`,
+                                    }}
+                                >
+                                    {formik.errors.phone || "nothing"}
+                                </p>
                             </div>
                             <div className={cx("button")}>
                                 <Link to="/">
                                     <button className={cx("btn-left")}>Cancel</button>
                                 </Link>
-                                {email === emailUser ? (
-                                    <Link to="/forgot/verificationPassword">
-                                        <button className={cx("btn-right")}>Search</button>
-                                    </Link>
-                                ) : (
-                                    <button
-                                        onClick={handleErrorMessage}
-                                        className={cx("btn-right")}
-                                    >
-                                        Search
-                                    </button>
-                                )}
+                                <button
+                                    type="submit"
+                                    disabled={formik.isSubmitting || !formik.isValid}
+                                    className={cx("btn-right")}
+                                >
+                                    Search
+                                </button>
                             </div>
                         </form>
                     </div>
