@@ -51,6 +51,7 @@ function Signup() {
 
             phone: Yup.string()
                 .required("Please fill out your phone number")
+                .min(10, "phone number must consist of 10 numbers")
                 .matches(
                     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
                     "Phone number is not valid",

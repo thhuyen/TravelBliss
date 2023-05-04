@@ -1,15 +1,19 @@
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 import * as Yup from "yup";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import styles from "./Newpassword.module.scss";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
+import { useEffect } from "react";
 
 const cx = classNames.bind(styles);
 
 function Newpassword() {
+    const { idUser } = useParams();
+
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -18,28 +22,27 @@ function Newpassword() {
         },
         validationSchema: Yup.object().shape({
             password: Yup.string()
-                .min(8, "Password must be 8 characters long")
+                .required("Please fill out your password")
+                .min(8, "Password must be at least 8 characters")
+                .max(20, "Password must be less than 20 characters")
                 .matches(/[0-9]/, "Password requires a number")
                 .matches(/[a-z]/, "Password requires a lowercase letter")
                 .matches(/[A-Z]/, "Password requires an uppercase letter")
                 .matches(/[^\w]/, "Password requires a symbol"),
-
-            confirmPassword: Yup.string().oneOf(
-                [Yup.ref("password"), null],
-                "Password is not matched",
-            ),
+            confirmPassword: Yup.string()
+                .required("Please confirm password")
+                .oneOf([Yup.ref("password"), null], "Passwords doesn't match"),
         }),
+        onSubmit: (values) => {
+            const Password = values.password;
+
+            axios.put(`http://localhost:5000/api/putUsers/password/${idUser}`, {
+                Password,
+            });
+            navigate("/forgot/successnewpassword", { replace: true });
+        },
     });
 
-    // const [errorMessage, setErrorMessage] = useState("");
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        navigate("/successnewpassword", { replace: true });
-    };
-    const handleErrorPass = (e) => {
-        e.preventDefault();
-    };
     return (
         <AuthenLayout img="https://thesmartlocal.com/vietnam/wp-content/uploads/2020/09/6-danang-dong-hoi-ride-2.jpg">
             <div className={cx("inner")}>
@@ -53,7 +56,7 @@ function Newpassword() {
                         }
                     />
 
-                    <form>
+                    <form onSubmit={formik.handleSubmit}>
                         <div>
                             <label>Enter New Password </label>
                             <div>
@@ -96,15 +99,13 @@ function Newpassword() {
                                 <button className={cx("btn-left")}>Cancel</button>
                             </Link>
 
-                            {formik.values.password === formik.values.confirmPassword ? (
-                                <button onClick={handleSubmit} className={cx("btn-right")}>
-                                    Continue
-                                </button>
-                            ) : (
-                                <button onClick={handleErrorPass} className={cx("btn-right")}>
-                                    Continue
-                                </button>
-                            )}
+                            <button
+                                type="submit"
+                                disabled={formik.isSubmitting || !formik.isValid}
+                                className={cx("btn-right")}
+                            >
+                                Continue
+                            </button>
                         </div>
                     </form>
                 </div>

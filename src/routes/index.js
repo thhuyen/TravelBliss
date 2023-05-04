@@ -40,11 +40,11 @@ const publicRoutes = [
         component: Congrats,
     },
     {
-        path: "/forgot/verificationpassword",
+        path: "/forgot/verificationpassword/:idUser",
         component: VerificationPassword,
     },
     {
-        path: "/forgot/newpassword",
+        path: "/forgot/newpassword/:idUser",
         component: Newpassword,
     },
     {
