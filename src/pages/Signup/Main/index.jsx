@@ -1,14 +1,25 @@
 import classNames from "classnames/bind";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState, useEffect } from "react";
 
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 
 const cx = classNames.bind(styles);
 function Signup() {
+    // get user
+    const [users, setUsers] = useState([]);
+    const loadData = async () => {
+        const response = await axios.get("http://localhost:5000/api/users");
+        setUsers(response.data);
+    };
+    useEffect(() => {
+        loadData();
+    }, []);
+
     const navigate = useNavigate();
     const formik = useFormik({
         initialValues: {
@@ -43,11 +54,32 @@ function Signup() {
                 .matches(
                     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
                     "Phone number is not valid",
+                )
+                .test(
+                    "Unique phoneNumber",
+                    "Phone number already used in another account", // <- key, message
+                    function (value) {
+                        const newUsers = users.filter((acc) => acc.Username === value);
+                        return newUsers.length < 1;
+                    },
                 ),
             accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
         onSubmit: (values) => {
-            localStorage.setItem("newAccount", JSON.stringify(values));
+            const id = "0";
+            const Username = values.phone;
+            const Password = values.password;
+            const Email = values.email;
+            const Fullname = values.fullname;
+
+            axios.post("http://localhost:5000/api/postUsers", {
+                id,
+                Username,
+                Password,
+                Email,
+                Fullname,
+            });
+
             navigate("/signup/vertification", { replace: true });
         },
     });
