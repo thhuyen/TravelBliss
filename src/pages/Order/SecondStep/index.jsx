@@ -1,5 +1,5 @@
 import classNames from "classnames/bind";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
 
 import Header from "~/components/Layout/components/Header";
@@ -17,19 +17,26 @@ function Order() {
     const [four_cabins, setFourCabins] = useState([]);
     const [active, setActive] = useState(1);
     const [train, setTrain] = useState({});
+    const [subtotal, setSubTotal] = useState(0);
+    const [countTicket, setCountTicket] = useState(0);
+    const [backgroundStandard, setBackgroundStandard] = useState([]);
+
     // get value from first step
     useEffect(() => {
         const train = JSON.parse(sessionStorage.getItem("train"));
         setTrain(train);
     }, []);
 
+    // click to change coach
     const handleCoach = (number) => {
         setActive(number);
     };
 
+    // get data seats
     const loadData = async () => {
         const standardSeats = await axios.get("http://localhost:5000/api/seats/standard");
         setStandardSeats(standardSeats.data);
+        // setEventStandard(standardSeats.data);
 
         const four_cabins = await axios.get("http://localhost:5000/api/seats/four_cabins");
         setFourCabins(four_cabins.data);
@@ -38,11 +45,60 @@ function Order() {
         loadData();
     }, []);
 
+    useEffect(() => {
+        for (let i in standardSeats) {
+            if (standardSeats[i].Status === 0) {
+                setBackgroundStandard((prev) => [
+                    ...prev,
+                    {
+                        number: i,
+                        background: "white",
+                        color: "black",
+                        border: "1px solid var(--grey-300)",
+                    },
+                ]);
+            } else {
+                setBackgroundStandard((prev) => [
+                    ...prev,
+                    {
+                        number: i,
+                        background: "var(--selected)",
+                        color: "white",
+                        border: "none",
+                    },
+                ]);
+            }
+        }
+    }, [standardSeats]);
+
+    const handleChoose = (seatNumber) => {
+        const price = standardSeats[0].CoachPrice;
+
+        backgroundStandard.forEach((seat) => {
+            if (seat.number === seatNumber) {
+                if (seat.background === "white") {
+                    seat.background = "#5daa8f";
+                    seat.color = "white";
+                    setSubTotal((prev) => prev + price);
+                    setCountTicket((prev) => prev + 1);
+                } else {
+                    seat.background = "white";
+                    seat.color = "black";
+                    setSubTotal((prev) => prev - price);
+                    setCountTicket((prev) => prev - 1);
+                }
+            }
+        });
+        setBackgroundStandard([...backgroundStandard]);
+    };
+
     return (
         <div>
             <Header />
             <div className={cx("space")}></div>
+
             <StepChain route="/order/firststep" done1={true} active2={true} />
+
             <div className={cx("ticket")}>
                 <InforTicker
                     departureTime={train.departureTime}
@@ -97,97 +153,91 @@ function Order() {
                     <table className={cx("table-left")}>
                         <tbody>
                             <tr>
-                                {standardSeats
-                                    .filter((seat) => seat.SeatNumber <= 7)
+                                {backgroundStandard
+                                    .filter((seat, index) => index < 7)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatId}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber >= 8 && +seat.SeatNumber <= 14,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 7 && index < 14)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatId}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr className={cx("space-table")}></tr>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 14 && +seat.SeatNumber <= 21,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 14 && index < 21)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 21 && +seat.SeatNumber <= 28,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 21 && index < 28)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
@@ -197,50 +247,46 @@ function Order() {
                     <table className={cx("table-right")}>
                         <tbody>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 28 && +seat.SeatNumber <= 35,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 28 && index < 35)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 35 && +seat.SeatNumber <= 42,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 35 && index < 42)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
@@ -248,50 +294,46 @@ function Order() {
                             <tr className={cx("space-table")}></tr>
 
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 42 && +seat.SeatNumber <= 49,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 42 && index < 49)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr>
-                                {standardSeats
-                                    .filter(
-                                        (seat) => +seat.SeatNumber > 49 && +seat.SeatNumber <= 56,
-                                    )
+                                {backgroundStandard
+                                    .filter((seat, index) => index >= 49 && index < 56)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatNumber}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
@@ -299,9 +341,12 @@ function Order() {
                     </table>
 
                     <div className={cx("confirm-box")}>
-                        Selected <span className={cx("quantity")}>2</span> tickets &nbsp; &nbsp;
-                        &nbsp; &nbsp; Subtotal: &nbsp;
-                        <span className={cx("subtotal")}>2.000.000</span> VND
+                        Selected <span className={cx("quantity")}>{countTicket}</span> tickets
+                        &nbsp; &nbsp; &nbsp; &nbsp; Subtotal: &nbsp;
+                        <span className={cx("subtotal")}>
+                            {subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                        </span>{" "}
+                        VND
                     </div>
 
                     <button className={cx("btn-continue")}>Continue</button>
