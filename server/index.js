@@ -37,12 +37,17 @@ app.get("/api/seats/four_cabins", (req, res) => {
         res.send(result);
     });
 });
-app.post("/api/post", (req, res) => {
-    const { username, password } = req.body;
-    const sqlInsert = "INSERT INTO `users`(`id`, `username`, `password`) VALUES(0, ?, ?)";
-    db.query(sqlInsert, [username, password], (error, result) => {
-        if (error) console.log(error);
-    });
+app.post("/api/postUsers", (req, res) => {
+    const { idUser, Username, Password, Email, Fullname, Birthday, Identity_number } = req.body;
+    const sqlInsert =
+        "INSERT INTO `users`(`idUser`, `Username`, `Password`, `Email`, `Fullname`, `Birthday`, `Identity_number`) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    db.query(
+        sqlInsert,
+        [idUser, Username, Password, Email, Fullname, Birthday, Identity_number],
+        (error, result) => {
+            if (error) console.log(error);
+        },
+    );
 });
 
 app.get("/", (req, res) => {
