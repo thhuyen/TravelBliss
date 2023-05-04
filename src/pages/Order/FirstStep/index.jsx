@@ -27,7 +27,61 @@ function FirstStep() {
                 seats: 231,
                 train: "SE07",
                 isButton: true,
-                price: "895.000",
+                price: 895000,
+            },
+            {
+                departureTime: "15:30",
+                arrivalTime: "4:25",
+                departureDate: "May 11",
+                arrivalDate: "May 13",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 187,
+                train: "SE05",
+                isButton: true,
+                price: 1060000,
+            },
+            {
+                departureTime: "19:20",
+                arrivalTime: "5:40",
+                departureDate: "May 11",
+                arrivalDate: "May 13",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 51,
+                train: "SE03",
+                isButton: true,
+                price: 1064000,
+            },
+            {
+                departureTime: "22:00",
+                arrivalTime: "6:30",
+                departureDate: "May 11",
+                arrivalDate: "May 13",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 154,
+                train: "SE01",
+                isButton: true,
+                price: 1063000,
+            },
+        ],
+        [],
+    );
+
+    const ticketsAfter = useMemo(
+        () => [
+            {
+                departureTime: "6:10",
+                arrivalTime: "17:58",
+                departureDate: "May 12",
+                arrivalDate: "May 13",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 231,
+                train: "SE07",
+                isButton: true,
+                price: 917000,
             },
             {
                 departureTime: "15:30",
@@ -39,31 +93,127 @@ function FirstStep() {
                 seats: 187,
                 train: "SE05",
                 isButton: true,
-                price: "1.060.000",
+                price: 1060000,
             },
             {
                 departureTime: "19:20",
                 arrivalTime: "5:40",
-                departureDate: "May 13",
-                arrivalDate: "May 14",
+                departureDate: "May 12",
+                arrivalDate: "May 13",
                 departurePlace: "Hanoi",
                 arrivalPlace: "Saigon",
                 seats: 51,
                 train: "SE03",
                 isButton: true,
-                price: "1.064.000",
+                price: 1064000,
             },
             {
                 departureTime: "22:00",
                 arrivalTime: "6:30",
-                departureDate: "May 14",
+                departureDate: "May 12",
+                arrivalDate: "May 13",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 154,
+                train: "SE01",
+                isButton: true,
+                price: 1063000,
+            },
+            {
+                departureTime: "6:10",
+                arrivalTime: "17:58",
+                departureDate: "May 13",
+                arrivalDate: "May 14",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 231,
+                train: "SE07",
+                isButton: true,
+                price: 917000,
+            },
+            {
+                departureTime: "15:30",
+                arrivalTime: "4:25",
+                departureDate: "May 13",
+                arrivalDate: "May 15",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 187,
+                train: "SE05",
+                isButton: true,
+                price: 1060000,
+            },
+            {
+                departureTime: "19:20",
+                arrivalTime: "5:40",
+                departureDate: "May 13",
+                arrivalDate: "May 15",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 51,
+                train: "SE03",
+                isButton: true,
+                price: 1064000,
+            },
+            {
+                departureTime: "22:00",
+                arrivalTime: "6:30",
+                departureDate: "May 13",
                 arrivalDate: "May 15",
                 departurePlace: "Hanoi",
                 arrivalPlace: "Saigon",
                 seats: 154,
                 train: "SE01",
                 isButton: true,
-                price: "1.063.000",
+                price: 1063000,
+            },
+            {
+                departureTime: "6:10",
+                arrivalTime: "17:58",
+                departureDate: "May 14",
+                arrivalDate: "May 15",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 231,
+                train: "SE07",
+                isButton: true,
+                price: 917000,
+            },
+            {
+                departureTime: "15:30",
+                arrivalTime: "6:30",
+                departureDate: "May 14",
+                arrivalDate: "May 15",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 187,
+                train: "SE05",
+                isButton: true,
+                price: 1063000,
+            },
+            {
+                departureTime: "19:20",
+                arrivalTime: "5:40",
+                departureDate: "May 14",
+                arrivalDate: "May 16",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 51,
+                train: "SE03",
+                isButton: true,
+                price: 1064000,
+            },
+            {
+                departureTime: "22:30",
+                arrivalTime: "6:30",
+                departureDate: "May 14",
+                arrivalDate: "May 16",
+                departurePlace: "Hanoi",
+                arrivalPlace: "Saigon",
+                seats: 154,
+                train: "SE01",
+                isButton: true,
+                price: 1063000,
             },
         ],
         [],
@@ -73,9 +223,17 @@ function FirstStep() {
 
     const showFilter = () => {
         if (filter === "Earliest") {
-            tickets.sort((a, b) => a.departureDate.slice(3, 6) - b.departureDate.slice(3, 6));
+            tickets.sort((a, b) => a.arrivalDate.slice(3, 6) - b.arrivalDate.slice(3, 6));
+            tickets.sort((a, b) => a.departureTime.slice(0, 2) - b.departureTime.slice(0, 2));
+            tickets.sort((a, b) => a.arrivalTime.slice(0, 2) - b.arrivalTime.slice(0, 2));
         } else if (filter === "Latest") {
-            tickets.sort((a, b) => b.departureDate.slice(3, 6) - a.departureDate.slice(3, 6));
+            tickets.sort((a, b) => b.arrivalDate.slice(3, 6) - a.arrivalDate.slice(3, 6));
+            tickets.sort((a, b) => b.departureTime.slice(0, 2) - a.departureTime.slice(0, 2));
+            tickets.sort((a, b) => b.arrivalTime.slice(0, 2) - a.arrivalTime.slice(0, 2));
+        } else if (filter === "Cheapest") {
+            tickets.sort((a, b) => a.price - b.price);
+        } else {
+            tickets.sort((a, b) => b.price - a.price);
         }
         return tickets;
     };
@@ -99,7 +257,9 @@ function FirstStep() {
                         }}
                     >
                         <FontAwesomeIcon icon={faFilter} className={cx("icon-filter")} />
-                        Departure time ({filter} first)
+                        {filter.includes("Earliest") || filter.includes("Latest")
+                            ? "Departure time (" + filter + " first)"
+                            : "Price (" + filter + " first)"}
                     </Dropdown.Toggle>
 
                     <Dropdown.Menu className={cx("sub-dropdown")}>
@@ -122,7 +282,7 @@ function FirstStep() {
                         <Dropdown.Item
                             className={cx("sub-dropdown-item")}
                             onClick={() => {
-                                setFilter("price-cheapest");
+                                setFilter("Cheapest");
                             }}
                         >
                             Price (Cheapest first)
@@ -151,13 +311,28 @@ function FirstStep() {
                     seats={ticket.seats}
                     train={ticket.train}
                     isButton={ticket.isButton}
-                    price={ticket.price}
+                    price={ticket.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
                 />
             ))}
 
             <div className={cx("filter")}>
                 You can find other trains departs on 3 days later below as well:
             </div>
+            {ticketsAfter.map((ticket, index) => (
+                <InforTicker
+                    key={index}
+                    departureTime={ticket.departureTime}
+                    arrivalTime={ticket.arrivalTime}
+                    departureDate={ticket.departureDate}
+                    arrivalDate={ticket.arrivalDate}
+                    departurePlace={ticket.arrivalPlace}
+                    arrivalPlace={ticket.arrivalPlace}
+                    seats={ticket.seats}
+                    train={ticket.train}
+                    isButton={ticket.isButton}
+                    price={ticket.price.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                />
+            ))}
             <div className={cx("space")}></div>
             <FooterMini />
         </div>
