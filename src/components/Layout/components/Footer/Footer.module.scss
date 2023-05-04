@@ -8,13 +8,14 @@
         color: #ea4e22;
         font-size: 13px;
         line-height: 20px;
+        margin-bottom: 4rem;
     }
 }
 .inner {
-    padding: 60px 160px 40px;
+    padding: 40px 160px;
     gap: 36rem;
     width: var(--max-width);
-    height: 100%;
+    // height: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,7 +36,10 @@
     gap: 3rem;
     .information,
     .support {
+        font-weight: 400;
         text-align: left;
+        color: #28292e;
+        font-size: 1.6rem;
     }
     h4 {
         font-size: 1.8rem;
