@@ -107,7 +107,9 @@
 }
 
 .confirm-box-wrapper {
-    width: 1040px;
+    margin: 0 calc((100% - 1040px) / 2);
+    display: flex;
+    justify-content: space-between;
 }
 .confirm-box {
     width: fit-content;

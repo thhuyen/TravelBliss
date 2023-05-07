@@ -88,7 +88,7 @@ function Signin() {
                             <p>Wrong username or password</p>
                         </div>
 
-                        <label className={cx("label-field")}>Email</label>
+                        <label className={cx("label-field")}>Phone number</label>
                         <input
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
