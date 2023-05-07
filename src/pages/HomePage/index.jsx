@@ -1,9 +1,8 @@
-import React from "react";
 import Banner from "~/components/Layout/components/Banner";
 import Footer from "~/components/Layout/components/Footer";
-import FooterMini from "~/components/Layout/components/FooterMini";
 import Header from "~/components/Layout/components/Header";
 import About from "./About";
+import Chatbot from "./Chatbox";
 import Destination from "./Destination";
 import News from "./News";
 import WhyChoose from "./WhyChoose";
@@ -17,6 +16,7 @@ function HomePage() {
             <News />
             <Destination />
             <WhyChoose />
+            <Chatbot />
             <Footer />
         </>
     );

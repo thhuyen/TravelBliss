@@ -1,9 +1,9 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 import { memo } from "react";
 
-import stylesBox from "./BoxMessage.module.scss";
 import classNames from "classnames/bind";
+import stylesBox from "./BoxMessage.module.scss";
+import { faCircleInfo } from "@fortawesome/free-solid-svg-icons";
 
 const cxBox = classNames.bind(stylesBox);
 
