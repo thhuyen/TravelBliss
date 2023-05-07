@@ -54,6 +54,9 @@ function Newpassword() {
                         text={
                             "Create a new password that has an eight-character password that contains at least one uppercase, one lowercase and a number."
                         }
+                        bggreen={true}
+                        clgreen={true}
+                        icgreen={true}
                     />
 
                     <form onSubmit={formik.handleSubmit}>

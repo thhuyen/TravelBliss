@@ -62,6 +62,9 @@ function Vertification() {
                     text={
                         "Please check your e-mail account for the verification code we just sent you and enter that code in the box below."
                     }
+                    bggreen={true}
+                    clgreen={true}
+                    icgreen={true}
                 />
 
                 <p>Verification code</p>

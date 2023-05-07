@@ -63,7 +63,13 @@ function StepChain({ ...props }) {
                 </div>
 
                 <div className={cxStep("step", "step-after")}>
-                    <div className={cxStep("number")}>3</div>
+                    <div
+                        className={clsx(stylesStep.number, {
+                            [stylesStep.active3]: props.active3,
+                        })}
+                    >
+                        3
+                    </div>
                     <div>
                         <p className={cxStep("sequence-text")}>Third step</p>
                         <p className={cxStep("action-text")}>Passenger Info</p>

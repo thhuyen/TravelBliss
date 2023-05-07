@@ -59,6 +59,9 @@ function ForgetPassword() {
                 <div className={cx("guide")}>
                     <BoxMessage
                         text={"Please enter your email address to search for your account."}
+                        bggreen={true}
+                        clgreen={true}
+                        icgreen={true}
                     />
                     <div>
                         <form onSubmit={formik.handleSubmit}>

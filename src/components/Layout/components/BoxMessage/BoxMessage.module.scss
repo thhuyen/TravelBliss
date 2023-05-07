@@ -1,15 +1,28 @@
-.guide-box {
+.guideBox {
+    max-width: 1120px;
     display: flex;
     align-items: center;
-    background: var(--green-100);
     padding: 10px;
     border-radius: var(--border-radius);
     margin: 15px 0;
 }
-.icon-infor {
+.bggreen {
+    background: var(--green-100);
+}
+.bgblue {
+    background: #e5f8ff;
+}
+.iconInfor {
     margin-right: 20px;
 }
-.guide-text {
+.guideText {
     font-size: 1.4rem;
+}
+.icgreen,
+.clgreen {
     color: var(--green-600);
+}
+.icblue,
+.clblue {
+    color: #005fe3;
 }
