@@ -103,7 +103,7 @@ function Order() {
                 <InforTicker
                     departureTime={train.departureTime}
                     arrivalTime={train.arrivalTime}
-                    departureDate={train.departureTime}
+                    departureDate={train.departureDate}
                     arrivalDate={train.arrivalDate}
                     departurePlace={train.departurePlace}
                     arrivalPlace={train.arrivalPlace}
@@ -339,17 +339,6 @@ function Order() {
                             </tr>
                         </tbody>
                     </table>
-
-                    <div className={cx("confirm-box")}>
-                        Selected <span className={cx("quantity")}>{countTicket}</span> tickets
-                        &nbsp; &nbsp; &nbsp; &nbsp; Subtotal: &nbsp;
-                        <span className={cx("subtotal")}>
-                            {subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
-                        </span>{" "}
-                        VND
-                    </div>
-
-                    <button className={cx("btn-continue")}>Continue</button>
                 </div>
             ) : (
                 <div className={cx("seats-four_cabins")}>
@@ -417,18 +406,20 @@ function Order() {
                             </tr>
                         </tbody>
                     </table>
-
-                    <div className={cx("confirm-box-wrapper", "d-flex")}>
-                        <div className={cx("confirm-box")}>
-                            Selected <span className={cx("quantity")}>2</span> tickets &nbsp; &nbsp;
-                            &nbsp; &nbsp; Subtotal: &nbsp;
-                            <span className={cx("subtotal")}>2.000.000</span> VND
-                        </div>
-
-                        <button className={cx("btn-continue")}>Continue</button>
-                    </div>
                 </div>
             )}
+
+            <div className={cx("confirm-box-wrapper")}>
+                <div className={cx("confirm-box")}>
+                    Selected <span className={cx("quantity")}>{countTicket}</span> tickets &nbsp;
+                    &nbsp; &nbsp; &nbsp; Subtotal: &nbsp;
+                    <span className={cx("subtotal")}>
+                        {subtotal.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
+                    </span>{" "}
+                    VND
+                </div>
+                <button className={cx("btn-continue")}>Continue</button>
+            </div>
 
             <FooterMini />
         </div>
