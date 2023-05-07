@@ -19,6 +19,9 @@ function Congrats() {
                     text={
                         "You have created account successfully. Please go back to Login page to proceed further."
                     }
+                    bggreen={true}
+                    clgreen={true}
+                    icgreen={true}
                 />
 
                 <Link to="/">

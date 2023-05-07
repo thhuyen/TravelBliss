@@ -55,6 +55,9 @@ function VerificationPassword() {
                         text={
                             "Please check your e-mail account for the verification code we just sent you and enter that code in the box below. Your code is 6 numbers long."
                         }
+                        bggreen={true}
+                        clgreen={true}
+                        icgreen={true}
                     />
                     <div>
                         <form>

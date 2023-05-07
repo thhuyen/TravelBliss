@@ -15,6 +15,7 @@ import Home from "~/pages/HomePage";
 import FirstStep from "~/pages/Order/FirstStep";
 import SecondStep from "~/pages/Order/SecondStep";
 import HomePage from "~/pages/HomePage";
+import ThirdStep from "~/pages/Order/ThirdStep";
 
 // dont need to login
 const publicRoutes = [
@@ -70,6 +71,10 @@ const privateRoutes = [
     {
         path: "/order/secondstep",
         component: SecondStep,
+    },
+    {
+        path: "/order/thirdstep",
+        component: ThirdStep,
     },
 ];
 

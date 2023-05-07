@@ -29,8 +29,6 @@ function Signin() {
         loadData();
     }, []);
 
-    console.log(users);
-
     const handleLogin = (e) => {
         e.preventDefault();
 

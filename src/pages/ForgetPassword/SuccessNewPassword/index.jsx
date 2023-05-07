@@ -19,6 +19,9 @@ function SuccessNewPassword() {
                         text={
                             "Your password have been changed successfully. Please go back to Sign-in page to proceed further."
                         }
+                        bggreen={true}
+                        clgreen={true}
+                        icgreen={true}
                     />
 
                     <Link to="/">
