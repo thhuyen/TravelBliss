@@ -67,7 +67,7 @@ function Signup() {
             accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
         onSubmit: (values) => {
-            const id = "0";
+            const id = "3";
             const Username = values.phone;
             const Password = values.password;
             const Email = values.email;
