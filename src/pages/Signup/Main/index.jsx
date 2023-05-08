@@ -67,14 +67,14 @@ function Signup() {
             accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
         onSubmit: (values) => {
-            const id = "0";
+            const idUser = "0";
             const Username = values.phone;
             const Password = values.password;
             const Email = values.email;
             const Fullname = values.fullname;
 
             axios.post("http://localhost:5000/api/postUsers", {
-                id,
+                idUser,
                 Username,
                 Password,
                 Email,
