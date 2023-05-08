@@ -30,7 +30,7 @@ function Banner() {
         "Da Nang",
         "Hai Phong",
         "Hanoi",
-        "Ho Chi Minh",
+        "Sai Gon",
     ];
     const handleChangeDeparture = (e) => {
         setDepartureCity(e.target.value);

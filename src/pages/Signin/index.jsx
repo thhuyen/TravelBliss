@@ -105,7 +105,9 @@ function Signin() {
                             className={cx("message-invalid")}
                             style={{ visibility: ` ${validPhone ? "" : "visible"}` }}
                         >
-                            {username === "" ? "Please fill out your username" : "Invalid email"}
+                            {username === ""
+                                ? "Please fill out your username"
+                                : "Invalid phone number"}
                         </p>
 
                         <label className={cx("label-field")}>Password</label>
