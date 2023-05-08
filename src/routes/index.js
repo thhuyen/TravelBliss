@@ -20,7 +20,6 @@ import Success from "~/pages/Order/Success";
 import History from "~/pages/Order/History";
 import TicketDetail from "~/pages/Order/TicketDetail";
 
-
 // dont need to login
 const publicRoutes = [
     {
@@ -79,7 +78,8 @@ const privateRoutes = [
     {
         path: "/order/thirdstep",
         component: ThirdStep,
-
+    },
+    {
         path: "/order/success",
         component: Success,
     },

@@ -1,6 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 import Header from "~/components/Layout/components/Header";
 import StepChain from "~/components/Layout/components/StepChain";
@@ -9,6 +10,7 @@ import InforTicker from "~/components/Layout/components/InforTicker";
 import head_coach from "~/assets/imgs/head_coach.png";
 import coach from "~/assets/imgs/coach.png";
 import FooterMini from "~/components/Layout/components/FooterMini";
+import { replace } from "formik";
 
 const cx = classNames.bind(styles);
 
@@ -20,6 +22,7 @@ function Order() {
     const [subtotal, setSubTotal] = useState(0);
     const [countTicket, setCountTicket] = useState(0);
     const [backgroundStandard, setBackgroundStandard] = useState([]);
+    const [backgroundCabin, setBackgroundCabin] = useState([]);
 
     // get value from first step
     useEffect(() => {
@@ -71,6 +74,34 @@ function Order() {
         }
     }, [standardSeats]);
 
+    useEffect(() => {
+        for (let i in four_cabins) {
+            if (four_cabins[i].Status === 0) {
+                setBackgroundCabin((prev) => [
+                    ...prev,
+                    {
+                        number: i,
+                        background: "white",
+                        color: "black",
+                        border: "1px solid var(--grey-300)",
+                        level: four_cabins[i].Level,
+                    },
+                ]);
+            } else {
+                setBackgroundCabin((prev) => [
+                    ...prev,
+                    {
+                        number: i,
+                        background: "var(--selected)",
+                        color: "white",
+                        border: "none",
+                        level: four_cabins[i].Level,
+                    },
+                ]);
+            }
+        }
+    }, [four_cabins]);
+
     const handleChoose = (seatNumber) => {
         const price = standardSeats[0].CoachPrice;
 
@@ -90,6 +121,34 @@ function Order() {
             }
         });
         setBackgroundStandard([...backgroundStandard]);
+    };
+
+    const handleChoose1 = (seatNumber) => {
+        backgroundCabin.forEach((seat) => {
+            const price1 = four_cabins[0].CoachPrice;
+
+            if (seat.number === seatNumber) {
+                if (seat.background === "white") {
+                    seat.background = "#5daa8f";
+                    seat.color = "white";
+                    setSubTotal((prev) => prev + price1);
+                    setCountTicket((prev) => prev + 1);
+                } else {
+                    seat.background = "white";
+                    seat.color = "black";
+                    setSubTotal((prev) => prev - price1);
+                    setCountTicket((prev) => prev - 1);
+                }
+            }
+        });
+        setBackgroundCabin([...backgroundCabin]);
+    };
+
+    const navigate = useNavigate();
+
+    const handleContinue = () => {
+        if (subtotal > 0) navigate("/order/thirdstep", { replace: true });
+        else alert("Please choose one seat at least!");
     };
 
     return (
@@ -359,48 +418,47 @@ function Order() {
                         <tbody>
                             <tr>
                                 <th>Level 2</th>
-
-                                {four_cabins
-                                    .filter((seat) => seat.Level === 2)
+                                {backgroundCabin
+                                    .filter((seat) => seat.level === 2)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatId}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose1(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
                             <tr>
-                                <th>Level 1</th>
-                                {four_cabins
-                                    .filter((seat) => seat.Level === 1)
+                                <th>Level 2</th>
+                                {backgroundCabin
+                                    .filter((seat) => seat.level === 1)
                                     .map((seat) => (
                                         <td
-                                            key={seat.SeatId}
+                                            key={seat.number}
                                             style={{
-                                                background: `${
-                                                    seat.Status === 1 ? "var(--selected)" : "white"
-                                                }`,
-                                                color: `${seat.Status === 1 ? "white" : "black"}`,
-                                                border: `${
-                                                    seat.Status === 1
-                                                        ? "none"
-                                                        : "1px solid var(--grey-300)"
-                                                }`,
+                                                background: `${seat.background}`,
+
+                                                color: `${seat.color}`,
+                                                border: `${seat.border}`,
                                             }}
+                                            onClick={
+                                                seat.background !== "var(--selected)"
+                                                    ? () => handleChoose1(seat.number)
+                                                    : undefined
+                                            }
                                         >
-                                            {seat.SeatNumber}
+                                            {+seat.number + 1}
                                         </td>
                                     ))}
                             </tr>
@@ -418,7 +476,9 @@ function Order() {
                     </span>{" "}
                     VND
                 </div>
-                <button className={cx("btn-continue")}>Continue</button>
+                <button className={cx("btn-continue")} onClick={handleContinue}>
+                    Continue
+                </button>
             </div>
 
             <FooterMini />

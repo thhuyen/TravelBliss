@@ -72,6 +72,8 @@ function Signup() {
             const Password = values.password;
             const Email = values.email;
             const Fullname = values.fullname;
+            const Birthday = "1999/01/14";
+            const Identity_number = "076528000011";
 
             axios.post("http://localhost:5000/api/postUsers", {
                 idUser,
@@ -79,6 +81,8 @@ function Signup() {
                 Password,
                 Email,
                 Fullname,
+                Birthday,
+                Identity_number,
             });
 
             navigate("/signup/vertification", { replace: true });
