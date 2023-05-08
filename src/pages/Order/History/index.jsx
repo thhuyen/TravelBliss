@@ -1,24 +1,18 @@
-import { faCircleCheck, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 
-import arrow from "~/assets/imgs/arrow.png";
-import qr from "~/assets/imgs/QR.png";
-import FooterMini from "~/components/Layout/components/FooterMini";
 import Header from "~/components/Layout/components/Header";
 
-import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
+import React from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import styles from "./History.module.scss";
 
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormHelperText from "@mui/material/FormHelperText";
 import FormControl from "@mui/material/FormControl";
+import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Footer from "~/components/Layout/components/Footer";
+import { Link } from "react-router-dom";
 
 const cx = classNames.bind(styles);
 
@@ -41,11 +35,7 @@ function History() {
                                 <span>Cancelled</span>
                             </div>
                             <FormControl sx={{ m: 1, minWidth: 120 }}>
-                                <Select
-                                    aria-placeholder="Sort by"
-                                    value={choose}
-                                    onChange={handleChange}
-                                >
+                                <Select placeholder="Sort" value={choose} onChange={handleChange}>
                                     <MenuItem>Oldest to Newest</MenuItem>
                                     <MenuItem>Newest to Oldest</MenuItem>
                                 </Select>
@@ -81,14 +71,22 @@ function History() {
                                 </Row>
 
                                 <hr />
-                                <span>View ticket details</span>
+                                <Link to="/order/ticketdetail">
+                                    <span>View ticket details</span>
+                                </Link>
                             </div>
                         </div>{" "}
                     </div>
                 </div>
                 <div className={cx("ticket-btn")}>
-                    <button className={cx("down")}> Go to Homepage</button>
-                    <button className={cx("up")}>Book another</button>
+                    <Link to="/">
+                        {" "}
+                        <button className={cx("down")}> Go to Homepage</button>
+                    </Link>
+                    <Link to="/order/firststep">
+                        {" "}
+                        <button className={cx("up")}>Book another</button>
+                    </Link>
                 </div>
             </div>
 

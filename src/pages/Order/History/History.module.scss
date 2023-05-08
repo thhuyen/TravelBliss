@@ -30,7 +30,7 @@
     display: flex;
 
     gap: 6rem;
-    margin: 2rem 3rem;
+    padding: 2rem 5.7rem;
 
     img {
         width: 180px;
@@ -45,8 +45,6 @@
     }
 }
 .departure {
-    Row {
-    }
     span {
         color: #ea4e22;
         font-size: 18px;
@@ -88,11 +86,14 @@ button {
     margin: 2rem 0;
     color: white;
     background-color: #ea4e22;
+    max-width: 15%;
+    padding: 9px 20px;
 }
 .down {
     border: 1px solid #ea4e22;
-
+    max-width: 15%;
     background-color: transparent;
+    padding: 9px 20px;
     color: #ea4e22;
 }
 .MuiTouchRipple-root,
