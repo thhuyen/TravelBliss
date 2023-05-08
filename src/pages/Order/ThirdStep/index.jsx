@@ -4,12 +4,15 @@ import StepChain from "~/components/Layout/components/StepChain";
 import styles from "./ThirdStep.module.scss";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
 import FooterMini from "~/components/Layout/components/FooterMini";
+import Header from "~/components/Layout/components/Header";
 
 const cx = classNames.bind(styles);
 
 function ThirdStep() {
     return (
         <div>
+            <Header />
+            <div className={cx("space")}></div>
             <StepChain route="/order/secondstep" done1={true} done2={true} active3={true} />
 
             <div className={cx("message")}>
