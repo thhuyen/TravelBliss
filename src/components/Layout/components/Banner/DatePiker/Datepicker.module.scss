@@ -13,11 +13,15 @@
 }
 
 .content {
+    font-size: 1.6rem;
     height: 100%;
     width: 100%;
     border: transparent;
     text-align: center;
     font-size: 1.8rem;
+    .content::placeholder {
+        font-size: 1.6rem;
+    }
 }
 .Datepicker_date__sxmvN {
     width: 77px !important;

@@ -59,9 +59,9 @@ function Banner() {
                         variant="standard"
                         sx={{ m: 1, minWidth: 120 }}
                     >
-                        <InputLabel className={cxBanner("input")} id="">
+                        {/* <InputLabel className={cxBanner("input")} id="">
                             Enter departure city...
-                        </InputLabel>
+                        </InputLabel> */}
                         <Select
                             className={cxBanner("select")}
                             labelId="departure"
@@ -87,7 +87,7 @@ function Banner() {
                     />
 
                     <FormControl className={cxBanner("arrival")} variant="standard">
-                        <InputLabel className={cxBanner("input")}>Enter arrival city...</InputLabel>
+                        {/* <InputLabel className={cxBanner("input")}>Enter arrival city...</InputLabel> */}
                         <Select
                             className={cxBanner("select")}
                             labelId="arrival"
