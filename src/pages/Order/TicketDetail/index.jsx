@@ -50,19 +50,19 @@ function TicketDetail() {
                                 <div className={cx("information")}>
                                     <span>Ticket Information:</span>
                                     <div>
-                                        <Row>
+                                        <Row className={cx("row")}>
                                             <Col className={cx("col1")}>Departure Time: </Col>
                                             <Col className={cx("col2")}>15:30, 30/05/2023</Col>
                                             <Col className={cx("col1")}>Arrival Time:</Col>{" "}
                                             <Col className={cx("col2")}>4:30, 01/06/2023 </Col>
                                         </Row>
-                                        <Row>
+                                        <Row className={cx("row")}>
                                             <Col className={cx("col1")}>Train Name: </Col>
                                             <Col className={cx("col2")}>SE04</Col>
                                             <Col className={cx("col1")}>Coach:</Col>{" "}
                                             <Col className={cx("col2")}>2 </Col>
                                         </Row>
-                                        <Row>
+                                        <Row className={cx("row")}>
                                             <Col className={cx("col1")}> Class:</Col>
                                             <Col className={cx("col2")}>Standard Seat</Col>
                                             <Col className={cx("col1")}>Seat:</Col>{" "}
@@ -70,19 +70,19 @@ function TicketDetail() {
                                         </Row>
                                     </div>
                                     <span>Passenger Details</span>
-                                    <Row>
-                                        <Col> Passenger Type:</Col>
+                                    <Row className={cx("row")}>
+                                        <Col className={cx("col1")}> Passenger Type:</Col>
                                         <Col className={cx("col2")}>Adult</Col>
-                                        <Col>Full name:</Col>{" "}
+                                        <Col className={cx("col1")}>Full name:</Col>{" "}
                                         <Col className={cx("col2")}>Nguyen Van Anh</Col>
                                     </Row>
-                                    <Row>
+                                    <Row className={cx("row")}>
                                         <Col className={cx("col1")}> Identification Number:</Col>
                                         <Col className={cx("col2")}>9809103902490</Col>
                                         <Col className={cx("col1")}>Day of Birth:</Col>{" "}
                                         <Col className={cx("col2")}>16/11/1998</Col>
                                     </Row>{" "}
-                                    <Row>
+                                    <Row className={cx("row", "row-sub")}>
                                         <Col className={cx("col1")}> E-Ticket has been sent to</Col>
                                         <Col className={cx("col2")}>Khoa.nguyen@gmail.com</Col>
                                     </Row>
