@@ -5,24 +5,24 @@
     margin: 70px calc((100% - 1040px) / 2) 0 calc((100% - 1040px) / 2);
 }
 .filter-box {
-    font-size: 1.3rem;
-    width: 230px;
+    font-size: 1.3rem !important;
+    width: 230px !important;
     color: var(--primary-orange-500);
-    padding: 10px;
+    padding: 10px !important;
     border: 1px solid var(--primary-orange-500);
-    border-radius: 36px;
+    border-radius: 36px !important;
     margin: 16px 0;
     background: white;
     cursor: pointer;
 
     &::after {
-        display: none;
+        display: none !important;
     }
 }
 .sub-dropdown {
-    font-size: 1.3rem;
+    font-size: 1.3rem !important;
     line-height: 20px;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius) !important;
     border: none;
     transform: translate3d(0px, 60px, 0px);
     box-shadow: 0 0 10px #ccc;
