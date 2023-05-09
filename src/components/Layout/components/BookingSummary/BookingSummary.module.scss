@@ -1,0 +1,57 @@
+.booking-summary {
+    border-radius: var(--border-radius);
+    border-right: 1px solid var(--grey-300);
+    border-left: 1px solid var(--grey-300);
+    border-bottom: 1px solid var(--grey-300);
+    border-radius: var(--border-radius);
+    box-shadow: 0 5px 10px #eee;
+    transform: translateY(229px);
+    padding-bottom: 5px;
+}
+.wrapper {
+    padding: 10px 20px;
+    line-height: 1.8;
+}
+.title {
+    height: 60px;
+    line-height: 60px;
+    color: white;
+    padding: 0 10px;
+    background: var(--primary-orange-400);
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+.part1 {
+    font-size: 1.3rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--grey-300);
+
+    span {
+        font-size: 1.6rem;
+    }
+}
+.part2 {
+    font-size: 1.3rem;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--grey-300);
+
+    .price {
+        float: right;
+    }
+}
+.part3 {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    .total {
+        float: right;
+    }
+}
+.btn-continue {
+    width: 100%;
+    color: white;
+    background: var(--primary-orange-400);
+    border: none;
+    margin-top: 10px;
+    outline: none;
+}
