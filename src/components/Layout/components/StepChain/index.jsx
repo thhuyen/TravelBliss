@@ -63,18 +63,26 @@ function StepChain({ ...props }) {
                 </div>
 
                 <div className={cxStep("step", "step-after")}>
-                    <div
-                        className={clsx(stylesStep.number, {
-                            [stylesStep.active3]: props.active3,
-                        })}
-                    >
-                        3
-                    </div>
+                    {props.done3 ? (
+                        <FontAwesomeIcon icon={faCircleCheck} className={cxStep("icon-done")} />
+                    ) : (
+                        <div
+                            className={clsx(stylesStep.number, {
+                                [stylesStep.active3]: props.active3,
+                            })}
+                        >
+                            2
+                        </div>
+                    )}
                     <div>
                         <p className={cxStep("sequence-text")}>Third step</p>
                         <p className={cxStep("action-text")}>Passenger Info</p>
                     </div>
-                    <div className={cxStep("line")}></div>
+                    <div
+                        className={clsx(stylesStep.line, {
+                            [stylesStep.done3]: props.done3,
+                        })}
+                    ></div>
                 </div>
 
                 <div className={cxStep("step", "step-after")}>

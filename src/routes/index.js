@@ -15,10 +15,12 @@ import Home from "~/pages/HomePage";
 import FirstStep from "~/pages/Order/FirstStep";
 import SecondStep from "~/pages/Order/SecondStep";
 import HomePage from "~/pages/HomePage";
-import ThirdStep from "~/pages/Order/ThirdStep";
+import PassengerInfo from "~/pages/Order/ThirdStep/PassengerInfo";
+import Confirmation from "~/pages/Order/ThirdStep/Confirmation";
 import Success from "~/pages/Order/Success";
 import History from "~/pages/History";
 import TicketDetail from "~/pages/Order/TicketDetail";
+import FourthStep from "~/pages/Order/FourthStep";
 
 // dont need to login
 const publicRoutes = [
@@ -76,8 +78,16 @@ const privateRoutes = [
         component: SecondStep,
     },
     {
-        path: "/order/thirdstep/:idUser",
-        component: ThirdStep,
+        path: "/order/thirdstep/passengerinfo/:idUser",
+        component: PassengerInfo,
+    },
+    {
+        path: "/order/thirdstep/confirmation/:idUser",
+        component: Confirmation,
+    },
+    {
+        path: "/order/fourthstep",
+        component: FourthStep,
     },
     {
         path: "/order/success",

@@ -4,7 +4,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 
 import StepChain from "~/components/Layout/components/StepChain";
-import styles from "./ThirdStep.module.scss";
+import styles from "./PassengerInfo.module.scss";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
 import FooterMini from "~/components/Layout/components/FooterMini";
 import Header from "~/components/Layout/components/Header";
@@ -12,9 +12,11 @@ import BookingSummary from "~/components/Layout/components/BookingSummary";
 
 const cx = classNames.bind(styles);
 
-function ThirdStep() {
+function PassengerInfo() {
     const { idUser } = useParams();
     const route = `/order/secondstep/${idUser}`;
+    const nextRoute = `/order/thirdstep/Confirmation/${idUser}`;
+
     const [users, setUsers] = useState([]);
     const [checked, setChecked] = useState(false);
     const [email, setEmail] = useState("");
@@ -62,8 +64,6 @@ function ThirdStep() {
                 };
             });
         } else {
-            console.log(autofill.birthday);
-            console.log(birthday);
             setAutoFill({});
         }
     };
@@ -198,7 +198,7 @@ function ThirdStep() {
                 </div>
 
                 <div className={cx("inner-right")}>
-                    <BookingSummary tickets={tickets} seats={seats} />
+                    <BookingSummary tickets={tickets} seats={seats} idUser={idUser} />
                 </div>
             </div>
 
@@ -207,4 +207,4 @@ function ThirdStep() {
     );
 }
 
-export default ThirdStep;
+export default PassengerInfo;

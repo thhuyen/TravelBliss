@@ -1,10 +1,12 @@
 import classNames from "classnames/bind";
 import stylesSummary from "./BookingSummary.module.scss";
 import { useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
 const cx1 = classNames.bind(stylesSummary);
 
-function BookingSummary({ tickets, seats }) {
+function BookingSummary({ tickets, seats, idUser }) {
+    const navigate = useNavigate();
     const count = useMemo(() => {
         const standard = seats.filter((seat) => seat.coach === 1);
         const cabin = seats.filter((seat) => seat.coach === 2);
@@ -14,6 +16,10 @@ function BookingSummary({ tickets, seats }) {
             cabin: cabin.length,
         };
     }, []);
+
+    const handleContinue = () => {
+        navigate(`/order/thirdstep/confirmation/${idUser}`, { replace: true });
+    };
 
     return (
         <div className={cx1("booking-summary")}>
@@ -52,7 +58,9 @@ function BookingSummary({ tickets, seats }) {
                         VND
                     </span>
                 </div>
-                <button className={cx1("btn-continue")}>Continue</button>
+                <button className={cx1("btn-continue")} onClick={handleContinue}>
+                    Continue
+                </button>
             </div>
         </div>
     );
