@@ -22,30 +22,6 @@ function FirstStep() {
     const tickets = useMemo(
         () => [
             {
-                departureTime: "6:10",
-                arrivalTime: "17:58",
-                departureDate: "May 10",
-                arrivalDate: "May 11",
-                departurePlace: "Hanoi",
-                arrivalPlace: "Saigon",
-                seats: 231,
-                train: "SE07",
-                isButton: true,
-                price: 895000,
-            },
-            {
-                departureTime: "15:30",
-                arrivalTime: "4:25",
-                departureDate: "May 10",
-                arrivalDate: "May 12",
-                departurePlace: "Hanoi",
-                arrivalPlace: "Saigon",
-                seats: 187,
-                train: "SE05",
-                isButton: true,
-                price: 1060000,
-            },
-            {
                 departureTime: "19:20",
                 arrivalTime: "5:40",
                 departureDate: "May 10",

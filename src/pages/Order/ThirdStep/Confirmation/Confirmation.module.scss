@@ -1,0 +1,20 @@
+.space {
+    height: 88px;
+}
+.wrapper {
+    display: flex;
+    margin: 10px calc((100% - 1040px) / 2) 50px calc((100% - 1040px) / 2);
+}
+.message {
+    display: flex;
+    justify-content: center;
+    text-align: justify;
+}
+
+.inner-left {
+    flex: 1.5;
+    padding-right: 50px;
+}
+.inner-right {
+    flex: 1;
+}
