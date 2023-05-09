@@ -3,9 +3,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import classNames from "classnames/bind";
 import { memo, useState } from "react";
-import { Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
-// import { makeStyles } from "@mui/material";
 
 import stylesBanner from "./Banner.module.scss";
 import Datepicker from "./DatePiker";
@@ -18,6 +17,9 @@ const useStyles = makeStyles({
 });
 
 function Banner() {
+    const { idUser } = useParams();
+    const navigate = useNavigate();
+
     const classes = useStyles();
     const [departureCity, setDepartureCity] = useState("");
     const [arrivalCity, setArrivalCity] = useState("");
@@ -43,6 +45,10 @@ function Banner() {
     const handleSwich = () => {
         setDepartureCity(arrivalCity);
         setArrivalCity(departureCity);
+    };
+
+    const goToOrder = () => {
+        navigate(`/order/firststep/${idUser}`, { replace: true });
     };
     return (
         <div className={cxBanner("wrapper")}>
@@ -106,10 +112,10 @@ function Banner() {
                         </Select>
                     </FormControl>
                 </div>
-                {/* button */}
-                <Link to="/order/firststep">
-                    <button className={cxBanner("btn", "button")}>Search Trains</button>
-                </Link>
+
+                <button className={cxBanner("btn", "button")} onClick={goToOrder}>
+                    Search Trains
+                </button>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import classNames from "classnames/bind";
 import { memo } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import clsx from "clsx";
 
 import { useCallback } from "react";
@@ -9,6 +9,9 @@ import stylesTicket from "./InforTicket.module.scss";
 
 const cxTicket = classNames.bind(stylesTicket);
 function InforTicket({ ...props }) {
+    const { idUser } = useParams();
+    const navigate = useNavigate();
+
     const handleChooseTrain = useCallback((e) => {
         const infor = {
             departureTime: props.departureTime,
@@ -22,6 +25,7 @@ function InforTicket({ ...props }) {
             price: props.price,
         };
         sessionStorage.setItem("train", JSON.stringify(infor));
+        navigate(`/order/secondstep/${idUser}`, { replace: true });
     }, []);
 
     return (
@@ -62,9 +66,7 @@ function InforTicket({ ...props }) {
                             </td>
 
                             <td>
-                                <Link to="/order/secondstep" onClick={handleChooseTrain}>
-                                    <button>Choose seat</button>
-                                </Link>
+                                <button onClick={handleChooseTrain}>Choose seat</button>
                             </td>
                         </>
                     ) : null}

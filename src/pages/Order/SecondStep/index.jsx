@@ -1,7 +1,7 @@
 import classNames from "classnames/bind";
 import { useEffect, useState, useMemo } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 import Header from "~/components/Layout/components/Header";
 import StepChain from "~/components/Layout/components/StepChain";
@@ -169,11 +169,13 @@ function Order() {
     };
 
     const navigate = useNavigate();
+    const { idUser } = useParams();
+    const route = `/order/firststep/${idUser}`;
 
     const handleContinue = () => {
         if (subtotal > 0) {
             sessionStorage.setItem("selectedSeat", JSON.stringify(select));
-            navigate("/order/thirdstep", { replace: true });
+            navigate(`/order/thirdstep/${idUser}`, { replace: true });
         } else alert("Please choose one seat at least!");
     };
 
@@ -182,7 +184,7 @@ function Order() {
             <Header />
             <div className={cx("space")}></div>
 
-            <StepChain route="/order/firststep" done1={true} active2={true} />
+            <StepChain route={route} done1={true} active2={true} />
 
             <div className={cx("ticket")}>
                 <InforTicker

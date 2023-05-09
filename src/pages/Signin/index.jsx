@@ -56,7 +56,8 @@ function Signin() {
         );
 
         if (accountExist.length > 0) {
-            navigate("/home", { replace: true });
+            const idUser = accountExist[0].idUser;
+            navigate(`/home/${idUser}`, { replace: true });
         } else {
             setAuthen(false);
         }

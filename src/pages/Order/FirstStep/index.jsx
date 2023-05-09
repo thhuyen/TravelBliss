@@ -4,6 +4,7 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 import { useMemo, useState } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { useParams } from "react-router-dom";
 
 import Header from "~/components/Layout/components/Header";
 import Banner from "~/components/Layout/components/Banner";
@@ -15,6 +16,9 @@ import FooterMini from "~/components/Layout/components/FooterMini";
 const cx = classNames.bind(styles);
 
 function FirstStep() {
+    const { idUser } = useParams();
+    const route = useMemo(() => `/home/${idUser}`, []);
+
     const tickets = useMemo(
         () => [
             {
@@ -243,7 +247,7 @@ function FirstStep() {
         <div>
             <Header />
             <Banner />
-            <StepChain route="/home" active1={true} />
+            <StepChain route={route} active1={true} />
 
             <div className={cx("filter")}>
                 We have found 4 trains departs on <b>May 11th:</b>

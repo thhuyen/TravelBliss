@@ -64,19 +64,19 @@ const publicRoutes = [
 // must login to view info
 const privateRoutes = [
     {
-        path: "/home",
+        path: "/home/:idUser",
         component: Home,
     },
     {
-        path: "/order/firststep",
+        path: "/order/firststep/:idUser",
         component: FirstStep,
     },
     {
-        path: "/order/secondstep",
+        path: "/order/secondstep/:idUser",
         component: SecondStep,
     },
     {
-        path: "/order/thirdstep",
+        path: "/order/thirdstep/:idUser",
         component: ThirdStep,
     },
     {
