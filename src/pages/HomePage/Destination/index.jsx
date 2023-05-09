@@ -40,7 +40,7 @@ function Destination() {
     return (
         <div className={cxDes("wrapper")}>
             <div className={cxDes("header")}>
-                <h2 className={cxDes("title")}>Popular Destionations</h2>
+                <h2 className={cxDes("title")}>Popular Destination</h2>
                 <span className={cxDes("btn")}>
                     View All <FontAwesomeIcon className={cxDes("icon")} icon={faAngleRight} />
                 </span>
