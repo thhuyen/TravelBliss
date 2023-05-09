@@ -25,7 +25,9 @@
     border: 1px solid #7f8591;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 8px;
+    margin-bottom: 2rem;
 }
+
 .route {
     display: flex;
 
@@ -35,6 +37,7 @@
     img {
         width: 180px;
         height: 146px;
+        object-fit: cover;
     }
     .departure {
         width: 70%;
@@ -91,7 +94,7 @@ button {
 }
 .down {
     border: 1px solid #ea4e22;
-    max-width: 15%;
+    max-width: 20%;
     background-color: transparent;
     padding: 9px 20px;
     color: #ea4e22;
@@ -99,4 +102,14 @@ button {
 .MuiTouchRipple-root,
 .MuiButtonBase-root {
     font-size: 18px !important;
+}
+
+.value {
+    font-size: 16px !important;
+    color: #ea4e22 !important;
+    font-family: "Poppins" !important;
+    border-color: #ea4e22 !important;
+}
+.css-kk1bwy-MuiButtonBase-root-MuiMenuItem-root {
+    border-color: #ea4e22 !important;
 }
