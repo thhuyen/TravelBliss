@@ -23,6 +23,7 @@ function Order() {
     const [countTicket, setCountTicket] = useState(0);
     const [backgroundStandard, setBackgroundStandard] = useState([]);
     const [backgroundCabin, setBackgroundCabin] = useState([]);
+    const [select, setSelect] = useState([]);
 
     // get value from first step
     useEffect(() => {
@@ -39,7 +40,6 @@ function Order() {
     const loadData = async () => {
         const standardSeats = await axios.get("http://localhost:5000/api/seats/standard");
         setStandardSeats(standardSeats.data);
-        // setEventStandard(standardSeats.data);
 
         const four_cabins = await axios.get("http://localhost:5000/api/seats/four_cabins");
         setFourCabins(four_cabins.data);
@@ -112,11 +112,23 @@ function Order() {
                     seat.color = "white";
                     setSubTotal((prev) => prev + price);
                     setCountTicket((prev) => prev + 1);
+                    setSelect((prev) => [
+                        ...prev,
+                        {
+                            seatNumber: seatNumber,
+                            coach: 1,
+                        },
+                    ]);
                 } else {
                     seat.background = "white";
                     seat.color = "black";
                     setSubTotal((prev) => prev - price);
                     setCountTicket((prev) => prev - 1);
+
+                    const newSelect = [...select];
+                    const index = newSelect.indexOf(seatNumber);
+                    newSelect.splice(index, 1);
+                    setSelect(newSelect);
                 }
             }
         });
@@ -133,11 +145,23 @@ function Order() {
                     seat.color = "white";
                     setSubTotal((prev) => prev + price1);
                     setCountTicket((prev) => prev + 1);
+                    setSelect((prev) => [
+                        ...prev,
+                        {
+                            seatNumber: seatNumber,
+                            coach: 2,
+                        },
+                    ]);
                 } else {
                     seat.background = "white";
                     seat.color = "black";
                     setSubTotal((prev) => prev - price1);
                     setCountTicket((prev) => prev - 1);
+
+                    const newSelect = [...select];
+                    const index = newSelect.indexOf(seatNumber);
+                    newSelect.splice(index, 1);
+                    setSelect(newSelect);
                 }
             }
         });
@@ -147,8 +171,10 @@ function Order() {
     const navigate = useNavigate();
 
     const handleContinue = () => {
-        if (subtotal > 0) navigate("/order/thirdstep", { replace: true });
-        else alert("Please choose one seat at least!");
+        if (subtotal > 0) {
+            sessionStorage.setItem("selectedSeat", JSON.stringify(select));
+            navigate("/order/thirdstep", { replace: true });
+        } else alert("Please choose one seat at least!");
     };
 
     return (
