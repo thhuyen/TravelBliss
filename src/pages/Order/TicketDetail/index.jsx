@@ -1,18 +1,15 @@
-import { faCircleCheck, faCircleInfo } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import classNames from "classnames/bind";
 
 import arrow from "~/assets/imgs/arrow.png";
 import qr from "~/assets/imgs/QR.png";
-import FooterMini from "~/components/Layout/components/FooterMini";
 import Header from "~/components/Layout/components/Header";
 
-import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
-import styles from "./TicketDetail.module.scss";
+import { Link } from "react-router-dom";
 import Footer from "~/components/Layout/components/Footer";
+import styles from "./TicketDetail.module.scss";
 
 const cx = classNames.bind(styles);
 
@@ -104,8 +101,14 @@ function TicketDetail() {
                         </div>
                     </div>
                     <div className={cx("ticket-btn")}>
-                        <button className={cx("down")}> Go to Homepage</button>
-                        <button className={cx("up")}>Book another</button>
+                        <Link to="/">
+                            {" "}
+                            <button className={cx("down")}> Go to Homepage</button>
+                        </Link>
+                        <Link to="/order/firststep">
+                            {" "}
+                            <button className={cx("up")}>Book another</button>
+                        </Link>
                     </div>
                 </div>
 

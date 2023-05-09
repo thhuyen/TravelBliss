@@ -98,6 +98,12 @@
         color: #ea4e22;
         font-size: 18px;
     }
+    .row {
+        margin-bottom: 0.8rem;
+    }
+    .row-2 {
+        width: 50%;
+    }
     .col1 {
         font-weight: 600;
         font-size: 13px;
@@ -121,6 +127,7 @@ button {
     height: 42px;
     font-size: 16px;
     border-radius: 8px;
+    padding: 1rem 2rem;
 }
 .up {
     border: none;
