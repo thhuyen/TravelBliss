@@ -175,7 +175,7 @@ function Order() {
     const handleContinue = () => {
         if (subtotal > 0) {
             sessionStorage.setItem("selectedSeat", JSON.stringify(select));
-            navigate(`/order/thirdstep/passengerinfo/${idUser}`, { replace: true });
+            navigate(`/order/thirdstep/${idUser}`, { replace: true });
         } else alert("Please choose one seat at least!");
     };
 
