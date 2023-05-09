@@ -1,5 +1,7 @@
 import classNames from "classnames/bind";
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useRef } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
 
 import StepChain from "~/components/Layout/components/StepChain";
 import styles from "./ThirdStep.module.scss";
@@ -11,19 +13,66 @@ import BookingSummary from "~/components/Layout/components/BookingSummary";
 const cx = classNames.bind(styles);
 
 function ThirdStep() {
-    // const [seats, setSeats] = useState([]);
+    const { idUser } = useParams();
+    const route = `/order/secondstep/${idUser}`;
+    const [users, setUsers] = useState([]);
+    const [checked, setChecked] = useState(false);
+    const [email, setEmail] = useState("");
+    const [cccd, setCCCD] = useState("");
+    const [fullname, setFullname] = useState("");
+    const [birthday, setBirthday] = useState(new Date());
+    const [autofill, setAutoFill] = useState({});
 
     const seats = useMemo(() => {
         return JSON.parse(sessionStorage.getItem("selectedSeat"));
     }, []);
 
     const tickets = useMemo(() => JSON.parse(sessionStorage.getItem("train")), []);
-    console.log(tickets);
+    const accRef = useRef();
+
+    const loadData = async () => {
+        const response = await axios.get("http://localhost:5000/api/users");
+        accRef.current = response.data.filter((acc) => acc.idUser === +idUser)[0];
+        setUsers(response.data);
+    };
+    useEffect(() => {
+        loadData();
+    }, []);
+
+    const handleAutoFill = () => {
+        setChecked((prev) => (prev ? false : true));
+
+        if (!checked) {
+            setAutoFill((prev) => {
+                function formatDate(input) {
+                    var datePart = input.match(/\d+/g),
+                        year = datePart[0], // get only two digits
+                        month = datePart[1],
+                        day = datePart[2];
+
+                    return year + "-" + month + "-" + day;
+                }
+
+                return {
+                    ...prev,
+                    email: accRef.current.Email,
+                    fullname: accRef.current.Fullname,
+                    cccd: accRef.current.Identity_number,
+                    birthday: formatDate(accRef.current.Birthday.slice(0, 10)),
+                };
+            });
+        } else {
+            console.log(autofill.birthday);
+            console.log(birthday);
+            setAutoFill({});
+        }
+    };
+
     return (
         <div>
             <Header />
             <div className={cx("space")}></div>
-            <StepChain route="/order/secondstep" done1={true} done2={true} active3={true} />
+            <StepChain route={route} done1={true} done2={true} active3={true} />
 
             <div className={cx("message")}>
                 <BoxMessage
@@ -40,18 +89,25 @@ function ThirdStep() {
                         Please provide a valid email address where we will send your electronic
                         tickets.
                     </p>
-                    <input id="autofill" type="checkbox" className={cx("autofill-checkbox")} />
+                    <input
+                        onChange={handleAutoFill}
+                        id="autofill"
+                        type="checkbox"
+                        className={cx("autofill-checkbox")}
+                    />
                     <label htmlFor="autofill">This ticket is for me</label>
                     <br />
                     <input
+                        value={checked ? autofill.email : email}
+                        onChange={(e) => setEmail(e.target.value)}
                         type="text"
-                        placeholder="012345678"
+                        placeholder="vananh@gmail.com"
                         className={cx("phone-input")}
                     ></input>
 
                     <h3 className={cx("title")}>Passenger(s) information</h3>
 
-                    {seats.map((seat) => (
+                    {seats.map((seat, index) => (
                         <div className={cx("infor-box")} key={seat.seatNumber}>
                             <div className={cx("seat")}>
                                 Coach No.{seat.coach}, Seat No.{+seat.seatNumber + 1}
@@ -72,7 +128,26 @@ function ThirdStep() {
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="date" />
+                                            <input
+                                                value={
+                                                    index === 0 && checked
+                                                        ? autofill.birthday
+                                                        : birthday.getFullYear().toString() +
+                                                          "-" +
+                                                          (birthday.getMonth() + 1)
+                                                              .toString()
+                                                              .padStart(2, 0) +
+                                                          "-" +
+                                                          birthday
+                                                              .getDate()
+                                                              .toString()
+                                                              .padStart(2, 0)
+                                                }
+                                                onChange={(e) =>
+                                                    setBirthday(new Date(e.target.value))
+                                                }
+                                                type="date"
+                                            />
                                         </td>
                                     </tr>
 
@@ -87,7 +162,14 @@ function ThirdStep() {
                                             </select>
                                         </td>
                                         <td>
-                                            <input type="text" placeholder="076528000011" />
+                                            <input
+                                                value={
+                                                    index === 0 && checked ? autofill.cccd : cccd
+                                                }
+                                                onChange={(e) => setCCCD(e.target.value)}
+                                                type="text"
+                                                placeholder="076528000011"
+                                            />
                                         </td>
                                     </tr>
 
@@ -97,6 +179,12 @@ function ThirdStep() {
                                     <tr>
                                         <td colSpan={2}>
                                             <input
+                                                value={
+                                                    index === 0 && checked
+                                                        ? autofill.fullname
+                                                        : fullname
+                                                }
+                                                onChange={(e) => setFullname(e.target.value)}
                                                 className={cx("fullname")}
                                                 type="text"
                                                 placeholder="Tran Anh"
