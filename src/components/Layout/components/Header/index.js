@@ -1,7 +1,7 @@
-import { memo } from "react";
+import { memo, useState } from "react";
 import classNames from "classnames/bind";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrain, faGlobe } from "@fortawesome/free-solid-svg-icons";
+import { faTrain, faGlobe, faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 
 import stylesHeader from "./Header.module.scss";
@@ -9,8 +9,14 @@ import stylesHeader from "./Header.module.scss";
 const cxHeader = classNames.bind(stylesHeader);
 
 function Header() {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const toggleMenu = () => {
+        console.log(1);
+        setIsOpen(!isOpen);
+    };
     return (
-        <header className={cxHeader("header")}>
+        <header className={cxHeader("header")} onClick={toggleMenu}>
             <div className={cxHeader("inner-header", "d-flex")}>
                 <Link to="/home" className={cxHeader("logo")}>
                     <div>
@@ -35,6 +41,29 @@ function Header() {
                             src="https://www.cartonionline.com/immagini/lo_straordinario_mondo_di_gumball/lo_straordinario_mondo_di_gumball_gumball_02.jpg"
                             alt="avatar"
                         />
+                        {isOpen && (
+                            <ul className={cxHeader("dropdown-menu")}>
+                                <Link>
+                                    <li>My profile</li>
+                                </Link>
+                                <Link to="/order/ticketdetail">
+                                    <li>My tickets</li>
+                                </Link>
+                                <Link>
+                                    <li>Change password</li>
+                                </Link>
+
+                                <Link to="/">
+                                    <li>
+                                        <FontAwesomeIcon
+                                            icon={faArrowRightFromBracket}
+                                            className={cxHeader("icon-out")}
+                                        />
+                                        Logout
+                                    </li>
+                                </Link>
+                            </ul>
+                        )}
                     </div>
                 </div>
             </div>

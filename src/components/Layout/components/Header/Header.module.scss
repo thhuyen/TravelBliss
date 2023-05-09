@@ -46,7 +46,32 @@
     border: 2px solid var(--primary-orange-500);
     border-radius: 50px;
     margin-left: 30px;
+    position: relative;
     cursor: pointer;
+    .dropdown-menu {
+        display: block;
+        position: absolute;
+        top: 86px;
+        width: 100%;
+        background-color: #ffffff;
+        left: 0;
+        list-style: none;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+        border-radius: 8px;
+
+        li {
+            margin-bottom: 0.3rem;
+            &:hover {
+                cursor: pointer;
+
+                // height: 100%;
+                width: 100%;
+            }
+            .icon-out {
+                margin-right: 0.9rem;
+            }
+        }
+    }
 
     img {
         width: 45px;
