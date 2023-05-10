@@ -226,7 +226,7 @@ function FirstStep() {
             <StepChain route={route} active1={true} />
 
             <div className={cx("filter")}>
-                We have found 4 trains departs on <b>May 11th:</b>
+                We have found 2 trains departs on <b>May 10th:</b>
                 <Dropdown>
                     <Dropdown.Toggle
                         className={cx("filter-box")}
