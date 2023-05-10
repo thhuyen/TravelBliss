@@ -15,6 +15,7 @@ const cx = classNames.bind(styles);
 function Confirmation() {
     const { idUser } = useParams();
     const route = `/order/thirdstep/passengerinfo/${idUser}`;
+    const nextRoute = `/order/fourthstep`;
 
     const seats = useMemo(() => {
         return JSON.parse(sessionStorage.getItem("selectedSeat"));
@@ -86,7 +87,12 @@ function Confirmation() {
 
                 <div className={cx("inner-right")}>
                     <div className={cx("wrapper-box")}>
-                        <BookingSummary tickets={tickets} seats={seats} title="Checkout" />
+                        <BookingSummary
+                            tickets={tickets}
+                            seats={seats}
+                            title="Checkout"
+                            nextRoute={nextRoute}
+                        />
                     </div>
                 </div>
             </div>

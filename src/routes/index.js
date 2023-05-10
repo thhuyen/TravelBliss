@@ -86,11 +86,11 @@ const privateRoutes = [
         component: Confirmation,
     },
     {
-        path: "/order/fourthstep",
+        path: "/order/fourthstep/:id",
         component: FourthStep,
     },
     {
-        path: "/order/success",
+        path: "/order/success/:id",
         component: Success,
     },
     {
