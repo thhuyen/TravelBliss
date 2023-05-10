@@ -225,13 +225,13 @@ function Order() {
 
             <div className={cx("explaination")}>
                 <div className={cx("explaination-item")}>
-                    <div className={cx("circle", "circle-red")}></div> Selected
+                    <div className={cx("circle", "circle-red")}></div>Reserved
                 </div>
                 <div className={cx("explaination-item")}>
-                    <div className={cx("circle", "circle-green")}></div> Available
+                    <div className={cx("circle", "circle-green")}></div>Selected
                 </div>
                 <div className={cx("explaination-item")}>
-                    <div className={cx("circle")}></div> Reserved
+                    <div className={cx("circle")}>Available</div>
                 </div>
             </div>
 
