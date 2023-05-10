@@ -16,6 +16,12 @@ function Confirmation() {
     const { idUser } = useParams();
     const route = `/order/thirdstep/passengerinfo/${idUser}`;
 
+    const seats = useMemo(() => {
+        return JSON.parse(sessionStorage.getItem("selectedSeat"));
+    }, []);
+
+    const tickets = useMemo(() => JSON.parse(sessionStorage.getItem("train")), []);
+
     return (
         <div>
             <Header />
@@ -32,10 +38,56 @@ function Confirmation() {
             </div>
 
             <div className={cx("wrapper")}>
-                <div className={cx("inner-left")}></div>
+                <div className={cx("inner-left")}>
+                    <div>
+                        <p className={cx("title")}>Passenger Details</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Passenger Type:</td>
+                                    <td>Adult</td>
+                                    <td>Fullname:</td>
+                                    <td>Nguyen Van Anh</td>
+                                </tr>
+                                <tr>
+                                    <td>Identification Number:</td>
+                                    <td>9809103902490</td>
+                                    <td>Day of Birth:</td>
+                                    <td>16/11/1998</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <p className={cx("title")}>Ticket Information:</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Departure Time:</td>
+                                    <td>15:30, 30/05/2023</td>
+                                    <td>Arrival Time:</td>
+                                    <td>4:30, 01/06/2023 </td>
+                                </tr>
+                                <tr>
+                                    <td>Train Name:</td>
+                                    <td>SE04</td>
+                                    <td>Coach:</td>
+                                    <td>1</td>
+                                </tr>
+                                <tr>
+                                    <td>Class:</td>
+                                    <td>Standard Seat</td>
+                                    <td>Seat:</td>
+                                    <td>26</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
                 <div className={cx("inner-right")}>
-                    {/* <BookingSummary tickets={tickets} seats={seats} /> */}
+                    <div className={cx("wrapper-box")}>
+                        <BookingSummary tickets={tickets} seats={seats} title="Checkout" />
+                    </div>
                 </div>
             </div>
 

@@ -5,11 +5,11 @@ import { useNavigate } from "react-router-dom";
 
 const cx1 = classNames.bind(stylesSummary);
 
-function BookingSummary({ tickets, seats, idUser }) {
+function BookingSummary({ ...props }) {
     const navigate = useNavigate();
     const count = useMemo(() => {
-        const standard = seats.filter((seat) => seat.coach === 1);
-        const cabin = seats.filter((seat) => seat.coach === 2);
+        const standard = props.seats.filter((seat) => seat.coach === 1);
+        const cabin = props.seats.filter((seat) => seat.coach === 2);
 
         return {
             standard: standard.length,
@@ -18,7 +18,7 @@ function BookingSummary({ tickets, seats, idUser }) {
     }, []);
 
     const handleContinue = () => {
-        navigate(`/order/thirdstep/confirmation/${idUser}`, { replace: true });
+        navigate(props.nextRoute, { replace: true });
     };
 
     return (
@@ -28,9 +28,9 @@ function BookingSummary({ tickets, seats, idUser }) {
             <div className={cx1("wrapper")}>
                 <div className={cx1("part1")}>
                     <span>One way trip - Ha Noi to Sai Gon</span> <br />
-                    Train {tickets.train}
+                    Train {props.tickets.train}
                     <br />
-                    Departs at {tickets.departureTime} {tickets.departureDate}, 2023
+                    Departs at {props.tickets.departureTime} {props.tickets.departureDate}, 2023
                 </div>
 
                 <div className={cx1("part2")}>
@@ -59,7 +59,7 @@ function BookingSummary({ tickets, seats, idUser }) {
                     </span>
                 </div>
                 <button className={cx1("btn-continue")} onClick={handleContinue}>
-                    Continue
+                    {props.title}
                 </button>
             </div>
         </div>
