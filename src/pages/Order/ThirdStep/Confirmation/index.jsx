@@ -15,7 +15,7 @@ const cx = classNames.bind(styles);
 function Confirmation() {
     const { idUser } = useParams();
     const route = `/order/thirdstep/passengerinfo/${idUser}`;
-    const nextRoute = `/order/fourthstep`;
+    const nextRoute = `/order/fourthstep/${idUser}`;
 
     const seats = useMemo(() => {
         return JSON.parse(sessionStorage.getItem("selectedSeat"));
