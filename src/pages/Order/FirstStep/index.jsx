@@ -85,7 +85,7 @@ function FirstStep() {
                 seats: 51,
                 train: "SE03",
                 isButton: true,
-                price: 1064000,
+                price: 1000000,
             },
             {
                 departureTime: "22:00",
