@@ -15,7 +15,22 @@
     flex: 1.5;
     padding-right: 50px;
 
+    td {
+        min-width: 150px;
+        // border: 1px solid black;
+    }
+
     .title {
+        margin-top: 20px;
+        font-size: 1.8rem;
+        color: var(--primary-orange-500);
+    }
+    .ticket {
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--primary-orange-500);
     }
 }
 .inner-right {

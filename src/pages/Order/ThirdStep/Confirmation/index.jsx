@@ -39,7 +39,7 @@ function Confirmation() {
 
             <div className={cx("wrapper")}>
                 <div className={cx("inner-left")}>
-                    <div>
+                    <div className={cx("ticket")}>
                         <p className={cx("title")}>Passenger Details</p>
                         <table>
                             <tbody>
@@ -47,11 +47,11 @@ function Confirmation() {
                                     <td>Passenger Type:</td>
                                     <td>Adult</td>
                                     <td>Fullname:</td>
-                                    <td>Nguyen Van Anh</td>
+                                    <td>Tran Anh</td>
                                 </tr>
                                 <tr>
-                                    <td>Identification Number:</td>
-                                    <td>9809103902490</td>
+                                    <td>Id Number:</td>
+                                    <td>076528000011</td>
                                     <td>Day of Birth:</td>
                                     <td>16/11/1998</td>
                                 </tr>
@@ -63,13 +63,13 @@ function Confirmation() {
                             <tbody>
                                 <tr>
                                     <td>Departure Time:</td>
-                                    <td>15:30, 30/05/2023</td>
+                                    <td>19:20, 10/05/2023</td>
                                     <td>Arrival Time:</td>
-                                    <td>4:30, 01/06/2023 </td>
+                                    <td>5:40, 12/05/2023 </td>
                                 </tr>
                                 <tr>
                                     <td>Train Name:</td>
-                                    <td>SE04</td>
+                                    <td>SE03</td>
                                     <td>Coach:</td>
                                     <td>1</td>
                                 </tr>
