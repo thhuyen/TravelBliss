@@ -30,7 +30,7 @@ function Success() {
                         <p>
                             Thank you for purchasing tickets via TravelBliss. Your transaction have
                             made Successfully. We will send your tickets to your email address:
-                            vananh.tran1198@gmail.com.
+                            Khoa.nguyen@gmail.com.
                         </p>
                         <p>
                             Please also find your tickets below and in ‘Success’ page. Don’t
@@ -47,18 +47,18 @@ function Success() {
                                 </p>
                                 <p>
                                     <span className={cx("id")}>Booking date:</span>
-                                    <span className={cx("id-number")}>10/04/2023 </span>
+                                    <span className={cx("id-number")}>10/05/2023</span>
                                 </p>
                             </div>
                             <div className={cx("route")}>
                                 <div className={cx("departure")}>
                                     <span>Departure</span>
-                                    <span className={cx("city")}>Sai Gon</span>
+                                    <span className={cx("city")}>Ha Noi</span>
                                 </div>
                                 <img src={arrow} alt="" className={cx("arrow")} />
                                 <div className={cx("arrival")}>
                                     <span>Arrival</span>
-                                    <span className={cx("city")}>Ha Noi</span>
+                                    <span className={cx("city")}>Sai Gon</span>
                                 </div>
                             </div>
                             <div className={cx("information")}>
@@ -66,15 +66,15 @@ function Success() {
                                 <div>
                                     <Row className={cx("row")}>
                                         <Col className={cx("col1")}>Departure Time: </Col>
-                                        <Col className={cx("col2")}>15:30, 30/05/2023</Col>
+                                        <Col className={cx("col2")}>19:20 10/05/2023</Col>
                                         <Col className={cx("col1")}>Arrival Time:</Col>{" "}
-                                        <Col className={cx("col2")}>4:30, 01/06/2023 </Col>
+                                        <Col className={cx("col2")}>5:40 12/05/2023 </Col>
                                     </Row>
                                     <Row className={cx("row")}>
                                         <Col className={cx("col1")}>Train Name: </Col>
-                                        <Col className={cx("col2")}>SE04</Col>
+                                        <Col className={cx("col2")}>SE03</Col>
                                         <Col className={cx("col1")}>Coach:</Col>{" "}
-                                        <Col className={cx("col2")}>2 </Col>
+                                        <Col className={cx("col2")}>1</Col>
                                     </Row>
                                     <Row className={cx("row")}>
                                         <Col className={cx("col1")}> Class:</Col>
@@ -88,11 +88,11 @@ function Success() {
                                     <Col className={cx("col1")}> Passenger Type:</Col>
                                     <Col className={cx("col2")}>Adult</Col>
                                     <Col className={cx("col1")}>Full name:</Col>{" "}
-                                    <Col className={cx("col2")}>Nguyen Van Anh</Col>
+                                    <Col className={cx("col2")}>Tran Anh</Col>
                                 </Row>
                                 <Row className={cx("row")}>
                                     <Col className={cx("col1")}> Identification Number:</Col>
-                                    <Col className={cx("col2")}>9809103902490</Col>
+                                    <Col className={cx("col2")}>076528000011</Col>
                                     <Col className={cx("col1")}>Day of Birth:</Col>{" "}
                                     <Col className={cx("col2")}>16/11/1998</Col>
                                 </Row>{" "}

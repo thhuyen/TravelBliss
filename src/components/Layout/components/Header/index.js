@@ -46,7 +46,7 @@ function Header() {
                                 <Link>
                                     <li>My profile</li>
                                 </Link>
-                                <Link to="/order/ticketdetail">
+                                <Link to="/history">
                                     <li>My tickets</li>
                                 </Link>
                                 <Link>
