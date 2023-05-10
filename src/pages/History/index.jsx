@@ -108,6 +108,10 @@ function History() {
                                         <Col className={cx("col1")}>Seat: </Col>
                                         <Col className={cx("col2")}>{ticket.seat}</Col>
                                     </Row>
+                                    <hr />
+                                    <Link to="/order/ticketdetail">
+                                        <span>View ticket details</span>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
