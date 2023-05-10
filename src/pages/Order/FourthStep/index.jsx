@@ -16,7 +16,6 @@ const cx = classNames.bind(styles);
 function FourthStep() {
     const { idUser } = useParams();
     const route = `/order/thirdstep/confirmation/${idUser}`;
-    const nextRoute = `/order/fourthstep/${idUser}`;
 
     const navigate = useNavigate();
 
@@ -27,7 +26,7 @@ function FourthStep() {
     const tickets = useMemo(() => JSON.parse(sessionStorage.getItem("train")), []);
 
     const paymentSuccess = () => {
-        navigate("/order/success", { replace: true });
+        navigate(`/order/success/${idUser}`, { replace: true });
     };
     return (
         <div>
@@ -51,7 +50,7 @@ function FourthStep() {
 
                 <div className={cx("inner-right")}>
                     <div className={cx("wrapper-box")}>
-                        <BookingSummary tickets={tickets} seats={seats} nextRoute={nextRoute} />
+                        <BookingSummary tickets={tickets} seats={seats} />
                     </div>
                 </div>
             </div>
