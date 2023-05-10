@@ -76,4 +76,12 @@
 }
 .inner-right {
     flex: 1;
+
+    .wrapper_box {
+        height: fit-content;
+        transform: translateY(229px);
+        position: sticky;
+        top: 0;
+        right: 0;
+    }
 }

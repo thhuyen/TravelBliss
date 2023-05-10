@@ -198,7 +198,15 @@ function PassengerInfo() {
                 </div>
 
                 <div className={cx("inner-right")}>
-                    <BookingSummary tickets={tickets} seats={seats} idUser={idUser} />
+                    <div className={cx("wrapper_box")}>
+                        <BookingSummary
+                            tickets={tickets}
+                            seats={seats}
+                            idUser={idUser}
+                            nextRoute={nextRoute}
+                            title="Continue"
+                        />
+                    </div>
                 </div>
             </div>
 
