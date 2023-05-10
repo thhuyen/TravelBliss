@@ -27,7 +27,7 @@ function FourthStep() {
     const tickets = useMemo(() => JSON.parse(sessionStorage.getItem("train")), []);
 
     const paymentSuccess = () => {
-        navigate("/order/success", { replace: true });
+        navigate(`/order/success/${idUser}`, { replace: true });
     };
     return (
         <div>
