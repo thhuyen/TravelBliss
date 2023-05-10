@@ -58,9 +58,13 @@ function BookingSummary({ ...props }) {
                         VND
                     </span>
                 </div>
-                <button className={cx1("btn-continue")} onClick={handleContinue}>
-                    {props.title}
-                </button>
+                {props.title ? (
+                    <button className={cx1("btn-continue")} onClick={handleContinue}>
+                        {props.title}
+                    </button>
+                ) : (
+                    ""
+                )}
             </div>
         </div>
     );
