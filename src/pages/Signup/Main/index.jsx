@@ -31,13 +31,14 @@ function Signup() {
             email: Yup.string()
                 .email("Invalid email address")
                 .required("Please fill out your email"),
-            password: Yup.string().required("Please fill out your password"),
-            // .min(8, "Password must be at least 8 characters")
-            // .max(20, "Password must be less than 20 characters")
-            // .matches(/[0-9]/, "Password requires a number")
-            // .matches(/[a-z]/, "Password requires a lowercase letter")
-            // .matches(/[A-Z]/, "Password requires an uppercase letter")
-            // .matches(/[^\w]/, "Password requires a symbol"),
+            password: Yup.string()
+                .required("Please fill out your password")
+                .min(8, "Password must be at least 8 characters")
+                .max(20, "Password must be less than 20 characters")
+                .matches(/[0-9]/, "Password requires a number")
+                .matches(/[a-z]/, "Password requires a lowercase letter")
+                .matches(/[A-Z]/, "Password requires an uppercase letter")
+                .matches(/[^\w]/, "Password requires a symbol"),
             confirmPassword: Yup.string()
                 .required("Please confirm password")
                 .oneOf([Yup.ref("password"), null], "Passwords doesn't match"),
@@ -63,36 +64,15 @@ function Signup() {
             accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
         onSubmit: (values) => {
-            // params values đó thấy ko nó là nguyên đống đó r á
-            const idUser = "0";
-            const Username = values.phone;
-            const Password = values.password;
-            const Email = values.email;
-            const Fullname = values.fullname;
-            const Birthday = "1999/01/14";
-            const Identity_number = "076528000011";
-
-            // axios.post("http://localhost:5000/api/postUsers", {
-            //     idUser,
-            //     Username,
-            //     Password,
-            //     Email,
-            //     Fullname,
-            //     Birthday,
-            //     Identity_number,
-            // });
-
-            axios
-                .post("http://localhost:5000/test/postUsers", {
-                    idUser,
-                    Username,
-                    Password,
-                    Email,
-                })
-                .then((response) => {
-                    window.test = response.data;
-                })
-                .catch((error) => console.log(error));
+            window.newAccount = {
+                idUser: "0",
+                Username: values.phone,
+                Password: values.password,
+                Email: values.email,
+                Fullname: values.fullname,
+                Birthday: "1999/01/14",
+                Identity_number: "076528000011",
+            };
 
             navigate("/signup/vertification", { replace: true });
         },
