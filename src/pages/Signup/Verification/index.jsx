@@ -1,15 +1,18 @@
 import classNames from "classnames/bind";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 import styles from "./Vertification.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
 
 const cx = classNames.bind(styles);
-console.log(window.test);
+
 function Vertification() {
+    const navigate = useNavigate();
+
     const [count, setCount] = useState(10);
     const [countOTP, setCountOTP] = useState(90);
     const [code, setCode] = useState("");
@@ -37,9 +40,9 @@ function Vertification() {
         }, 90000);
 
         const templateParams = {
-            name: "James",
+            name: window.newAccount.Fullname,
             message: "The OTP to verify you is " + OTP,
-            email: "bebe.yy99@gmail.com",
+            email: window.newAccount.Email,
         };
 
         emailjs
@@ -64,6 +67,24 @@ function Vertification() {
             setValid(true);
             setCountOTP(90);
             setOTP(Math.floor(100000 + Math.random() * 900000).toString());
+        }
+    };
+
+    const handleSend = () => {
+        if (code === OTP && valid) {
+            const { idUser, Username, Password, Email, Fullname, Birthday, Identity_number } =
+                window.newAccount;
+
+            axios.post("http://localhost:5000/api/postUsers", {
+                idUser,
+                Username,
+                Password,
+                Email,
+                Fullname,
+                Birthday,
+                Identity_number,
+            });
+            navigate("/signup/congrats", { replace: true });
         }
     };
 
@@ -102,13 +123,9 @@ function Vertification() {
                     OTP valid (<span>{countOTP}</span>s)
                 </p>
 
-                {code === OTP && valid ? (
-                    <Link to="/signup/congrats">
-                        <button className={cx(styles.btnSubmit, "btnActive")}>SUBMIT</button>
-                    </Link>
-                ) : (
-                    <button className={cx(styles.btnSubmit, "btnActive")}>SUBMIT</button>
-                )}
+                <button className={cx(styles.btnSubmit, "btnActive")} onClick={handleSend}>
+                    SUBMIT
+                </button>
             </div>
         </AuthenLayout>
     );
