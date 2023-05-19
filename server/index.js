@@ -4,11 +4,11 @@ const app = express();
 const cors = require("cors");
 const mysql = require("mysql2");
 
-const db = mysql.createPool({
+const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "",
-    database: "travelblist",
+    database: "travelbliss",
 });
 
 app.use(cors());
@@ -23,6 +23,7 @@ app.get("/", (req, res) => {
 app.get("/api/users", (req, res) => {
     const sqlGet = "SELECT * FROM users";
     db.query(sqlGet, (error, result) => {
+        console.log(result);
         res.send(result);
     });
 });
@@ -55,6 +56,11 @@ app.post("/api/postUsers", (req, res) => {
             if (error) console.log(error);
         },
     );
+});
+
+app.post("/test/postUsers", (req, res) => {
+    // console.log(JSON.stringify(req.body));
+    res.send(req.body);
 });
 
 // put

@@ -3,21 +3,18 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 
 import styles from "./Signup.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
+import { getUsers } from "~/components/Data/users";
 
 const cx = classNames.bind(styles);
+
 function Signup() {
-    // get user
     const [users, setUsers] = useState([]);
-    const loadData = async () => {
-        const response = await axios.get("http://localhost:5000/api/users");
-        setUsers(response.data);
-    };
     useEffect(() => {
-        loadData();
+        getUsers().then((data) => setUsers(data));
     }, []);
 
     const navigate = useNavigate();
@@ -34,14 +31,13 @@ function Signup() {
             email: Yup.string()
                 .email("Invalid email address")
                 .required("Please fill out your email"),
-            password: Yup.string()
-                .required("Please fill out your password")
-                .min(8, "Password must be at least 8 characters")
-                .max(20, "Password must be less than 20 characters")
-                .matches(/[0-9]/, "Password requires a number")
-                .matches(/[a-z]/, "Password requires a lowercase letter")
-                .matches(/[A-Z]/, "Password requires an uppercase letter")
-                .matches(/[^\w]/, "Password requires a symbol"),
+            password: Yup.string().required("Please fill out your password"),
+            // .min(8, "Password must be at least 8 characters")
+            // .max(20, "Password must be less than 20 characters")
+            // .matches(/[0-9]/, "Password requires a number")
+            // .matches(/[a-z]/, "Password requires a lowercase letter")
+            // .matches(/[A-Z]/, "Password requires an uppercase letter")
+            // .matches(/[^\w]/, "Password requires a symbol"),
             confirmPassword: Yup.string()
                 .required("Please confirm password")
                 .oneOf([Yup.ref("password"), null], "Passwords doesn't match"),
@@ -67,6 +63,7 @@ function Signup() {
             accept: Yup.bool().oneOf([true], "The terms and conditions must be accepted."),
         }),
         onSubmit: (values) => {
+            // params values đó thấy ko nó là nguyên đống đó r á
             const idUser = "0";
             const Username = values.phone;
             const Password = values.password;
@@ -75,15 +72,27 @@ function Signup() {
             const Birthday = "1999/01/14";
             const Identity_number = "076528000011";
 
-            axios.post("http://localhost:5000/api/postUsers", {
-                idUser,
-                Username,
-                Password,
-                Email,
-                Fullname,
-                Birthday,
-                Identity_number,
-            });
+            // axios.post("http://localhost:5000/api/postUsers", {
+            //     idUser,
+            //     Username,
+            //     Password,
+            //     Email,
+            //     Fullname,
+            //     Birthday,
+            //     Identity_number,
+            // });
+
+            axios
+                .post("http://localhost:5000/test/postUsers", {
+                    idUser,
+                    Username,
+                    Password,
+                    Email,
+                })
+                .then((response) => {
+                    window.test = response.data;
+                })
+                .catch((error) => console.log(error));
 
             navigate("/signup/vertification", { replace: true });
         },

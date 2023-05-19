@@ -1,13 +1,14 @@
 import classNames from "classnames/bind";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 
 import styles from "./Vertification.module.scss";
 import AuthenLayout from "~/components/Layout/AuthenLayout";
 import BoxMessage from "~/components/Layout/components/BoxMessage";
 
 const cx = classNames.bind(styles);
-
+console.log(window.test);
 function Vertification() {
     const [count, setCount] = useState(10);
     const [countOTP, setCountOTP] = useState(90);
@@ -35,7 +36,22 @@ function Vertification() {
             setValid(false);
         }, 90000);
 
-        console.log(OTP);
+        const templateParams = {
+            name: "James",
+            message: "The OTP to verify you is " + OTP,
+            email: "bebe.yy99@gmail.com",
+        };
+
+        emailjs
+            .send("service_r969bxl", "template_yjj5wgf", templateParams, "4G7Fk9yVhs6yzOy6l")
+            .then(
+                function (response) {
+                    console.log("SUCCESS!", response.status, response.text);
+                },
+                function (error) {
+                    console.log("FAILED...", error);
+                },
+            );
 
         // clean up
         return () => clearInterval(timeoutOTP);
