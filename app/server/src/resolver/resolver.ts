@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
-import { get } from 'lodash'
+import get from 'lodash/get'
 
 const queries = {
     users: {
@@ -8,9 +8,9 @@ const queries = {
             "operationName": "getUsers",
             "query": ` query {
                 getUsers {
-                    fullName
-                    phoneNumber
-                    email
+                    FullName
+                    PhoneNumber
+                    Email
                 }
             }`
         }
@@ -21,8 +21,8 @@ const queries = {
             "operationName": "getPopularDestinations",
             "query": ` query {
                 getPopularDestinations {
-                    place
-                    url
+                    Place
+                    Url
                 }
             }`
         }
