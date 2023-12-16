@@ -1,10 +1,14 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
+    type Book {
+        id: ID
+        name: String,
+        genre: String
     type User {
-        fullName: ID
-        phoneNumber: String
-        email: String
+        FullName: ID
+        PhoneNumber: String
+        Email: String
     }
     
     type PopularDestination {
