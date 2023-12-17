@@ -1,10 +1,6 @@
 import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
-    type Book {
-        id: ID
-        name: String,
-        genre: String
     type User {
         FullName: ID
         PhoneNumber: String
@@ -12,14 +8,14 @@ export const typeDefs = gql`
     }
     
     type PopularDestination {
-        place: String
-        url: String
+        Place: String
+        Url: String
     }
 
     type FAQ {
-        id: String
-        question: String
-        answer: String
+        Id: String
+        Question: String
+        Answer: String
     }
 
     # ROOT TYPE

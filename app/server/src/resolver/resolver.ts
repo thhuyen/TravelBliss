@@ -1,9 +1,9 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios from "axios";
 import get from 'lodash/get'
 
 const queries = {
     users: {
-        api: "http://localhost:3000/users",
+        api: "http://localhost:8080/users",
         query: {
             "operationName": "getUsers",
             "query": ` query {
@@ -16,7 +16,7 @@ const queries = {
         }
     },
     popularDestination: {
-        api: "http://localhost:3000/popularDestination",
+        api: "http://localhost:8080/popularDestination",
         query: {
             "operationName": "getPopularDestinations",
             "query": ` query {
@@ -28,14 +28,14 @@ const queries = {
         }
     },
     FAQs: {
-        api: "http://localhost:3000/FAQs",
+        api: "http://localhost:8080/FAQs",
         query: {
             "operationName": "getPopularDestinations",
             "query": ` query {
                 getFAQs {
-                    id
-                    question
-                    answer
+                    Id
+                    Question
+                    Answer
                 }
             }`
         }
