@@ -1,6 +1,6 @@
 import styled, { createGlobalStyle } from 'styled-components';
-import { color } from '../../constant/styles';
-import { Field } from 'formik'
+import { Form } from 'formik';
+
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -18,52 +18,28 @@ export const FixedPosition = styled.div`
   right: 0;
   left: 0;
 `
-export const FlexContainer = styled(FixedPosition)`
+export const FlexContainer = styled.div`
   display: flex;
-  flex-direction: row;
-   
+  flex-direction: row; 
 `
 export const LeftSide = styled.div<{ background: string }>`
+  width: 40%;
+  height: 100vh;
   background-image: url(${props => props.background});
   background-position: 30% 50%;
-  width: 40%;
 `
 export const RightSide = styled.div`
   width: 60%;
+  height: 90vh;
   text-align: center;
-  padding-top: 5rem;
+  margin-top: 3rem;
+  overflow: scroll;
 `
-export const Input = styled(Field)`
-  width: 100%;
-  padding: 0.625rem;
-  margin-top: 0.3rem;
-  border-radius: 0.5rem;
-  outline: none;
-  border: 1px solid ${color.secondary300};
-`
-export const Button = styled.button<{ width?: string }>`
-  width: ${props => props.width ?? '100%'};
-  color: white;
-  text-transform: uppercase;
-  font-weight: 600;
-  padding: 0.5rem 1.25rem;
-  background-color: ${color.primary500};
-  border-radius: 0.5rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  &:hover{
-    opacity: 0.9;
-  }
-`
-
-export const Title = styled.h2`
-  font-family: 'Lato', sans-serif;
-`
-
-export const Label = styled.label`
-  font-weight: 600;
-`
+export const StyledAuthenForm = styled(Form)`
+  width: 70%;
+  text-align: left;
+  display: inline-block;
+`;
 
 type BoxProps = {
   mr?: string;

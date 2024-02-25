@@ -12,7 +12,7 @@ import {
 import message from "../../constant/message";
 import { useNavigate } from "react-router-dom";
 
-const SignupForm = () => {
+const OTP = () => {
   const navigate = useNavigate();
   const validations = useMemo(
     () => ({
@@ -67,79 +67,9 @@ const SignupForm = () => {
   );
   return (
     <Formik {...validations}>
-      <StyledAuthenForm>
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="fullName">Full Name</Label> <br />
-          <Input
-            id="fullName"
-            name="fullName"
-            type="text"
-            placeholder="Tran Huynh Van Anh"
-          />
-          <FormErrorMessage inputName="fullName" />
-        </StyledBox>
-
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="phoneNumber">Phone number</Label> <br />
-          <Input
-            id="phoneNumber"
-            name="phoneNumber"
-            type="text"
-            placeholder="0792908142"
-          />
-          <FormErrorMessage inputName="phoneNumber" />
-        </StyledBox>
-
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="email">Email</Label> <br />
-          <Input
-            id="email"
-            name="email"
-            type="text"
-            placeholder="khoa.nguyen@gmail.com"
-          />
-          <FormErrorMessage inputName="email" />
-        </StyledBox>
-
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="password">Password</Label> <br />
-          <Input
-            id="password"
-            name="password"
-            type="password"
-            placeholder="********"
-          />
-          <FormErrorMessage inputName="password" />
-        </StyledBox>
-
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="confirmPassword">Confirm password</Label> <br />
-          <Input
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="********"
-          />
-          <FormErrorMessage inputName="confirmPassword" />
-        </StyledBox>
-
-        <StyledBox mb="1.3rem">
-          <Field id="acceptance" type="checkbox" name="acceptance" />
-          &nbsp;
-          <LabelForCheckbox htmlFor="acceptance">
-            I agree to the <a href="/">Terms and Conditions</a>
-          </LabelForCheckbox>
-          <FormErrorMessage inputName="acceptance" />
-        </StyledBox>
-        <StyledBox mb="1.3rem">
-          <Button>sign up</Button>
-        </StyledBox>
-        <StyledBox display="flex" justifyContent="center">
-          Already have an account? &nbsp;<a href="/signin">Sign in</a>
-        </StyledBox>
-      </StyledAuthenForm>
+      <StyledAuthenForm></StyledAuthenForm>
     </Formik>
   );
 };
 
-export default SignupForm;
+export default OTP;

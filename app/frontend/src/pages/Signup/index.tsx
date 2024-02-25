@@ -3,7 +3,7 @@ import AuthenLayout from "../../component/AuthenLayout/AuthenLayout";
 import SignupForm from "./SignupForm";
 import styled from "styled-components";
 import { color } from "../../constant/styles";
-import { Title } from "../../component/StyleComponent";
+import { Title } from "../../component/StyleComponent/StyledForm";
 
 const Brand = styled.span`
   color: ${color.primary500};

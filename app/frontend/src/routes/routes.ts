@@ -1,10 +1,15 @@
+import OTP from "../pages/OTP/OTP";
 import Signup from "../pages/Signup";
 
-// dont need to login
+// don't need to login
 const publicRoutes = [
     {
         path: "/signup",
         component: Signup,
+    },
+    {
+        path: "/otp",
+        component: OTP,
     }
 ];
 
