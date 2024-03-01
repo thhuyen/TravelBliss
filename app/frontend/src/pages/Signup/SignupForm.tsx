@@ -2,15 +2,17 @@ import React, { useMemo } from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { StyledAuthenForm, StyledBox } from "../../component/StyleComponent";
+import { StyledBox } from "../../component/StyleComponent";
 import {
   Label,
   Input,
   Button,
   LabelForCheckbox,
+  StyledAuthenForm,
 } from "../../component/StyleComponent/StyledForm";
 import message from "../../constant/message";
 import { useNavigate } from "react-router-dom";
+import { label } from "../../constant/label";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -54,7 +56,7 @@ const SignupForm = () => {
             message.existedPhoneNumber, // <- key, message
             function (value) {
               //   const newUsers = users.filter((acc) => acc.Username === value);
-              //   return newUsers.length < 1;
+              return true;
             }
           ),
         acceptance: Yup.bool().oneOf([true], message.acceptance),
@@ -68,8 +70,8 @@ const SignupForm = () => {
   return (
     <Formik {...validations}>
       <StyledAuthenForm>
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="fullName">Full Name</Label> <br />
+        <StyledBox marginBottom="1.3rem">
+          <Label htmlFor="fullName">{label.FULL_NAME}</Label> <br />
           <Input
             id="fullName"
             name="fullName"
@@ -79,8 +81,8 @@ const SignupForm = () => {
           <FormErrorMessage inputName="fullName" />
         </StyledBox>
 
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="phoneNumber">Phone number</Label> <br />
+        <StyledBox marginBottom="1.3rem">
+          <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label> <br />
           <Input
             id="phoneNumber"
             name="phoneNumber"
@@ -90,8 +92,8 @@ const SignupForm = () => {
           <FormErrorMessage inputName="phoneNumber" />
         </StyledBox>
 
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="email">Email</Label> <br />
+        <StyledBox marginBottom="1.3rem">
+          <Label htmlFor="email">{label.EMAIL}</Label> <br />
           <Input
             id="email"
             name="email"
@@ -101,8 +103,8 @@ const SignupForm = () => {
           <FormErrorMessage inputName="email" />
         </StyledBox>
 
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="password">Password</Label> <br />
+        <StyledBox marginBottom="1.3rem">
+          <Label htmlFor="password">{label.PASSWORD}</Label> <br />
           <Input
             id="password"
             name="password"
@@ -112,8 +114,9 @@ const SignupForm = () => {
           <FormErrorMessage inputName="password" />
         </StyledBox>
 
-        <StyledBox mb="1.3rem">
-          <Label htmlFor="confirmPassword">Confirm password</Label> <br />
+        <StyledBox marginBottom="1.3rem">
+          <Label htmlFor="confirmPassword">{label.CONFIRM_PASSWORD}</Label>{" "}
+          <br />
           <Input
             id="confirmPassword"
             name="confirmPassword"
@@ -123,7 +126,7 @@ const SignupForm = () => {
           <FormErrorMessage inputName="confirmPassword" />
         </StyledBox>
 
-        <StyledBox mb="1.3rem">
+        <StyledBox marginBottom="1.3rem">
           <Field id="acceptance" type="checkbox" name="acceptance" />
           &nbsp;
           <LabelForCheckbox htmlFor="acceptance">
@@ -131,8 +134,8 @@ const SignupForm = () => {
           </LabelForCheckbox>
           <FormErrorMessage inputName="acceptance" />
         </StyledBox>
-        <StyledBox mb="1.3rem">
-          <Button>sign up</Button>
+        <StyledBox marginBottom="1.3rem">
+          <Button width="100%">sign up</Button>
         </StyledBox>
         <StyledBox display="flex" justifyContent="center">
           Already have an account? &nbsp;<a href="/signin">Sign in</a>

@@ -1,4 +1,5 @@
 const message = {
+    // signup form
     requiredFullName: "Please fill out your full name",
     requiredEmail: "Please fill out your email",
     requiredPhoneNumber: "Please fill out your phone number",
@@ -16,7 +17,16 @@ const message = {
     notValidPhoneNumber: "Phone number is not valid",
     minPhoneNumber: "Phone number must consist of 10 numbers",
     existedPhoneNumber: "Phone number already used in another account",
-    acceptance: "The terms and conditions must be accepted"
+    acceptance: "The terms and conditions must be accepted",
+
+    // OTP
+    otpMessage: "Please check your phone for the verification code we just sent you and enter that code in the box below.",
+    invalidOtp: "Your code isn't valid, try again",
+    requiredOtp: "Please fill out your OTP",
+
+    // Congrats
+    congratsMessage: "You have created account successfully. Please go back to Sign in page to proceed further."
+
 }
 
 export default message;

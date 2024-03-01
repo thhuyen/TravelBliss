@@ -1,12 +1,17 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
-import { store } from './store'
-import { Provider } from 'react-redux'
+import React from "react";
+import ReactDOM from "react-dom";
+import App from "./App";
+import { Provider } from "react-redux";
+import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
+
+const client = new ApolloClient({
+  uri: "https://flyby-router-demo.herokuapp.com/",
+  cache: new InMemoryCache(),
+});
 
 ReactDOM.render(
-  <Provider store={store}>
+  <ApolloProvider client={client}>
     <App />
-  </Provider>,
-  document.getElementById('root')
-)
+  </ApolloProvider>,
+  document.getElementById("root")
+);
