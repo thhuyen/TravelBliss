@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { color } from "../../constant/styles";
+import { Link } from "react-router-dom";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -34,61 +35,6 @@ export const RightSide = styled.div`
 `;
 
 type StyleProps = {
-  marginRight?: string;
-  marginTop?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-  display?:
-  | "flex"
-  | "inline-flex"
-  | "grid"
-  | "inline-grid"
-  | "block"
-  | "inline-block"
-  | "none";
-  justifyContent?:
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-evenly"
-  | "space-around"
-  | "initial";
-  gridGap?: string;
-  sm?: string;
-  xs?: string;
-  md?: string;
-  lg?: string;
-  xl?: string;
-  textAlign?: "center" | "left" | "right";
-  flexDirection?: "row" | "column";
-  flexWrap?: "no-wrap" | "wrap";
-  color?: string;
-  fontSize?: string;
-  fontWeight?: string;
-  textTransform?: "capitalize" | "uppercase" | "lowercase";
-  lineSpacing?: string;
-  background?: string;
-  border?: string;
-  borderRadius?: string;
-  paddingTop?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
-  width?: string;
-  height?: string;
-  float?: "left" | "right" | "none" | "inherit";
-  boxShadow?: string;
-  alignItems?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end	"
-  | "start"
-  | "end"
-  | "baseline"
-  | "initial"
-  | "inherit";
   alignContent?:
   | "stretch"
   | "center"
@@ -99,75 +45,130 @@ type StyleProps = {
   | "space-evenly"
   | "initial"
   | "inherit";
-  backgroundImage?: string,
-  cursor?: string
+  alignItems?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "start"
+  | "end"
+  | "baseline"
+  | "initial"
+  | "inherit";
+  backgroundColor?: string;
+  border?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+  color?: string;
+  cursor?: string;
+  display?:
+  | "flex"
+  | "inline-flex"
+  | "grid"
+  | "inline-grid"
+  | "block"
+  | "inline-block"
+  | "none";
+  flexDirection?: "row" | "column";
+  flexWrap?: "no-wrap" | "wrap";
+  float?: "left" | "right" | "none" | "inherit";
+  fontSize?: string;
+  fontWeight?: string;
+  gridGap?: string;
+  height?: string;
+  justifyContent?:
+  | "flex-start"
+  | "flex-end"
+  | "center"
+  | "space-between"
+  | "space-evenly"
+  | "space-around"
+  | "initial";
+  lineHeight?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  marginTop?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
+  paddingRight?: string;
+  paddingTop?: string;
+  position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
+  sm?: string;
+  xs?: string;
+  md?: string;
+  lg?: string;
+  xl?: string;
+  textAlign?: "center" | "left" | "right";
+  textTransform?: "capitalize" | "uppercase" | "lowercase";
+  width?: string;
 };
 
 const commonStyle = (style: StyleProps) => {
   const {
-    marginRight,
-    marginTop,
-    marginBottom,
-    marginLeft,
-    display,
-    justifyContent,
-    gridGap,
-    textAlign,
-    flexWrap,
-    flexDirection,
+    alignContent,
+    alignItems,
+    backgroundColor,
+    border,
+    borderRadius,
+    boxShadow,
     color,
+    cursor,
+    display,
+    flexDirection,
+    flexWrap,
+    float,
     fontSize,
     fontWeight,
-    lineSpacing,
-    background,
-    borderRadius,
-    border,
-    paddingTop,
+    gridGap,
+    height,
+    justifyContent,
+    lineHeight,
+    marginLeft,
+    marginBottom,
+    marginRight,
+    marginTop,
     paddingBottom,
     paddingLeft,
     paddingRight,
-    width,
-    height,
-    float,
+    paddingTop,
+    position,
+    textAlign,
     textTransform,
-    boxShadow,
-    alignItems,
-    alignContent,
-    backgroundImage,
-    cursor
+    width,
   } = style;
 
   return `
-    width: ${width};
+    align-content: ${alignContent ?? "initial"};
+    align-items: ${alignItems ?? "initial"};
+    background-color: ${backgroundColor};
+    border: ${border};
+    border-radius: ${borderRadius};
+    box-shadow: ${boxShadow ?? "none"};
+    color: ${color};
+    cursor: ${cursor ?? "auto"};
+    display: ${display ?? "block"};
+    flex-direction: ${flexDirection ?? "row"};
+    flex-wrap: ${flexWrap ?? "initial"};
+    float: ${float ?? "none"};
+    font-size: ${fontSize ?? "initial"};
+    font-weight: ${fontWeight ?? "500"};
+    grid-gap: ${gridGap ?? 0};
     height: ${height};
+    justify-content: ${justifyContent ?? "initial"};
+    line-height: ${lineHeight ?? "initial"};
+    margin-bottom: ${marginBottom};
     margin-left: ${marginLeft};
     margin-right: ${marginRight};
     margin-top: ${marginTop};
-    margin-bottom: ${marginBottom};
-    padding-top: ${paddingTop};
     padding-bottom: ${paddingBottom};
     padding-left: ${paddingLeft};
     padding-right: ${paddingRight};
-    display: ${display ?? "block"};
-    align-items: ${alignItems ?? "initial"};
-    align-content ${alignContent ?? 'initial'}
-    justify-content: ${justifyContent ?? "initial"};
-    grid-gap: ${gridGap ?? 0};
-    flex-wrap: ${flexWrap ?? "initial"};
-    flex-direction: ${flexDirection ?? "row"}
-    textAlign: ${textAlign ?? "left"};
-    color: ${color};
-    font-size: ${fontSize ?? "initial"};
-    font-weight: ${fontWeight ?? "500"};
-    line-spacing ${lineSpacing ?? "initial"};
-    background-color: ${background};
-    border-radius: ${borderRadius};
-    border: ${border};
-    float: ${float ?? "none"};
-    text-transform: ${textTransform ?? "capitalize"};
-    box-shadow: ${boxShadow ?? "none"};
-    backgroundImage: ${backgroundImage ?? 'none'};
-    cursor: ${cursor ?? 'auto'}
+    padding-top: ${paddingTop};
+    position: ${position};
+    text-align: ${textAlign ?? "left"};
+    text-transform: ${textTransform};
+    width: ${width};
   `;
 };
 
@@ -189,6 +190,23 @@ export const StyledTextP = styled.p<StyleProps>`
   `}
 `;
 
+type BackgroundImageStyleProps = {
+  backgroundImage?: string | "none" | "inherit" | "initial";
+  backgroundPosition?: string;
+  backgroundSize?: string;
+};
+export const BackgroundImage = styled.div<BackgroundImageStyleProps>`
+  ${(props) => {
+    const { backgroundImage, backgroundPosition, backgroundSize } = props;
+    return `
+      background-image: ${backgroundImage ? `url("${backgroundImage}")` : "none"
+      };
+      background-position: ${backgroundPosition};
+      background-size: ${backgroundSize}
+    `;
+  }}
+`;
+
 export const GlobalMessage = styled.div`
   width: 70%;
   color: ${color.green600};
@@ -199,4 +217,14 @@ export const GlobalMessage = styled.div`
   margin-bottom: 1rem;
   background-color: ${color.green100};
   display: inline-block;
+`;
+
+export const StyledLink = styled(Link) <{
+  fontSize?: string;
+  color?: string;
+  textDecoration?: string;
+}>`
+  font-size: ${({ fontSize }) => fontSize};
+  color: ${({ color }) => color ?? "blue"};
+  text-decoration: ${({ textDecoration }) => textDecoration ?? "underline"};
 `;
