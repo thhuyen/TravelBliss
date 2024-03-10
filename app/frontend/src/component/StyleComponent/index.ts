@@ -19,10 +19,6 @@ export const FixedPosition = styled.div`
   left: 0;
 `;
 
-export const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 export const LeftSide = styled.div<{ background: string }>`
   width: 40%;
   height: 100vh;
@@ -37,7 +33,7 @@ export const RightSide = styled.div`
   overflow-y: scroll;
 `;
 
-type BoxProps = {
+type StyleProps = {
   marginRight?: string;
   marginTop?: string;
   marginBottom?: string;
@@ -65,6 +61,7 @@ type BoxProps = {
   lg?: string;
   xl?: string;
   textAlign?: "center" | "left" | "right";
+  flexDirection?: 'row' | 'column';
   flexWrap?: "no-wrap" | "wrap";
   color?: string;
   background?: string;
@@ -81,7 +78,7 @@ type BoxProps = {
   boxShadow?: string
 };
 
-const commonStyle = (style: BoxProps) => {
+const commonStyle = (style: StyleProps) => {
   const {
     marginRight,
     marginTop,
@@ -92,6 +89,7 @@ const commonStyle = (style: BoxProps) => {
     gridGap,
     textAlign,
     flexWrap,
+    flexDirection,
     color,
     background,
     borderRadius,
@@ -122,6 +120,7 @@ const commonStyle = (style: BoxProps) => {
     justify-content: ${justifyContent ?? "initial"};
     grid-gap: ${gridGap ?? 0};
     flex-wrap: ${flexWrap ?? "initial"};
+    flex-direction: ${flexDirection ?? "row"}
     textAlign: ${textAlign ?? "left"};
     color: ${color};
     background-color: ${background};
@@ -132,7 +131,19 @@ const commonStyle = (style: BoxProps) => {
     box-shadow: ${boxShadow ?? "none"}
   `;
 };
-export const StyledBox = styled.div<BoxProps>`
+export const StyledBox = styled.div<StyleProps>`
+  ${(props) => `
+    ${commonStyle(props)}
+  `}
+`;
+
+export const StyledTextSpan = styled.span<StyleProps>`
+  ${(props) => `
+    ${commonStyle(props)}
+  `}
+`;
+
+export const StyledTextP = styled.p<StyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}

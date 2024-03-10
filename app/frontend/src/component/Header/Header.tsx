@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexContainer, StyledBox } from "../StyleComponent";
+import { StyledBox } from "../StyleComponent";
 
 const Header = () => {
   return (

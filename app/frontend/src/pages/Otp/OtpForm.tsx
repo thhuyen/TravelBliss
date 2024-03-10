@@ -12,7 +12,7 @@ import { label } from "../../constant/label";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { FlexContainer, StyledBox } from "../../component/StyleComponent";
+import { StyledBox } from "../../component/StyleComponent";
 import { color } from "../../constant/styles";
 
 type FormValues = {
@@ -78,7 +78,7 @@ const OtpForm = () => {
     <Formik {...validations}>
       <StyledAuthenForm method="post">
         <Label htmlFor="otp">{label.VERIFICATION_CODE}</Label> <br />
-        <FlexContainer>
+        <StyledBox display="flex">
           <Input id="otp" name="otp" type="text" placeholder="123456" />
           <ReSendButton
             type="button"
@@ -88,7 +88,7 @@ const OtpForm = () => {
           >
             {label.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
-        </FlexContainer>
+        </StyledBox>
         <FormErrorMessage inputName="otp" />
         <StyledBox marginTop="0.5rem" marginLeft="0.5rem">
           <StyledBox color={color.primary500}>
