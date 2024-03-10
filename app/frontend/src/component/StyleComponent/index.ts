@@ -61,9 +61,13 @@ type StyleProps = {
   lg?: string;
   xl?: string;
   textAlign?: "center" | "left" | "right";
-  flexDirection?: 'row' | 'column';
+  flexDirection?: "row" | "column";
   flexWrap?: "no-wrap" | "wrap";
   color?: string;
+  fontSize?: string;
+  fontWeight?: string;
+  textTransform?: "capitalize" | "uppercase" | "lowercase";
+  lineSpacing?: string;
   background?: string;
   border?: string;
   borderRadius?: string;
@@ -74,8 +78,29 @@ type StyleProps = {
   width?: string;
   height?: string;
   float?: "left" | "right" | "none" | "inherit";
-  textTransform?: "capitalize" | "uppercase" | "lowercase",
-  boxShadow?: string
+  boxShadow?: string;
+  alignItems?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end	"
+  | "start"
+  | "end"
+  | "baseline"
+  | "initial"
+  | "inherit";
+  alignContent?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly"
+  | "initial"
+  | "inherit";
+  backgroundImage?: string,
+  cursor?: string
 };
 
 const commonStyle = (style: StyleProps) => {
@@ -91,6 +116,9 @@ const commonStyle = (style: StyleProps) => {
     flexWrap,
     flexDirection,
     color,
+    fontSize,
+    fontWeight,
+    lineSpacing,
     background,
     borderRadius,
     border,
@@ -102,7 +130,11 @@ const commonStyle = (style: StyleProps) => {
     height,
     float,
     textTransform,
-    boxShadow
+    boxShadow,
+    alignItems,
+    alignContent,
+    backgroundImage,
+    cursor
   } = style;
 
   return `
@@ -117,20 +149,28 @@ const commonStyle = (style: StyleProps) => {
     padding-left: ${paddingLeft};
     padding-right: ${paddingRight};
     display: ${display ?? "block"};
+    align-items: ${alignItems ?? "initial"};
+    align-content ${alignContent ?? 'initial'}
     justify-content: ${justifyContent ?? "initial"};
     grid-gap: ${gridGap ?? 0};
     flex-wrap: ${flexWrap ?? "initial"};
     flex-direction: ${flexDirection ?? "row"}
     textAlign: ${textAlign ?? "left"};
     color: ${color};
+    font-size: ${fontSize ?? "initial"};
+    font-weight: ${fontWeight ?? "500"};
+    line-spacing ${lineSpacing ?? "initial"};
     background-color: ${background};
     border-radius: ${borderRadius};
     border: ${border};
     float: ${float ?? "none"};
     text-transform: ${textTransform ?? "capitalize"};
-    box-shadow: ${boxShadow ?? "none"}
+    box-shadow: ${boxShadow ?? "none"};
+    backgroundImage: ${backgroundImage ?? 'none'};
+    cursor: ${cursor ?? 'auto'}
   `;
 };
+
 export const StyledBox = styled.div<StyleProps>`
   ${(props) => `
     ${commonStyle(props)}
