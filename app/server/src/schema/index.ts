@@ -2,9 +2,11 @@ import { gql } from "apollo-server-express";
 
 export const typeDefs = gql`
     type User {
-        FullName: ID
+        Id: ID!
+        FullName: String
         PhoneNumber: String
         Email: String
+        Password: String
     }
     
     type PopularDestination {
@@ -24,6 +26,10 @@ export const typeDefs = gql`
         getUsers: [User]
         getPopularDestinations: [PopularDestination]
         getFAQs: [FAQ]
+    }
+
+    type Mutation {
+        createUser(Id: ID!, FullName: String!, PhoneNumber: String!, Email: String!, Password: String!): User
     }
 `
 

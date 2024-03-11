@@ -9,11 +9,12 @@ import {
 } from "../../component/StyleComponent/StyledForm";
 import message from "../../constant/message";
 import { label } from "../../constant/label";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 import { StyledBox } from "../../component/StyleComponent";
 import { color } from "../../constant/styles";
+import { useCreateUser } from "../../hooks/useCreateUser";
 
 type FormValues = {
   otp: string;
@@ -27,6 +28,8 @@ const ReSendButton = styled(Button)`
 
 const OtpForm = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const { createUser, error } = useCreateUser();
   const [counter, setCounter] = useState<number>(10);
   const [validOtpCounter, setValidOtpCounter] = useState<number>(90);
 
@@ -62,7 +65,11 @@ const OtpForm = () => {
           return;
         }
 
-        navigate("/congrats", { replace: true });
+        const { values: userInfo } = state;
+        createUser(userInfo);
+        if (!error) {
+          navigate("/congrats", { replace: true });
+        }
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
