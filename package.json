@@ -13,7 +13,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"yarn frontend:start\" \"yarn server:start\" \"yarn stubs:start\"",
+    "start": "concurrently \"yarn frontend:start\" \"yarn server:start\"",
     "server:start": "cd app/server && yarn start",
     "frontend:start": "cd app/frontend && yarn start",
     "stubs:start": "cd app/stubs && yarn start"

@@ -54,7 +54,7 @@ const OtpForm = () => {
       validationSchema: Yup.object({
         otp: Yup.string().required(message.requiredOtp),
       }),
-      onSubmit: (
+      onSubmit: async (
         values: FormikValues,
         { setSubmitting, setErrors }: FormikHelpers<FormValues>
       ) => {
@@ -66,7 +66,10 @@ const OtpForm = () => {
         }
 
         const { values: userInfo } = state;
-        createUser(userInfo);
+        const result = await createUser(userInfo);
+        console.log({ result });
+        console.log("123");
+
         if (!error) {
           navigate("/congrats", { replace: true });
         }

@@ -13,14 +13,19 @@ export const useCreateUser = () => {
 
   const createUser = async (payload: User) => {
     const { fullName, email, phoneNumber, password } = payload;
-    await addUser({
-      variables: {
-        fullName,
-        email,
-        phoneNumber,
-        password
-      }
-    })
+    try {
+      return addUser({
+        variables: {
+          fullName,
+          email,
+          phoneNumber,
+          password
+        }
+      })
+    }
+    catch (error) {
+      console.log("Error: ", error)
+    }
   }
 
   return {
