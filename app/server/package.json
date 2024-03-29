@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "babel src --out-dir build --source-maps=inline --delete-dir-on-start --copy-files --verbose",
-    "start": "nodemon --watch app/server -e ts --exec ts-node index.ts"
-  },
   "author": "",
   "license": "ISC",
   "dependencies": {},
