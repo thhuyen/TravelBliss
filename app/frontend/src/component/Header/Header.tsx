@@ -7,7 +7,7 @@ import {
 } from "../StyleComponent";
 import { color } from "../../constant/styles";
 import styled from "styled-components";
-import { routes } from "../../constant/route";
+import { routes } from "../../constant/routes";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -55,8 +55,9 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
         <StyledTextSpan
           color={color.primary500}
-          $fontSize="1.2rem"
+          $fontSize="1.5rem"
           $marginLeft="0.5rem"
+          $fontWeight="600"
         >
           TravelBliss
         </StyledTextSpan>
@@ -64,9 +65,15 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
       {authenticated && (
         <NavigationBar>
-          {NavItemPaths.map((path) => (
-            <StyledTextSpan $marginRight="1rem">
-              <StyledLink to={path}>{mapPathContent(path)}</StyledLink>
+          {NavItemPaths.map((path, index) => (
+            <StyledTextSpan key={index} $marginRight="1rem">
+              <StyledLink
+                to={path}
+                $textDecoration="none"
+                color={color.primary500}
+              >
+                {mapPathContent(path)}
+              </StyledLink>
             </StyledTextSpan>
           ))}
 
@@ -82,12 +89,12 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
           <StyledBox
             display="flex"
             $alignItems="center"
-            paddingLeft="1.25rem"
-            paddingRight="1.25rem"
-            paddingTop="0.625rem"
-            paddingBottom="0.625rem"
+            $paddingLeft="1rem"
+            $paddingRight="1rem"
+            $paddingTop="0.5rem"
+            $paddingBottom="0.5rem"
             border={`0.125rem solid ${color.primary500}`}
-            borderRadius="3.125rem"
+            $borderRadius="3.125rem"
             cursor="pointer"
           >
             <StyledTextSpan
@@ -100,8 +107,8 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
             <img
               src="/imgs/avatarUser.svg"
               alt="avatar"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
             />
           </StyledBox>
         </NavigationBar>

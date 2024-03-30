@@ -18,7 +18,7 @@ import {
 } from "../../component/StyleComponent/StyledForm";
 import { label } from "../../constant/label";
 import message from "../../constant/message";
-import { routes } from "../../constant/route";
+import { routes } from "../../constant/routes";
 import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 

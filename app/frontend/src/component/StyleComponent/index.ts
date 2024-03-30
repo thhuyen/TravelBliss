@@ -57,7 +57,7 @@ type StyleProps = {
   | "inherit";
   backgroundColor?: string;
   border?: string;
-  borderRadius?: string;
+  $borderRadius?: string;
   boxShadow?: string;
   color?: string;
   cursor?: string;
@@ -73,7 +73,7 @@ type StyleProps = {
   flexWrap?: "no-wrap" | "wrap";
   float?: "left" | "right" | "none" | "inherit";
   $fontSize?: string;
-  fontWeight?: string;
+  $fontWeight?: string;
   gridGap?: string;
   height?: string;
   $justifyContent?:
@@ -89,10 +89,10 @@ type StyleProps = {
   $marginLeft?: string;
   $marginRight?: string;
   $marginTop?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
-  paddingTop?: string;
+  $paddingBottom?: string;
+  $paddingLeft?: string;
+  $paddingRight?: string;
+  $paddingTop?: string;
   position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
   sm?: string;
   xs?: string;
@@ -110,7 +110,7 @@ const commonStyle = (style: StyleProps) => {
     $alignItems,
     backgroundColor,
     border,
-    borderRadius,
+    $borderRadius,
     boxShadow,
     color,
     cursor,
@@ -119,7 +119,7 @@ const commonStyle = (style: StyleProps) => {
     flexWrap,
     float,
     $fontSize,
-    fontWeight,
+    $fontWeight,
     gridGap,
     height,
     $justifyContent,
@@ -128,10 +128,10 @@ const commonStyle = (style: StyleProps) => {
     $marginBottom,
     $marginRight,
     $marginTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
+    $paddingBottom,
+    $paddingLeft,
+    $paddingRight,
+    $paddingTop,
     position,
     $textAlign,
     textTransform,
@@ -143,7 +143,7 @@ const commonStyle = (style: StyleProps) => {
     align-items: ${$alignItems ?? "initial"};
     background-color: ${backgroundColor};
     border: ${border};
-    border-radius: ${borderRadius};
+    border-radius: ${$borderRadius};
     box-shadow: ${boxShadow ?? "none"};
     color: ${color};
     cursor: ${cursor ?? "auto"};
@@ -152,7 +152,7 @@ const commonStyle = (style: StyleProps) => {
     flex-wrap: ${flexWrap ?? "initial"};
     float: ${float ?? "none"};
     font-size: ${$fontSize ?? "initial"};
-    font-weight: ${fontWeight ?? "500"};
+    font-weight: ${$fontWeight ?? "500"};
     grid-gap: ${gridGap ?? 0};
     height: ${height};
     justify-content: ${$justifyContent ?? "initial"};
@@ -161,10 +161,10 @@ const commonStyle = (style: StyleProps) => {
     margin-left: ${$marginLeft};
     margin-right: ${$marginRight};
     margin-top: ${$marginTop};
-    padding-bottom: ${paddingBottom};
-    padding-left: ${paddingLeft};
-    padding-right: ${paddingRight};
-    padding-top: ${paddingTop};
+    padding-bottom: ${$paddingBottom};
+    padding-left: ${$paddingLeft};
+    padding-right: ${$paddingRight};
+    padding-top: ${$paddingTop};
     position: ${position};
     text-align: ${$textAlign ?? "left"};
     text-transform: ${textTransform};
@@ -222,9 +222,9 @@ export const GlobalMessage = styled.div`
 export const StyledLink = styled(Link) <{
   $fontSize?: string;
   color?: string;
-  textDecoration?: string;
+  $textDecoration?: string;
 }>`
   font-size: ${({ $fontSize }) => $fontSize};
   color: ${({ color }) => color ?? "blue"};
-  text-decoration: ${({ textDecoration }) => textDecoration ?? "underline"};
+  text-decoration: ${({ $textDecoration }) => $textDecoration ?? "underline"};
 `;

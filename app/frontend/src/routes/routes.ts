@@ -1,8 +1,9 @@
-import { routes } from "../constant/route";
+import { routes } from "../constant/routes";
 import Congrats from "../pages/Congrats";
 import Otp from "../pages/OTP/OTP";
 import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Home from "../pages/Home/Home";
 
 // don't need to login
 const publicRoutes = [
@@ -29,7 +30,7 @@ const publicRoutes = [
 const privateRoutes = [
     {
         path: routes.home,
-        component: "",
+        component: Home,
     }
 ];
 
