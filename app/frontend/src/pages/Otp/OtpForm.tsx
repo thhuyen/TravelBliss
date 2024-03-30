@@ -99,12 +99,12 @@ const OtpForm = () => {
           </ReSendButton>
         </StyledBox>
         <FormErrorMessage inputName="otp" />
-        <StyledBox marginTop="0.5rem" marginLeft="0.5rem">
+        <StyledBox $marginTop="0.5rem" $marginLeft="0.5rem">
           <StyledBox color={color.primary500}>
             OTP valid {"(" + validOtpCounter + "s)"}
           </StyledBox>
         </StyledBox>
-        <StyledBox marginTop="1.5rem">
+        <StyledBox $marginTop="1.5rem">
           <Button width="100%" type="submit">
             submit
           </Button>

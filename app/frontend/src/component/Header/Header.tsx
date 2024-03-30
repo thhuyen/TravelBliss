@@ -7,7 +7,7 @@ import {
 } from "../StyleComponent";
 import { color } from "../../constant/styles";
 import styled from "styled-components";
-import { route } from "../../constant/route";
+import { routes } from "../../constant/route";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -34,11 +34,11 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ authenticated }) => {
-  const NavItemPaths = [route.home, "/guide", "/contact", "/about"];
+  const NavItemPaths = [routes.home, "/guide", "/contact", "/about"];
 
   const mapPathContent = (path: string) => {
     switch (path) {
-      case route.home:
+      case routes.home:
         return "Home";
       case "/guide":
         return "Guide";
@@ -51,12 +51,12 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
   return (
     <StyledHeader>
-      <StyledBox id="logo" display="flex" alignItems="center">
+      <StyledBox id="logo" display="flex" $alignItems="center">
         <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
         <StyledTextSpan
           color={color.primary500}
           fontSize="1.2rem"
-          marginLeft="0.5rem"
+          $marginLeft="0.5rem"
         >
           TravelBliss
         </StyledTextSpan>
@@ -65,13 +65,13 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
       {authenticated && (
         <NavigationBar>
           {NavItemPaths.map((path) => (
-            <StyledTextSpan marginRight="1rem">
+            <StyledTextSpan $marginRight="1rem">
               <StyledLink to={path}>{mapPathContent(path)}</StyledLink>
             </StyledTextSpan>
           ))}
 
           <StyledTextSpan
-            marginRight="1rem"
+            $marginRight="1rem"
             color={color.primary500}
             cursor="pointer"
           >
@@ -81,7 +81,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
           {/* User Dialog */}
           <StyledBox
             display="flex"
-            alignItems="center"
+            $alignItems="center"
             paddingLeft="1.25rem"
             paddingRight="1.25rem"
             paddingTop="0.625rem"
@@ -91,7 +91,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
             cursor="pointer"
           >
             <StyledTextSpan
-              marginRight="0.5rem"
+              $marginRight="0.5rem"
               cursor="pointer"
               color={color.primary500}
             >
@@ -112,8 +112,8 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
           color={color.primary500}
           cursor="pointer"
           fontSize="1.5rem"
-          textAlign="center"
-          lineHeight="1.5"
+          $textAlign="center"
+          $lineHeight="1.5"
         >
           <FontAwesomeIcon icon={faGlobe} />
           <StyledTextP>English</StyledTextP>

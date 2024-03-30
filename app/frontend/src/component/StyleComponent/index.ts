@@ -45,7 +45,7 @@ type StyleProps = {
   | "space-evenly"
   | "initial"
   | "inherit";
-  alignItems?:
+  $alignItems?:
   | "stretch"
   | "center"
   | "flex-start"
@@ -76,7 +76,7 @@ type StyleProps = {
   fontWeight?: string;
   gridGap?: string;
   height?: string;
-  justifyContent?:
+  $justifyContent?:
   | "flex-start"
   | "flex-end"
   | "center"
@@ -84,11 +84,11 @@ type StyleProps = {
   | "space-evenly"
   | "space-around"
   | "initial";
-  lineHeight?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-  marginRight?: string;
-  marginTop?: string;
+  $lineHeight?: string;
+  $marginBottom?: string;
+  $marginLeft?: string;
+  $marginRight?: string;
+  $marginTop?: string;
   paddingBottom?: string;
   paddingLeft?: string;
   paddingRight?: string;
@@ -99,7 +99,7 @@ type StyleProps = {
   md?: string;
   lg?: string;
   xl?: string;
-  textAlign?: "center" | "left" | "right";
+  $textAlign?: "center" | "left" | "right";
   textTransform?: "capitalize" | "uppercase" | "lowercase";
   width?: string;
 };
@@ -107,7 +107,7 @@ type StyleProps = {
 const commonStyle = (style: StyleProps) => {
   const {
     alignContent,
-    alignItems,
+    $alignItems,
     backgroundColor,
     border,
     borderRadius,
@@ -122,25 +122,25 @@ const commonStyle = (style: StyleProps) => {
     fontWeight,
     gridGap,
     height,
-    justifyContent,
-    lineHeight,
-    marginLeft,
-    marginBottom,
-    marginRight,
-    marginTop,
+    $justifyContent,
+    $lineHeight,
+    $marginLeft,
+    $marginBottom,
+    $marginRight,
+    $marginTop,
     paddingBottom,
     paddingLeft,
     paddingRight,
     paddingTop,
     position,
-    textAlign,
+    $textAlign,
     textTransform,
     width,
   } = style;
 
   return `
     align-content: ${alignContent ?? "initial"};
-    align-items: ${alignItems ?? "initial"};
+    align-items: ${$alignItems ?? "initial"};
     background-color: ${backgroundColor};
     border: ${border};
     border-radius: ${borderRadius};
@@ -155,18 +155,18 @@ const commonStyle = (style: StyleProps) => {
     font-weight: ${fontWeight ?? "500"};
     grid-gap: ${gridGap ?? 0};
     height: ${height};
-    justify-content: ${justifyContent ?? "initial"};
-    line-height: ${lineHeight ?? "initial"};
-    margin-bottom: ${marginBottom};
-    margin-left: ${marginLeft};
-    margin-right: ${marginRight};
-    margin-top: ${marginTop};
+    justify-content: ${$justifyContent ?? "initial"};
+    line-height: ${$lineHeight ?? "initial"};
+    margin-bottom: ${$marginBottom};
+    margin-left: ${$marginLeft};
+    margin-right: ${$marginRight};
+    margin-top: ${$marginTop};
     padding-bottom: ${paddingBottom};
     padding-left: ${paddingLeft};
     padding-right: ${paddingRight};
     padding-top: ${paddingTop};
     position: ${position};
-    text-align: ${textAlign ?? "left"};
+    text-align: ${$textAlign ?? "left"};
     text-transform: ${textTransform};
     width: ${width};
   `;
@@ -190,19 +190,19 @@ export const StyledTextP = styled.p<StyleProps>`
   `}
 `;
 
-type BackgroundImageStyleProps = {
-  backgroundImage?: string | "none" | "inherit" | "initial";
-  backgroundPosition?: string;
-  backgroundSize?: string;
+type $backgroundImageStyleProps = {
+  $backgroundImage?: string | "none" | "inherit" | "initial";
+  $backgroundPosition?: string;
+  $backgroundSize?: string;
 };
-export const BackgroundImage = styled.div<BackgroundImageStyleProps>`
+export const $backgroundImage = styled.div<$backgroundImageStyleProps>`
   ${(props) => {
-    const { backgroundImage, backgroundPosition, backgroundSize } = props;
+    const { $backgroundImage, $backgroundPosition, $backgroundSize } = props;
     return `
-      background-image: ${backgroundImage ? `url("${backgroundImage}")` : "none"
+      background-image: ${$backgroundImage ? `url("${$backgroundImage}")` : "none"
       };
-      background-position: ${backgroundPosition};
-      background-size: ${backgroundSize}
+      background-position: ${$backgroundPosition};
+      background-size: ${$backgroundSize}
     `;
   }}
 `;

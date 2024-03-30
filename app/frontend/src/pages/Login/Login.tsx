@@ -2,7 +2,7 @@ import React, { useMemo } from "react";
 import * as Yup from "yup";
 import Header from "../../component/Header/Header";
 import {
-  BackgroundImage,
+  $backgroundImage,
   StyledBox,
   StyledLink,
   StyledTextP,
@@ -18,11 +18,11 @@ import {
 } from "../../component/StyleComponent/StyledForm";
 import { label } from "../../constant/label";
 import message from "../../constant/message";
-import { route } from "../../constant/route";
-import { useNavigate, Link } from "react-router-dom";
+import { routes } from "../../constant/route";
+import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 
-const CustomBackgroundImage = styled(BackgroundImage)`
+const CustomBackgroundImage = styled($backgroundImage)`
   width: 100%;
   position: fixed;
   top: -6rem;
@@ -42,7 +42,7 @@ const LoginBox = styled(StyledBox)`
   border-radius: 0.5rem;
 `;
 
-const Signin: React.FC = () => {
+const Login: React.FC = () => {
   const navigate = useNavigate();
   const validations = useMemo(
     () => ({
@@ -56,7 +56,7 @@ const Signin: React.FC = () => {
         phoneNumber: Yup.string().required(message.requiredPhoneNumber),
       }),
       onSubmit: (values: any) => {
-        navigate(route.home, { state: { values } });
+        navigate(routes.home, { state: { values } });
       },
     }),
     []
@@ -65,17 +65,17 @@ const Signin: React.FC = () => {
     <>
       <Header authenticated={false} />
       <CustomBackgroundImage
-        backgroundImage="https://trithucxanh.vn/storage/post/7/0-anh144.jpg"
-        backgroundPosition="center"
-        backgroundSize="cover"
+        $backgroundImage="https://trithucxanh.vn/storage/post/7/0-anh144.jpg"
+        $backgroundPosition="center"
+        $backgroundSize="cover"
       >
         <LoginBox>
-          <StyledTextP fontSize="2rem" textAlign="center" marginBottom="1rem">
+          <StyledTextP fontSize="2rem" $textAlign="center" $marginBottom="1rem">
             Sign in
           </StyledTextP>
           <Formik {...validations}>
             <Form>
-              <StyledBox marginBottom="1rem">
+              <StyledBox $marginBottom="1rem">
                 <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label>
                 <Input
                   id="phoneNumber"
@@ -86,7 +86,7 @@ const Signin: React.FC = () => {
                 <FormErrorMessage inputName="phoneNumber" />
               </StyledBox>
 
-              <StyledBox marginBottom="1rem">
+              <StyledBox $marginBottom="1rem">
                 <Label htmlFor="password">{label.PASSWORD}</Label> <br />
                 <Input
                   id="password"
@@ -98,10 +98,10 @@ const Signin: React.FC = () => {
               </StyledBox>
 
               <StyledBox
-                marginBottom="1rem"
+                $marginBottom="1rem"
                 display="flex"
-                alignItems="center"
-                justifyContent="space-between"
+                $alignItems="center"
+                $justifyContent="space-between"
               >
                 <StyledBox>
                   <Field id="remember" type="checkbox" name="remember" />
@@ -121,19 +121,19 @@ const Signin: React.FC = () => {
 
               <Button width="100%">sign up</Button>
 
-              <StyledTextP
+              <StyledTextSpan
                 display="flex"
-                alignItems="center"
-                justifyContent="center"
-                marginTop="1rem"
+                $alignItems="center"
+                $justifyContent="center"
+                $marginTop="1rem"
               >
-                <StyledTextSpan fontSize="smaller" marginRight="0.5rem">
+                <StyledTextSpan fontSize="smaller" $marginRight="0.5rem">
                   Not a member
                 </StyledTextSpan>
-                <StyledLink to={route.signUp} fontSize="smaller">
+                <StyledLink to={routes.signUp} fontSize="smaller">
                   Sign up
                 </StyledLink>
-              </StyledTextP>
+              </StyledTextSpan>
             </Form>
           </Formik>
         </LoginBox>
@@ -142,4 +142,4 @@ const Signin: React.FC = () => {
   );
 };
 
-export default Signin;
+export default Login;

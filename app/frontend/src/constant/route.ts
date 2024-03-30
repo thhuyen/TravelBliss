@@ -1,7 +1,7 @@
-export const route = {
-    signUp: '/signup',
-    otp: '/otp',
-    congrats: '/congrats',
-    signIn: '/',
-    home: '/home'
-}
+export const routes = {
+    signUp: "/signup",
+    otp: "/otp",
+    congrats: "/congrats",
+    signIn: "/",
+    home: "/home",
+} as const;
