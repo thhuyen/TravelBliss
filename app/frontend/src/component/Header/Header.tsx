@@ -14,7 +14,7 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 
 const StyledHeader = styled.header`
   width: 100%;
-  height: 6rem;
+  height: 4rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -52,10 +52,10 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
   return (
     <StyledHeader>
       <StyledBox id="logo" display="flex" alignItems="center">
-        <img src="/imgs/logo.svg" alt="logo" width={50} height={50} />
+        <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
         <StyledTextSpan
           color={color.primary500}
-          fontSize="1.5rem"
+          fontSize="1.2rem"
           marginLeft="0.5rem"
         >
           TravelBliss

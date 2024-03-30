@@ -8,11 +8,7 @@ export const typeDefs = gql`
     email: String
     password: String
   }
-
-  type Query {
-    getUsers: [User]
-  }
-
+  
   input CreateUserInput {
     fullName: String!
     phoneNumber: String!
