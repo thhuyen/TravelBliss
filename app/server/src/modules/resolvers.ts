@@ -1,4 +1,4 @@
 import { resolver as createUserResolver } from "../modules/createUser/createUser-resolver";
-import merge from 'lodash/merge';
+import { resolver as getUserResolver } from "../modules/getUser/getUser-resolver";
 
-export default merge(createUserResolver)
+export default [createUserResolver, getUserResolver]

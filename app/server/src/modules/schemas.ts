@@ -1,4 +1,4 @@
-import merge from "lodash/merge";
 import { typeDefs as createUserTypeDefs } from "../modules/createUser/createUser-schema";
+import { typeDefs as getUserTypeDefs } from "../modules/getUser/getUser.schema";
 
-export default merge(createUserTypeDefs);
+export default [createUserTypeDefs, getUserTypeDefs]
