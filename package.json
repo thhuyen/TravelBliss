@@ -13,8 +13,8 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "concurrently \"yarn frontend:start\" \"yarn server:start\" \"yarn stubs:start\"",
-    "server:start": "cd app/server && yarn start",
+    "start": "concurrently \"yarn frontend:start\" \"yarn server:start\"",
+    "server:start": "nodemon --watch app/server -e ts --exec ts-node app/server/index.ts",
     "frontend:start": "cd app/frontend && yarn start",
     "stubs:start": "cd app/stubs && yarn start"
   },

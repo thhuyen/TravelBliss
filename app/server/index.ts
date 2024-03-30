@@ -1,11 +1,10 @@
 import { ApolloServer } from "apollo-server";
-import { typeDefs } from "./src/schema";
-import { resolvers } from "./src/resolver/resolver";
-
+import resolvers from "./src/modules/resolvers";
+import schemas from "./src/modules/schemas";
 const port = process.env.PORT || 5000;
 
 const server = new ApolloServer({
-    typeDefs,
+    typeDefs: schemas,
     resolvers
 });
 

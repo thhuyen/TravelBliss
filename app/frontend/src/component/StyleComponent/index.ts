@@ -1,5 +1,6 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { color } from "../../constant/styles";
+import { Link } from "react-router-dom";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -19,10 +20,6 @@ export const FixedPosition = styled.div`
   left: 0;
 `;
 
-export const FlexContainer = styled.div`
-  display: flex;
-  flex-direction: row;
-`;
 export const LeftSide = styled.div<{ background: string }>`
   width: 40%;
   height: 100vh;
@@ -37,11 +34,33 @@ export const RightSide = styled.div`
   overflow-y: scroll;
 `;
 
-type BoxProps = {
-  marginRight?: string;
-  marginTop?: string;
-  marginBottom?: string;
-  marginLeft?: string;
+type StyleProps = {
+  alignContent?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "space-between"
+  | "space-around"
+  | "space-evenly"
+  | "initial"
+  | "inherit";
+  alignItems?:
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "start"
+  | "end"
+  | "baseline"
+  | "initial"
+  | "inherit";
+  backgroundColor?: string;
+  border?: string;
+  borderRadius?: string;
+  boxShadow?: string;
+  color?: string;
+  cursor?: string;
   display?:
   | "flex"
   | "inline-flex"
@@ -50,6 +69,13 @@ type BoxProps = {
   | "block"
   | "inline-block"
   | "none";
+  flexDirection?: "row" | "column";
+  flexWrap?: "no-wrap" | "wrap";
+  float?: "left" | "right" | "none" | "inherit";
+  fontSize?: string;
+  fontWeight?: string;
+  gridGap?: string;
+  height?: string;
   justifyContent?:
   | "flex-start"
   | "flex-end"
@@ -58,84 +84,127 @@ type BoxProps = {
   | "space-evenly"
   | "space-around"
   | "initial";
-  gridGap?: string;
+  lineHeight?: string;
+  marginBottom?: string;
+  marginLeft?: string;
+  marginRight?: string;
+  marginTop?: string;
+  paddingBottom?: string;
+  paddingLeft?: string;
+  paddingRight?: string;
+  paddingTop?: string;
+  position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
   sm?: string;
   xs?: string;
   md?: string;
   lg?: string;
   xl?: string;
   textAlign?: "center" | "left" | "right";
-  flexWrap?: "no-wrap" | "wrap";
-  color?: string;
-  background?: string;
-  border?: string;
-  borderRadius?: string;
-  paddingTop?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
+  textTransform?: "capitalize" | "uppercase" | "lowercase";
   width?: string;
-  height?: string;
-  float?: "left" | "right" | "none" | "inherit";
-  textTransform?: "capitalize" | "uppercase" | "lowercase",
-  boxShadow?: string
 };
 
-const commonStyle = (style: BoxProps) => {
+const commonStyle = (style: StyleProps) => {
   const {
+    alignContent,
+    alignItems,
+    backgroundColor,
+    border,
+    borderRadius,
+    boxShadow,
+    color,
+    cursor,
+    display,
+    flexDirection,
+    flexWrap,
+    float,
+    fontSize,
+    fontWeight,
+    gridGap,
+    height,
+    justifyContent,
+    lineHeight,
+    marginLeft,
+    marginBottom,
     marginRight,
     marginTop,
-    marginBottom,
-    marginLeft,
-    display,
-    justifyContent,
-    gridGap,
-    textAlign,
-    flexWrap,
-    color,
-    background,
-    borderRadius,
-    border,
-    paddingTop,
     paddingBottom,
     paddingLeft,
     paddingRight,
-    width,
-    height,
-    float,
+    paddingTop,
+    position,
+    textAlign,
     textTransform,
-    boxShadow
+    width,
   } = style;
 
   return `
-    width: ${width};
+    align-content: ${alignContent ?? "initial"};
+    align-items: ${alignItems ?? "initial"};
+    background-color: ${backgroundColor};
+    border: ${border};
+    border-radius: ${borderRadius};
+    box-shadow: ${boxShadow ?? "none"};
+    color: ${color};
+    cursor: ${cursor ?? "auto"};
+    display: ${display ?? "block"};
+    flex-direction: ${flexDirection ?? "row"};
+    flex-wrap: ${flexWrap ?? "initial"};
+    float: ${float ?? "none"};
+    font-size: ${fontSize ?? "initial"};
+    font-weight: ${fontWeight ?? "500"};
+    grid-gap: ${gridGap ?? 0};
     height: ${height};
+    justify-content: ${justifyContent ?? "initial"};
+    line-height: ${lineHeight ?? "initial"};
+    margin-bottom: ${marginBottom};
     margin-left: ${marginLeft};
     margin-right: ${marginRight};
     margin-top: ${marginTop};
-    margin-bottom: ${marginBottom};
-    padding-top: ${paddingTop};
     padding-bottom: ${paddingBottom};
     padding-left: ${paddingLeft};
     padding-right: ${paddingRight};
-    display: ${display ?? "block"};
-    justify-content: ${justifyContent ?? "initial"};
-    grid-gap: ${gridGap ?? 0};
-    flex-wrap: ${flexWrap ?? "initial"};
-    textAlign: ${textAlign ?? "left"};
-    color: ${color};
-    background-color: ${background};
-    border-radius: ${borderRadius};
-    border: ${border};
-    float: ${float ?? "none"};
-    text-transform: ${textTransform ?? "capitalize"};
-    box-shadow: ${boxShadow ?? "none"}
+    padding-top: ${paddingTop};
+    position: ${position};
+    text-align: ${textAlign ?? "left"};
+    text-transform: ${textTransform};
+    width: ${width};
   `;
 };
-export const StyledBox = styled.div<BoxProps>`
+
+export const StyledBox = styled.div<StyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
+`;
+
+export const StyledTextSpan = styled.span<StyleProps>`
+  ${(props) => `
+    ${commonStyle(props)}
+  `}
+`;
+
+export const StyledTextP = styled.p<StyleProps>`
+  ${(props) => `
+    ${commonStyle(props)}
+  `}
+`;
+
+type BackgroundImageStyleProps = {
+  backgroundImage?: string | "none" | "inherit" | "initial";
+  backgroundPosition?: string;
+  backgroundSize?: string;
+};
+export const BackgroundImage = styled.div<BackgroundImageStyleProps>`
+  ${(props) => {
+    const { backgroundImage, backgroundPosition, backgroundSize } = props;
+    return `
+      background-image: ${backgroundImage ? `url("${backgroundImage}")` : "none"
+      };
+      background-position: ${backgroundPosition};
+      background-size: ${backgroundSize}
+    `;
+  }}
 `;
 
 export const GlobalMessage = styled.div`
@@ -148,4 +217,14 @@ export const GlobalMessage = styled.div`
   margin-bottom: 1rem;
   background-color: ${color.green100};
   display: inline-block;
+`;
+
+export const StyledLink = styled(Link) <{
+  fontSize?: string;
+  color?: string;
+  textDecoration?: string;
+}>`
+  font-size: ${({ fontSize }) => fontSize};
+  color: ${({ color }) => color ?? "blue"};
+  text-decoration: ${({ textDecoration }) => textDecoration ?? "underline"};
 `;

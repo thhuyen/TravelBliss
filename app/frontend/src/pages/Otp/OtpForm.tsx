@@ -9,11 +9,12 @@ import {
 } from "../../component/StyleComponent/StyledForm";
 import message from "../../constant/message";
 import { label } from "../../constant/label";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { FlexContainer, StyledBox } from "../../component/StyleComponent";
+import { StyledBox } from "../../component/StyleComponent";
 import { color } from "../../constant/styles";
+import { useCreateUser } from "../../hooks/useCreateUser";
 
 type FormValues = {
   otp: string;
@@ -27,6 +28,8 @@ const ReSendButton = styled(Button)`
 
 const OtpForm = () => {
   const navigate = useNavigate();
+  const { state } = useLocation();
+  const { createUser, error } = useCreateUser();
   const [counter, setCounter] = useState<number>(10);
   const [validOtpCounter, setValidOtpCounter] = useState<number>(90);
 
@@ -51,7 +54,7 @@ const OtpForm = () => {
       validationSchema: Yup.object({
         otp: Yup.string().required(message.requiredOtp),
       }),
-      onSubmit: (
+      onSubmit: async (
         values: FormikValues,
         { setSubmitting, setErrors }: FormikHelpers<FormValues>
       ) => {
@@ -62,7 +65,14 @@ const OtpForm = () => {
           return;
         }
 
-        navigate("/congrats", { replace: true });
+        const { values: userInfo } = state;
+        const result = await createUser(userInfo);
+        console.log({ result });
+        console.log("123");
+
+        if (!error) {
+          navigate("/congrats", { replace: true });
+        }
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -78,7 +88,7 @@ const OtpForm = () => {
     <Formik {...validations}>
       <StyledAuthenForm method="post">
         <Label htmlFor="otp">{label.VERIFICATION_CODE}</Label> <br />
-        <FlexContainer>
+        <StyledBox display="flex">
           <Input id="otp" name="otp" type="text" placeholder="123456" />
           <ReSendButton
             type="button"
@@ -88,7 +98,7 @@ const OtpForm = () => {
           >
             {label.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
-        </FlexContainer>
+        </StyledBox>
         <FormErrorMessage inputName="otp" />
         <StyledBox marginTop="0.5rem" marginLeft="0.5rem">
           <StyledBox color={color.primary500}>

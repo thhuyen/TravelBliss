@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { LeftSide, RightSide, FlexContainer } from "../StyleComponent";
+import { LeftSide, RightSide, StyledBox } from "../StyleComponent";
 
 type AuthenProps = {
   background: string;
@@ -8,10 +8,10 @@ type AuthenProps = {
 
 const AuthenLayout: React.FC<AuthenProps> = ({ background, children }) => {
   return (
-    <FlexContainer>
+    <StyledBox display="flex">
       <LeftSide background={background} />
       <RightSide>{children}</RightSide>
-    </FlexContainer>
+    </StyledBox>
   );
 };
 
