@@ -70,7 +70,11 @@ const Login: React.FC = () => {
         $backgroundSize="cover"
       >
         <LoginBox>
-          <StyledTextP fontSize="2rem" $textAlign="center" $marginBottom="1rem">
+          <StyledTextP
+            $fontSize="2rem"
+            $textAlign="center"
+            $marginBottom="1rem"
+          >
             Sign in
           </StyledTextP>
           <Formik {...validations}>
@@ -113,7 +117,7 @@ const Login: React.FC = () => {
                 </StyledBox>
 
                 <StyledBox>
-                  <StyledLink to="/" fontSize="smaller">
+                  <StyledLink to="/" $fontSize="smaller">
                     Forgot password?
                   </StyledLink>
                 </StyledBox>
@@ -127,10 +131,10 @@ const Login: React.FC = () => {
                 $justifyContent="center"
                 $marginTop="1rem"
               >
-                <StyledTextSpan fontSize="smaller" $marginRight="0.5rem">
+                <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
                   Not a member
                 </StyledTextSpan>
-                <StyledLink to={routes.signUp} fontSize="smaller">
+                <StyledLink to={routes.signUp} $fontSize="smaller">
                   Sign up
                 </StyledLink>
               </StyledTextSpan>

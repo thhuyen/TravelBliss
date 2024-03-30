@@ -55,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
         <StyledTextSpan
           color={color.primary500}
-          fontSize="1.2rem"
+          $fontSize="1.2rem"
           $marginLeft="0.5rem"
         >
           TravelBliss
@@ -111,12 +111,12 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         <StyledTextP
           color={color.primary500}
           cursor="pointer"
-          fontSize="1.5rem"
+          $fontSize="1.2rem"
           $textAlign="center"
           $lineHeight="1.5"
         >
           <FontAwesomeIcon icon={faGlobe} />
-          <StyledTextP>English</StyledTextP>
+          <StyledTextP cursor="pointer">English</StyledTextP>
         </StyledTextP>
       )}
     </StyledHeader>

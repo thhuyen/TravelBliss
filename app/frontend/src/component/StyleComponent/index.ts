@@ -72,7 +72,7 @@ type StyleProps = {
   flexDirection?: "row" | "column";
   flexWrap?: "no-wrap" | "wrap";
   float?: "left" | "right" | "none" | "inherit";
-  fontSize?: string;
+  $fontSize?: string;
   fontWeight?: string;
   gridGap?: string;
   height?: string;
@@ -118,7 +118,7 @@ const commonStyle = (style: StyleProps) => {
     flexDirection,
     flexWrap,
     float,
-    fontSize,
+    $fontSize,
     fontWeight,
     gridGap,
     height,
@@ -151,7 +151,7 @@ const commonStyle = (style: StyleProps) => {
     flex-direction: ${flexDirection ?? "row"};
     flex-wrap: ${flexWrap ?? "initial"};
     float: ${float ?? "none"};
-    font-size: ${fontSize ?? "initial"};
+    font-size: ${$fontSize ?? "initial"};
     font-weight: ${fontWeight ?? "500"};
     grid-gap: ${gridGap ?? 0};
     height: ${height};
@@ -220,11 +220,11 @@ export const GlobalMessage = styled.div`
 `;
 
 export const StyledLink = styled(Link) <{
-  fontSize?: string;
+  $fontSize?: string;
   color?: string;
   textDecoration?: string;
 }>`
-  font-size: ${({ fontSize }) => fontSize};
+  font-size: ${({ $fontSize }) => $fontSize};
   color: ${({ color }) => color ?? "blue"};
   text-decoration: ${({ textDecoration }) => textDecoration ?? "underline"};
 `;
