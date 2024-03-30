@@ -1,3 +1,4 @@
+import get from "lodash/get";
 import React, { useEffect, useMemo, useState } from "react";
 import { Formik, FormikHelpers, FormikValues } from "formik";
 import * as Yup from "yup";
@@ -29,7 +30,7 @@ const ReSendButton = styled(Button)`
 const OtpForm = () => {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const { createUser, error } = useCreateUser();
+  const { createUser } = useCreateUser();
   const [counter, setCounter] = useState<number>(10);
   const [validOtpCounter, setValidOtpCounter] = useState<number>(90);
 
@@ -67,10 +68,8 @@ const OtpForm = () => {
 
         const { values: userInfo } = state;
         const result = await createUser(userInfo);
-        console.log({ result });
-        console.log("123");
 
-        if (!error) {
+        if (get(result, "data")) {
           navigate("/congrats", { replace: true });
         }
       },
@@ -106,7 +105,9 @@ const OtpForm = () => {
           </StyledBox>
         </StyledBox>
         <StyledBox marginTop="1.5rem">
-          <Button width="100%">submit</Button>
+          <Button width="100%" type="submit">
+            submit
+          </Button>
         </StyledBox>
       </StyledAuthenForm>
     </Formik>
