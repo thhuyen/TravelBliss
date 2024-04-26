@@ -2,7 +2,10 @@ import React, { useMemo } from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { StyledBox } from "../../component/StyleComponent";
+import {
+  CommonStyledBox,
+  CommonStyledFlex,
+} from "../../component/StyleComponent";
 import {
   Label,
   Input,
@@ -70,7 +73,7 @@ const SignupForm = () => {
   return (
     <Formik {...validations}>
       <StyledAuthenForm>
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Label htmlFor="fullName">{label.FULL_NAME}</Label> <br />
           <Input
             id="fullName"
@@ -79,9 +82,9 @@ const SignupForm = () => {
             placeholder="Tran Huynh Van Anh"
           />
           <FormErrorMessage inputName="fullName" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label> <br />
           <Input
             id="phoneNumber"
@@ -90,9 +93,9 @@ const SignupForm = () => {
             placeholder="0792908142"
           />
           <FormErrorMessage inputName="phoneNumber" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Label htmlFor="email">{label.EMAIL}</Label> <br />
           <Input
             id="email"
@@ -101,9 +104,9 @@ const SignupForm = () => {
             placeholder="khoa.nguyen@gmail.com"
           />
           <FormErrorMessage inputName="email" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Label htmlFor="password">{label.PASSWORD}</Label> <br />
           <Input
             id="password"
@@ -112,9 +115,9 @@ const SignupForm = () => {
             placeholder="********"
           />
           <FormErrorMessage inputName="password" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Label htmlFor="confirmPassword">{label.CONFIRM_PASSWORD}</Label>{" "}
           <br />
           <Input
@@ -124,22 +127,24 @@ const SignupForm = () => {
             placeholder="********"
           />
           <FormErrorMessage inputName="confirmPassword" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox $marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Field id="acceptance" type="checkbox" name="acceptance" />
           &nbsp;
           <LabelForCheckbox htmlFor="acceptance">
             I agree to the <a href="/">Terms and Conditions</a>
           </LabelForCheckbox>
           <FormErrorMessage inputName="acceptance" />
-        </StyledBox>
-        <StyledBox $marginBottom="1.3rem">
+        </CommonStyledBox>
+
+        <CommonStyledBox $marginBottom="1.3rem">
           <Button width="100%">sign up</Button>
-        </StyledBox>
-        <StyledBox display="flex" $justifyContent="center">
+        </CommonStyledBox>
+
+        <CommonStyledFlex $justifyContent="center">
           Already have an account? &nbsp;<a href="/signin">Sign in</a>
-        </StyledBox>
+        </CommonStyledFlex>
       </StyledAuthenForm>
     </Formik>
   );

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  StyledBox,
+  CommonStyledFlex,
   StyledLink,
   StyledTextP,
   StyledTextSpan,
@@ -51,7 +51,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
   return (
     <StyledHeader>
-      <StyledBox id="logo" display="flex" $alignItems="center">
+      <CommonStyledFlex id="logo" $alignItems="center">
         <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
         <StyledTextSpan
           color={color.primary500}
@@ -61,7 +61,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         >
           TravelBliss
         </StyledTextSpan>
-      </StyledBox>
+      </CommonStyledFlex>
 
       {authenticated && (
         <NavigationBar>
@@ -79,28 +79,27 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
           <StyledTextSpan
             $marginRight="1rem"
-            color={color.primary500}
-            cursor="pointer"
+            $color={color.primary500}
+            $cursor="pointer"
           >
             <FontAwesomeIcon icon={faGlobe} />
           </StyledTextSpan>
 
           {/* User Dialog */}
-          <StyledBox
-            display="flex"
+          <CommonStyledFlex
             $alignItems="center"
             $paddingLeft="1rem"
             $paddingRight="1rem"
             $paddingTop="0.5rem"
             $paddingBottom="0.5rem"
-            border={`0.125rem solid ${color.primary500}`}
+            $border={`0.125rem solid ${color.primary500}`}
             $borderRadius="3.125rem"
-            cursor="pointer"
+            $cursor="pointer"
           >
             <StyledTextSpan
               $marginRight="0.5rem"
-              cursor="pointer"
-              color={color.primary500}
+              $cursor="pointer"
+              $color={color.primary500}
             >
               Hello, Anh
             </StyledTextSpan>
@@ -110,20 +109,20 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
               width={30}
               height={30}
             />
-          </StyledBox>
+          </CommonStyledFlex>
         </NavigationBar>
       )}
 
       {!authenticated && (
         <StyledTextP
-          color={color.primary500}
-          cursor="pointer"
+          $color={color.primary500}
+          $cursor="pointer"
           $fontSize="1.2rem"
           $textAlign="center"
           $lineHeight="1.5"
         >
           <FontAwesomeIcon icon={faGlobe} />
-          <StyledTextP cursor="pointer">English</StyledTextP>
+          <StyledTextP $cursor="pointer">English</StyledTextP>
         </StyledTextP>
       )}
     </StyledHeader>

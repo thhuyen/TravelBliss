@@ -13,7 +13,10 @@ import { label } from "../../constant/label";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { StyledBox } from "../../component/StyleComponent";
+import {
+  CommonStyledFlex,
+  CommonStyledBox,
+} from "../../component/StyleComponent";
 import { color } from "../../constant/styles";
 import { useCreateUser } from "../../hooks/useCreateUser";
 
@@ -87,7 +90,7 @@ const OtpForm = () => {
     <Formik {...validations}>
       <StyledAuthenForm method="post">
         <Label htmlFor="otp">{label.VERIFICATION_CODE}</Label> <br />
-        <StyledBox display="flex">
+        <CommonStyledFlex>
           <Input id="otp" name="otp" type="text" placeholder="123456" />
           <ReSendButton
             type="button"
@@ -97,18 +100,18 @@ const OtpForm = () => {
           >
             {label.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
-        </StyledBox>
+        </CommonStyledFlex>
         <FormErrorMessage inputName="otp" />
-        <StyledBox $marginTop="0.5rem" $marginLeft="0.5rem">
-          <StyledBox color={color.primary500}>
+        <CommonStyledBox $marginTop="0.5rem" $marginLeft="0.5rem">
+          <CommonStyledBox $color={color.primary500}>
             OTP valid {"(" + validOtpCounter + "s)"}
-          </StyledBox>
-        </StyledBox>
-        <StyledBox $marginTop="1.5rem">
+          </CommonStyledBox>
+        </CommonStyledBox>
+        <CommonStyledBox $marginTop="1.5rem">
           <Button width="100%" type="submit">
             submit
           </Button>
-        </StyledBox>
+        </CommonStyledBox>
       </StyledAuthenForm>
     </Formik>
   );

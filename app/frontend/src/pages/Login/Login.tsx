@@ -2,8 +2,9 @@ import React, { useMemo } from "react";
 import * as Yup from "yup";
 import Header from "../../component/Header/Header";
 import {
-  $backgroundImage,
-  StyledBox,
+  CommonStyledBackgroundImages,
+  CommonStyledBox,
+  CommonStyledFlex,
   StyledLink,
   StyledTextP,
   StyledTextSpan,
@@ -22,7 +23,7 @@ import { routes } from "../../constant/routes";
 import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 
-const CustomBackgroundImage = styled($backgroundImage)`
+const CustomBackgroundImage = styled(CommonStyledBackgroundImages)`
   width: 100%;
   position: fixed;
   top: -6rem;
@@ -31,7 +32,7 @@ const CustomBackgroundImage = styled($backgroundImage)`
   z-index: -10;
 `;
 
-const LoginBox = styled(StyledBox)`
+const LoginBox = styled(CommonStyledBox)`
   width: 25rem;
   height: fit-content;
   background-color: white;
@@ -79,7 +80,7 @@ const Login: React.FC = () => {
           </StyledTextP>
           <Formik {...validations}>
             <Form>
-              <StyledBox $marginBottom="1rem">
+              <CommonStyledBox $marginBottom="1rem">
                 <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label>
                 <Input
                   id="phoneNumber"
@@ -88,9 +89,9 @@ const Login: React.FC = () => {
                   placeholder="123456789"
                 ></Input>
                 <FormErrorMessage inputName="phoneNumber" />
-              </StyledBox>
+              </CommonStyledBox>
 
-              <StyledBox $marginBottom="1rem">
+              <CommonStyledBox $marginBottom="1rem">
                 <Label htmlFor="password">{label.PASSWORD}</Label> <br />
                 <Input
                   id="password"
@@ -99,45 +100,45 @@ const Login: React.FC = () => {
                   placeholder="********"
                 />
                 <FormErrorMessage inputName="password" />
-              </StyledBox>
+              </CommonStyledBox>
 
-              <StyledBox
+              <CommonStyledFlex
                 $marginBottom="1rem"
-                display="flex"
                 $alignItems="center"
                 $justifyContent="space-between"
               >
-                <StyledBox>
+                <CommonStyledBox>
                   <Field id="remember" type="checkbox" name="remember" />
                   &nbsp;
                   <LabelForCheckbox htmlFor="remember">
                     Remember me
                   </LabelForCheckbox>
                   <FormErrorMessage inputName="acceptance" />
-                </StyledBox>
+                </CommonStyledBox>
 
-                <StyledBox>
+                <CommonStyledBox>
                   <StyledLink to="/" $fontSize="smaller">
                     Forgot password?
                   </StyledLink>
-                </StyledBox>
-              </StyledBox>
+                </CommonStyledBox>
+              </CommonStyledFlex>
 
               <Button width="100%">sign up</Button>
 
-              <StyledTextSpan
-                display="flex"
+              <CommonStyledFlex
                 $alignItems="center"
                 $justifyContent="center"
                 $marginTop="1rem"
               >
-                <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
-                  Not a member
+                <StyledTextSpan>
+                  <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
+                    Not a member
+                  </StyledTextSpan>
+                  <StyledLink to={routes.signUp} $fontSize="smaller">
+                    Sign up
+                  </StyledLink>
                 </StyledTextSpan>
-                <StyledLink to={routes.signUp} $fontSize="smaller">
-                  Sign up
-                </StyledLink>
-              </StyledTextSpan>
+              </CommonStyledFlex>
             </Form>
           </Formik>
         </LoginBox>

@@ -1,6 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
 import { color } from "../../constant/styles";
 import { Link } from "react-router-dom";
+import {
+  BackGroundImagesProps,
+  CommonStyleProps,
+  FlexStyleProps,
+} from "./types";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -34,95 +39,18 @@ export const RightSide = styled.div`
   overflow-y: scroll;
 `;
 
-type StyleProps = {
-  alignContent?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "initial"
-  | "inherit";
-  $alignItems?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "start"
-  | "end"
-  | "baseline"
-  | "initial"
-  | "inherit";
-  backgroundColor?: string;
-  border?: string;
-  $borderRadius?: string;
-  boxShadow?: string;
-  color?: string;
-  cursor?: string;
-  display?:
-  | "flex"
-  | "inline-flex"
-  | "grid"
-  | "inline-grid"
-  | "block"
-  | "inline-block"
-  | "none";
-  flexDirection?: "row" | "column";
-  flexWrap?: "no-wrap" | "wrap";
-  float?: "left" | "right" | "none" | "inherit";
-  $fontSize?: string;
-  $fontWeight?: string;
-  gridGap?: string;
-  height?: string;
-  $justifyContent?:
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-evenly"
-  | "space-around"
-  | "initial";
-  $lineHeight?: string;
-  $marginBottom?: string;
-  $marginLeft?: string;
-  $marginRight?: string;
-  $marginTop?: string;
-  $paddingBottom?: string;
-  $paddingLeft?: string;
-  $paddingRight?: string;
-  $paddingTop?: string;
-  position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
-  sm?: string;
-  xs?: string;
-  md?: string;
-  lg?: string;
-  xl?: string;
-  $textAlign?: "center" | "left" | "right";
-  textTransform?: "capitalize" | "uppercase" | "lowercase";
-  width?: string;
-};
-
-const commonStyle = (style: StyleProps) => {
+const commonStyle = (style: CommonStyleProps) => {
   const {
-    alignContent,
-    $alignItems,
-    backgroundColor,
-    border,
+    $backgroundColor,
+    $border,
     $borderRadius,
-    boxShadow,
-    color,
-    cursor,
-    display,
-    flexDirection,
-    flexWrap,
-    float,
+    $boxShadow,
+    $color,
+    $cursor,
+    $float,
     $fontSize,
     $fontWeight,
-    gridGap,
-    height,
-    $justifyContent,
+    $height,
     $lineHeight,
     $marginLeft,
     $marginBottom,
@@ -132,30 +60,23 @@ const commonStyle = (style: StyleProps) => {
     $paddingLeft,
     $paddingRight,
     $paddingTop,
-    position,
+    $position,
     $textAlign,
-    textTransform,
-    width,
+    $textTransform,
+    $width,
   } = style;
 
   return `
-    align-content: ${alignContent ?? "initial"};
-    align-items: ${$alignItems ?? "initial"};
-    background-color: ${backgroundColor};
-    border: ${border};
+    background-color: ${$backgroundColor};
+    border: ${$border};
     border-radius: ${$borderRadius};
-    box-shadow: ${boxShadow ?? "none"};
-    color: ${color};
-    cursor: ${cursor ?? "auto"};
-    display: ${display ?? "block"};
-    flex-direction: ${flexDirection ?? "row"};
-    flex-wrap: ${flexWrap ?? "initial"};
-    float: ${float ?? "none"};
+    box-shadow: ${$boxShadow ?? "none"};
+    color: ${$color};
+    cursor: ${$cursor ?? "auto"};
+    float: ${$float ?? "none"};
     font-size: ${$fontSize ?? "initial"};
     font-weight: ${$fontWeight ?? "500"};
-    grid-gap: ${gridGap ?? 0};
-    height: ${height};
-    justify-content: ${$justifyContent ?? "initial"};
+    height: ${$height};
     line-height: ${$lineHeight ?? "initial"};
     margin-bottom: ${$marginBottom};
     margin-left: ${$marginLeft};
@@ -165,44 +86,76 @@ const commonStyle = (style: StyleProps) => {
     padding-left: ${$paddingLeft};
     padding-right: ${$paddingRight};
     padding-top: ${$paddingTop};
-    position: ${position};
+    position: ${$position};
     text-align: ${$textAlign ?? "left"};
-    text-transform: ${textTransform};
-    width: ${width};
+    text-transform: ${$textTransform};
+    width: ${$width};
   `;
 };
 
-export const StyledBox = styled.div<StyleProps>`
+export const CommonStyledBox = styled.div<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-export const StyledTextSpan = styled.span<StyleProps>`
+export const StyledTextSpan = styled.span<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-export const StyledTextP = styled.p<StyleProps>`
+export const StyledTextP = styled.p<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-type $backgroundImageStyleProps = {
-  $backgroundImage?: string | "none" | "inherit" | "initial";
-  $backgroundPosition?: string;
-  $backgroundSize?: string;
-};
-export const $backgroundImage = styled.div<$backgroundImageStyleProps>`
+export const CommonStyledBackgroundImages = styled.div<BackGroundImagesProps>`
   ${(props) => {
-    const { $backgroundImage, $backgroundPosition, $backgroundSize } = props;
+    const {
+      $backgroundImage,
+      $backgroundOrigin,
+      $backgroundPosition,
+      $backgroundPositionX,
+      $backgroundPositionY,
+      $backgroundRepeat,
+      $backgroundSize,
+    } = props;
     return `
+      ${commonStyle(props)}
       background-image: ${$backgroundImage ? `url("${$backgroundImage}")` : "none"
       };
       background-position: ${$backgroundPosition};
-      background-size: ${$backgroundSize}
+      background-size: ${$backgroundSize};
+      background-origin: ${$backgroundOrigin};
+      background-position-x: ${$backgroundPositionX};
+      background-position-y: ${$backgroundPositionY};
+      background-repeat: ${$backgroundRepeat}
+    `;
+  }}
+`;
+
+export const CommonStyledFlex = styled.div<FlexStyleProps>`
+  ${(props) => {
+    const {
+      $alignContent,
+      $alignItems,
+      $flexDirection,
+      $flexWrap,
+      $flexGrow,
+      $justifyContent,
+    } = props;
+
+    return `
+      ${commonStyle(props)}
+      display: flex;
+      align-content: ${$alignContent ?? "initial"};
+      align-items: ${$alignItems ?? "initial"};
+      flex-direction: ${$flexDirection ?? "row"};
+      flex-wrap: ${$flexWrap ?? "initial"};
+      flex-grow: ${$flexGrow ?? "initial"};
+      justify-content: ${$justifyContent ?? "initial"};
     `;
   }}
 `;
