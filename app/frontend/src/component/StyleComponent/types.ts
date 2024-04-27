@@ -8,6 +8,7 @@ export interface CommonStyleProps {
   $float?: "left" | "right" | "none" | "inherit";
   $fontSize?: string;
   $fontWeight?: string;
+  $fontStyle?: "normal" | "italic" | "oblique" | "initial" | "inherit";
   $height?: string;
   $lineHeight?: string;
   $marginBottom?: string;
@@ -20,18 +21,30 @@ export interface CommonStyleProps {
   $paddingTop?: string;
   $position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
   $textAlign?: "center" | "left" | "right" | "justify";
+  $textDecoration?: string;
   $textTransform?: "capitalize" | "uppercase" | "lowercase";
   $width?: string;
-};
+}
 
 export interface BackGroundImagesProps extends CommonStyleProps {
   $backgroundImage: string;
-  $backgroundOrigin?: 'padding-box' | ' border-box' | 'content-box' | 'initial' | 'inherit';
+  $backgroundOrigin?:
+  | "padding-box"
+  | " border-box"
+  | "content-box"
+  | "initial"
+  | "inherit";
   $backgroundPosition?: string;
   $backgroundPositionX?: string;
   $backgroundPositionY?: string;
-  $backgroundRepeat?: 'repeat' | 'repeat-x' | 'repeat-y' | 'no-repeat' | 'initial' | 'inherit';
-  $backgroundSize?: string
+  $backgroundRepeat?:
+  | "repeat"
+  | "repeat-x"
+  | "repeat-y"
+  | "no-repeat"
+  | "initial"
+  | "inherit";
+  $backgroundSize?: string;
 }
 
 export interface FlexStyleProps extends CommonStyleProps {
@@ -55,6 +68,15 @@ export interface FlexStyleProps extends CommonStyleProps {
   | "baseline"
   | "initial"
   | "inherit";
+  $alignSelf?:
+  | "auto"
+  | "stretch"
+  | "center"
+  | "flex-start"
+  | "flex-end"
+  | "baseline"
+  | "initial"
+  | "inherit";
   $justifyContent?:
   | "flex-start"
   | "flex-end"
@@ -71,6 +93,15 @@ export interface FlexStyleProps extends CommonStyleProps {
   | "start"
   | "end"
   | "baseline"
+  | "initial"
+  | "inherit";
+  $justifySelf?:
+  | "auto"
+  | "normal"
+  | "stretch"
+  | "positional alignment "
+  | "overflow-alignment"
+  | "baseline alignment"
   | "initial"
   | "inherit";
   $flexDirection?: "row" | "column";

@@ -50,6 +50,7 @@ const commonStyle = (style: CommonStyleProps) => {
     $float,
     $fontSize,
     $fontWeight,
+    $fontStyle,
     $height,
     $lineHeight,
     $marginLeft,
@@ -76,6 +77,7 @@ const commonStyle = (style: CommonStyleProps) => {
     float: ${$float ?? "none"};
     font-size: ${$fontSize ?? "initial"};
     font-weight: ${$fontWeight ?? "500"};
+    font-style: ${$fontStyle ?? "normal"};
     height: ${$height};
     line-height: ${$lineHeight ?? "initial"};
     margin-bottom: ${$marginBottom};
@@ -141,21 +143,25 @@ export const CommonStyledFlex = styled.div<FlexStyleProps>`
     const {
       $alignContent,
       $alignItems,
+      $alignSelf,
       $flexDirection,
       $flexWrap,
       $flexGrow,
       $justifyContent,
+      $justifySelf
     } = props;
 
     return `
       ${commonStyle(props)}
       display: flex;
-      align-content: ${$alignContent ?? "initial"};
-      align-items: ${$alignItems ?? "initial"};
+      align-content: ${$alignContent ?? "stretch"};
+      align-items: ${$alignItems ?? "normal"};
+      align-self: ${$alignSelf ?? "auto"};
       flex-direction: ${$flexDirection ?? "row"};
       flex-wrap: ${$flexWrap ?? "initial"};
       flex-grow: ${$flexGrow ?? "initial"};
-      justify-content: ${$justifyContent ?? "initial"};
+      justify-content: ${$justifyContent ?? "flex-start"};
+      justify-self: ${$justifySelf ?? "auto"}
     `;
   }}
 `;
@@ -172,12 +178,14 @@ export const GlobalMessage = styled.div`
   display: inline-block;
 `;
 
-export const StyledLink = styled(Link) <{
-  $fontSize?: string;
-  color?: string;
-  $textDecoration?: string;
-}>`
-  font-size: ${({ $fontSize }) => $fontSize};
-  color: ${({ color }) => color ?? "blue"};
-  text-decoration: ${({ $textDecoration }) => $textDecoration ?? "underline"};
+export const StyledLink = styled(Link) <CommonStyleProps>`
+  ${(props) => {
+    const { $color, $textDecoration, $cursor } = props
+
+    return `
+      ${commonStyle(props)}
+      color: ${$color ?? "blue"};
+      cursor: ${$cursor ?? "pointer"};
+      text-decoration: ${$textDecoration ?? "underline"};
+  ` }}
 `;

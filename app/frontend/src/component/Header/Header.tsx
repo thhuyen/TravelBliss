@@ -6,28 +6,11 @@ import {
   StyledTextSpan,
 } from "../StyleComponent";
 import { color } from "../../constant/styles";
-import styled from "styled-components";
 import { routes } from "../../constant/routes";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-
-const StyledHeader = styled.header`
-  width: 100%;
-  height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 3rem;
-  box-shadow: 0 0 5px #ccc;
-  background: white;
-  z-index: 10;
-`;
-
-const NavigationBar = styled.nav`
-  display: flex;
-  align-items: center;
-`;
+import { StyledHeader, NavigationBar } from "./styles";
 
 type HeaderProps = {
   authenticated: boolean;
@@ -51,17 +34,19 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
   return (
     <StyledHeader>
-      <CommonStyledFlex id="logo" $alignItems="center">
-        <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
-        <StyledTextSpan
-          color={color.primary500}
-          $fontSize="1.5rem"
-          $marginLeft="0.5rem"
-          $fontWeight="600"
-        >
-          TravelBliss
-        </StyledTextSpan>
-      </CommonStyledFlex>
+      <StyledLink to={authenticated ? "/home" : "/"} $textDecoration="none">
+        <CommonStyledFlex id="logo" $alignItems="center">
+          <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
+          <StyledTextSpan
+            $color={color.primary500}
+            $fontSize="1.5rem"
+            $marginLeft="0.5rem"
+            $fontWeight="600"
+          >
+            TravelBliss
+          </StyledTextSpan>
+        </CommonStyledFlex>
+      </StyledLink>
 
       {authenticated && (
         <NavigationBar>
@@ -70,7 +55,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
               <StyledLink
                 to={path}
                 $textDecoration="none"
-                color={color.primary500}
+                $color={color.primary500}
               >
                 {mapPathContent(path)}
               </StyledLink>
