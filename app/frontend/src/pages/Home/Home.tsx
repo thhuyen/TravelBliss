@@ -7,9 +7,48 @@ import {
   StyledTextP,
 } from "../../component/StyleComponent";
 import { color } from "../../constant/styles";
-import { StyledBanner, StyledArticle } from "./styles";
+import {
+  StyledBanner,
+  StyledArticle,
+  StyledGridDestinationContainer,
+  StyledGridDestinationHeader,
+  StyledGridDestinationItems,
+  StyledOverlay,
+} from "./styles";
 
 const Home = () => {
+  const popularDestinations = [
+    {
+      id: 1,
+      url: "https://dulichkhampha24.com/wp-content/uploads/2020/06/cau-vang-da-nang-5-1.jpg",
+      title: "Da Nang",
+    },
+    {
+      id: 2,
+      url: "https://haycafe.vn/wp-content/uploads/2022/01/Hinh-anh-nen-Ha-Noi.jpg",
+      title: "Ha Noi",
+    },
+    {
+      id: 3,
+      url: "https://pix10.agoda.net/geo/city/2679/1_2679_02.jpg?ca=6&ce=1&s=1920x822",
+      title: "Nha Trang",
+    },
+    {
+      id: 4,
+      url: "https://i1-dulich.vnecdn.net/2022/06/06/1IMG-5318-5102-1654526021.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=3W45y7igU_FW7jW-ugDyLA",
+      title: "Da Lat",
+    },
+    {
+      id: 5,
+      url: "https://gonatour.vn/vnt_upload/news/01_2021/ve_dep_eo_gio_quy_nhon_gonatour.jpg",
+      title: "Quy Nhon",
+    },
+    {
+      id: 6,
+      url: "https://bcp.cdnchinhphu.vn/uploaded/1/truonggiangthanh/2021_10_22/tth_NHCP.jpg",
+      title: "Hue",
+    },
+  ];
   return (
     <>
       <Header authenticated />
@@ -120,6 +159,32 @@ const Home = () => {
           $borderRadius="1.5rem"
         />
       </StyledArticle>
+
+      <StyledGridDestinationContainer>
+        <StyledGridDestinationHeader>
+          Popular destinations
+        </StyledGridDestinationHeader>
+        {popularDestinations.map(({ id, url, title }) => (
+          <StyledGridDestinationItems
+            key={id}
+            $backgroundImage={url}
+            $backgroundPosition="center"
+            $backgroundSize="cover"
+            $borderRadius="1rem"
+            $position="relative"
+          >
+            <StyledOverlay $borderRadius="1rem" />
+            <StyledTextP
+              $color="white"
+              $letterSpacing="1px"
+              $position="absolute"
+              $bottom="1rem"
+            >
+              {title}
+            </StyledTextP>
+          </StyledGridDestinationItems>
+        ))}
+      </StyledGridDestinationContainer>
     </>
   );
 };

@@ -44,6 +44,7 @@ const commonStyle = (style: CommonStyleProps) => {
     $backgroundColor,
     $border,
     $borderRadius,
+    $bottom,
     $boxShadow,
     $color,
     $cursor,
@@ -52,6 +53,8 @@ const commonStyle = (style: CommonStyleProps) => {
     $fontWeight,
     $fontStyle,
     $height,
+    $left,
+    $letterSpacing,
     $lineHeight,
     $marginLeft,
     $marginBottom,
@@ -62,8 +65,10 @@ const commonStyle = (style: CommonStyleProps) => {
     $paddingRight,
     $paddingTop,
     $position,
+    $right,
     $textAlign,
     $textTransform,
+    $top,
     $width,
   } = style;
 
@@ -71,6 +76,7 @@ const commonStyle = (style: CommonStyleProps) => {
     background-color: ${$backgroundColor};
     border: ${$border};
     border-radius: ${$borderRadius};
+    bottom: ${$bottom};
     box-shadow: ${$boxShadow ?? "none"};
     color: ${$color};
     cursor: ${$cursor ?? "auto"};
@@ -79,6 +85,8 @@ const commonStyle = (style: CommonStyleProps) => {
     font-weight: ${$fontWeight ?? "500"};
     font-style: ${$fontStyle ?? "normal"};
     height: ${$height};
+    left: ${$left};
+    letter-spacing: ${$letterSpacing};
     line-height: ${$lineHeight ?? "initial"};
     margin-bottom: ${$marginBottom};
     margin-left: ${$marginLeft};
@@ -89,8 +97,10 @@ const commonStyle = (style: CommonStyleProps) => {
     padding-right: ${$paddingRight};
     padding-top: ${$paddingTop};
     position: ${$position};
+    right: ${$right}
     text-align: ${$textAlign ?? "left"};
     text-transform: ${$textTransform};
+    top: ${$top};
     width: ${$width};
   `;
 };
@@ -166,6 +176,18 @@ export const CommonStyledFlex = styled.div<FlexStyleProps>`
   }}
 `;
 
+export const StyledLink = styled(Link) <CommonStyleProps>`
+  ${(props) => {
+    const { $color, $textDecoration, $cursor } = props
+
+    return `
+      ${commonStyle(props)}
+      color: ${$color ?? "blue"};
+      cursor: ${$cursor ?? "pointer"};
+      text-decoration: ${$textDecoration ?? "underline"};
+  ` }}
+`;
+
 export const GlobalMessage = styled.div`
   width: 70%;
   color: ${color.green600};
@@ -178,14 +200,3 @@ export const GlobalMessage = styled.div`
   display: inline-block;
 `;
 
-export const StyledLink = styled(Link) <CommonStyleProps>`
-  ${(props) => {
-    const { $color, $textDecoration, $cursor } = props
-
-    return `
-      ${commonStyle(props)}
-      color: ${$color ?? "blue"};
-      cursor: ${$cursor ?? "pointer"};
-      text-decoration: ${$textDecoration ?? "underline"};
-  ` }}
-`;

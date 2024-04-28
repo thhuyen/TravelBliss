@@ -2,6 +2,7 @@ export interface CommonStyleProps {
   $backgroundColor?: string;
   $border?: string;
   $borderRadius?: string;
+  $bottom?: string;
   $boxShadow?: string;
   $color?: string;
   $cursor?: string;
@@ -10,6 +11,8 @@ export interface CommonStyleProps {
   $fontWeight?: string;
   $fontStyle?: "normal" | "italic" | "oblique" | "initial" | "inherit";
   $height?: string;
+  $left?: string;
+  $letterSpacing?: string;
   $lineHeight?: string;
   $marginBottom?: string;
   $marginLeft?: string;
@@ -20,9 +23,11 @@ export interface CommonStyleProps {
   $paddingRight?: string;
   $paddingTop?: string;
   $position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
+  $right?: string,
   $textAlign?: "center" | "left" | "right" | "justify";
   $textDecoration?: string;
   $textTransform?: "capitalize" | "uppercase" | "lowercase";
+  $top?: string;
   $width?: string;
 }
 
@@ -44,7 +49,13 @@ export interface BackGroundImagesProps extends CommonStyleProps {
   | "no-repeat"
   | "initial"
   | "inherit";
-  $backgroundSize?: string;
+  $backgroundSize?:
+  | "auto"
+  | "length"
+  | "cover"
+  | "contain"
+  | "initial"
+  | "inherit";
 }
 
 export interface FlexStyleProps extends CommonStyleProps {

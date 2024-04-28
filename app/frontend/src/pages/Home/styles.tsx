@@ -1,4 +1,9 @@
 import styled from "styled-components";
+import {
+  CommonStyledBackgroundImages,
+  CommonStyledBox,
+} from "../../component/StyleComponent";
+import { color } from "../../constant/styles";
 
 export const StyledBanner = styled.section`
   width: 100%;
@@ -9,11 +14,46 @@ export const StyledBanner = styled.section`
   background-size: 140%;
 `;
 
-export const StyledArticle = styled.section`
+export const StyledArticle = styled.article`
   max-width: 80rem;
   height: 30rem;
   display: flex;
   justify-content: space-between;
   margin: 3rem auto;
-  padding: 0 2rem;
+  padding: 0 3rem;
+`;
+
+export const StyledGridDestinationContainer = styled.section`
+  max-width: 80rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  grid-gap: 10px;
+  padding: 0 3rem;
+  margin: 0 auto;
+`;
+
+export const StyledGridDestinationHeader = styled(CommonStyledBox)`
+  grid-column: 1 / -1;
+  color: ${color.primary500};
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 10px;
+`;
+
+export const StyledGridDestinationItems = styled(CommonStyledBackgroundImages)`
+  height: 22rem;
+  padding: 20px;
+  background-color: #f2f2f2;
+`;
+
+export const StyledOverlay = styled(CommonStyledBox)<{
+  $borderRadius?: string;
+}>`
+  background: rgba(0, 0, 0, 0.4);
+  border-radius: ${({ $borderRadius }) => $borderRadius ?? 0};
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
 `;
