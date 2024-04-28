@@ -49,6 +49,7 @@ const Home = () => {
       title: "Hue",
     },
   ];
+
   return (
     <>
       <Header authenticated />
@@ -164,9 +165,10 @@ const Home = () => {
         <StyledGridDestinationHeader>
           Popular destinations
         </StyledGridDestinationHeader>
+
         {popularDestinations.map(({ id, url, title }) => (
           <StyledGridDestinationItems
-            key={id}
+            key={`${id}-item`}
             $backgroundImage={url}
             $backgroundPosition="center"
             $backgroundSize="cover"
@@ -175,6 +177,7 @@ const Home = () => {
           >
             <StyledOverlay $borderRadius="1rem" />
             <StyledTextP
+              key={`${id}-title`}
               $color="white"
               $letterSpacing="1px"
               $position="absolute"
