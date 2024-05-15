@@ -6,7 +6,6 @@ import {
   StyledLink,
   StyledTextP,
 } from "../../component/StyleComponent";
-import { color } from "../../constant/styles";
 import {
   StyledBanner,
   StyledArticle,
@@ -14,9 +13,11 @@ import {
   StyledGridDestinationHeader,
   StyledGridDestinationItems,
   StyledOverlay,
+  StyledArticleTitle,
 } from "./styles";
+import { texts, colors } from "../../constant";
 
-const Home = () => {
+const Home: React.FC = () => {
   const popularDestinations = [
     {
       id: 1,
@@ -68,14 +69,9 @@ const Home = () => {
           $flexDirection="column"
           $paddingLeft="2rem"
         >
-          <StyledTextP
-            $color={color.primary500}
-            $fontSize="2rem"
-            $fontWeight="600"
-            $marginBottom="2rem"
-          >
-            About TravelBliss
-          </StyledTextP>
+          <StyledArticleTitle>
+            {texts.TITLE_ABOUT_TRAVELBLISS}
+          </StyledArticleTitle>
 
           <StyledTextP
             $lineHeight="1.5"
@@ -99,7 +95,7 @@ const Home = () => {
             type of equipment varies, and it depends on availability.
           </StyledTextP>
 
-          <StyledLink to="" $textDecoration="none" $color={color.primary600}>
+          <StyledLink to="" $textDecoration="none" $color={colors.primary600}>
             Read more &#8594;
           </StyledLink>
         </CommonStyledFlex>
@@ -112,21 +108,14 @@ const Home = () => {
           $flexDirection="column"
           $paddingRight="2rem"
         >
-          <StyledTextP
-            $color={color.primary500}
-            $fontSize="2rem"
-            $fontWeight="600"
-          >
-            Our latest news
-          </StyledTextP>
+          <StyledArticleTitle>{texts.TITLE_LATEST_NEWS}</StyledArticleTitle>
 
           <StyledTextP
-            $color={color.secondary300}
-            $marginTop="1.5rem"
+            $color={colors.secondary300}
             $marginBottom="1.5rem"
             $fontStyle="italic"
           >
-            02 April 2023
+            {texts.DATE_NEWS}
           </StyledTextP>
 
           <StyledTextP
@@ -148,7 +137,7 @@ const Home = () => {
             have an additional train during the holiday
           </StyledTextP>
 
-          <StyledLink to="" $textDecoration="none" $color={color.primary600}>
+          <StyledLink to="" $textDecoration="none" $color={colors.primary600}>
             Read more &#8594;
           </StyledLink>
         </CommonStyledFlex>
@@ -188,6 +177,10 @@ const Home = () => {
           </StyledGridDestinationItems>
         ))}
       </StyledGridDestinationContainer>
+
+      <StyledArticle>
+        <StyledArticleTitle></StyledArticleTitle>
+      </StyledArticle>
     </>
   );
 };

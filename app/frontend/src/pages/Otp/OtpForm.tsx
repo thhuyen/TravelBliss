@@ -8,8 +8,6 @@ import {
   StyledAuthenForm,
   Button,
 } from "../../component/StyleComponent/StyledForm";
-import message from "../../constant/message";
-import { label } from "../../constant/label";
 import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
@@ -17,7 +15,7 @@ import {
   CommonStyledFlex,
   CommonStyledBox,
 } from "../../component/StyleComponent";
-import { color } from "../../constant/styles";
+import { colors, messages, labels } from "../../constant";
 import { useCreateUser } from "../../hooks/useCreateUser";
 
 type FormValues = {
@@ -56,7 +54,7 @@ const OtpForm = () => {
         otp: "",
       },
       validationSchema: Yup.object({
-        otp: Yup.string().required(message.requiredOtp),
+        otp: Yup.string().required(messages.requiredOtp),
       }),
       onSubmit: async (
         values: FormikValues,
@@ -64,7 +62,7 @@ const OtpForm = () => {
       ) => {
         const { otp } = values as FormValues;
         if (otp !== "123456") {
-          setErrors({ otp: message.invalidOtp });
+          setErrors({ otp: messages.invalidOtp });
           setSubmitting(false);
           return;
         }
@@ -89,7 +87,7 @@ const OtpForm = () => {
   return (
     <Formik {...validations}>
       <StyledAuthenForm method="post">
-        <Label htmlFor="otp">{label.VERIFICATION_CODE}</Label> <br />
+        <Label htmlFor="otp">{labels.VERIFICATION_CODE}</Label> <br />
         <CommonStyledFlex>
           <Input id="otp" name="otp" type="text" placeholder="123456" />
           <ReSendButton
@@ -98,12 +96,12 @@ const OtpForm = () => {
             disabled={counter !== 0}
             onClick={handleClick}
           >
-            {label.RE_SEND_BTN + " (" + counter + "s)"}
+            {labels.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
         </CommonStyledFlex>
         <FormErrorMessage inputName="otp" />
         <CommonStyledBox $marginTop="0.5rem" $marginLeft="0.5rem">
-          <CommonStyledBox $color={color.primary500}>
+          <CommonStyledBox $color={colors.primary500}>
             OTP valid {"(" + validOtpCounter + "s)"}
           </CommonStyledBox>
         </CommonStyledBox>

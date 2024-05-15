@@ -1,4 +1,4 @@
-import { routes } from "../constant/routes";
+import { routes } from "../constant";
 import Congrats from "../pages/Congrats";
 import Otp from "../pages/OTP/OTP";
 import Login from "../pages/Login";

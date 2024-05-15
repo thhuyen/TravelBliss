@@ -2,8 +2,9 @@ import styled from "styled-components";
 import {
   CommonStyledBackgroundImages,
   CommonStyledBox,
+  StyledTextP,
 } from "../../component/StyleComponent";
-import { color } from "../../constant/styles";
+import { colors } from "../../constant";
 
 export const StyledBanner = styled.section`
   width: 100%;
@@ -34,7 +35,7 @@ export const StyledGridDestinationContainer = styled.section`
 
 export const StyledGridDestinationHeader = styled(CommonStyledBox)`
   grid-column: 1 / -1;
-  color: ${color.primary500};
+  color: ${colors.primary500};
   font-size: 2rem;
   font-weight: 600;
   padding: 10px;
@@ -56,4 +57,11 @@ export const StyledOverlay = styled(CommonStyledBox)<{
   left: 0;
   right: 0;
   bottom: 0;
+`;
+
+export const StyledArticleTitle = styled(StyledTextP)`
+  color: ${colors.primary500};
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
 `;

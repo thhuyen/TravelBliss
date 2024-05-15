@@ -1,5 +1,5 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { color } from "../../constant/styles";
+import { colors } from "../../constant";
 import { Link } from "react-router-dom";
 import {
   BackGroundImagesProps,
@@ -190,13 +190,13 @@ export const StyledLink = styled(Link) <CommonStyleProps>`
 
 export const GlobalMessage = styled.div`
   width: 70%;
-  color: ${color.green600};
+  color: ${colors.green600};
   text-align: left;
   line-height: 1.5;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
-  background-color: ${color.green100};
+  background-color: ${colors.green100};
   display: inline-block;
 `;
 

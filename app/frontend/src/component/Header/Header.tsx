@@ -5,8 +5,7 @@ import {
   StyledTextP,
   StyledTextSpan,
 } from "../StyleComponent";
-import { color } from "../../constant/styles";
-import { routes } from "../../constant/routes";
+import { routes, colors } from "../../constant";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
@@ -38,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         <CommonStyledFlex id="logo" $alignItems="center">
           <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
           <StyledTextSpan
-            $color={color.primary500}
+            $color={colors.primary500}
             $fontSize="1.5rem"
             $marginLeft="0.5rem"
             $fontWeight="600"
@@ -55,7 +54,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
               <StyledLink
                 to={path}
                 $textDecoration="none"
-                $color={color.primary500}
+                $color={colors.primary500}
               >
                 {mapPathContent(path)}
               </StyledLink>
@@ -64,7 +63,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
           <StyledTextSpan
             $marginRight="1rem"
-            $color={color.primary500}
+            $color={colors.primary500}
             $cursor="pointer"
           >
             <FontAwesomeIcon icon={faGlobe} />
@@ -77,14 +76,14 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
             $paddingRight="1rem"
             $paddingTop="0.5rem"
             $paddingBottom="0.5rem"
-            $border={`0.125rem solid ${color.primary500}`}
+            $border={`0.125rem solid ${colors.primary500}`}
             $borderRadius="3.125rem"
             $cursor="pointer"
           >
             <StyledTextSpan
               $marginRight="0.5rem"
               $cursor="pointer"
-              $color={color.primary500}
+              $color={colors.primary500}
             >
               Hello, Anh
             </StyledTextSpan>
@@ -100,7 +99,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
       {!authenticated && (
         <StyledTextP
-          $color={color.primary500}
+          $color={colors.primary500}
           $cursor="pointer"
           $fontSize="1.2rem"
           $textAlign="center"

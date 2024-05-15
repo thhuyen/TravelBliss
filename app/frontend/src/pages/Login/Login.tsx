@@ -17,9 +17,7 @@ import {
   Button,
   LabelForCheckbox,
 } from "../../component/StyleComponent/StyledForm";
-import { label } from "../../constant/label";
-import message from "../../constant/message";
-import { routes } from "../../constant/routes";
+import { labels, routes, messages } from "../../constant";
 import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 
@@ -52,9 +50,9 @@ const Login: React.FC = () => {
         phoneNumber: "",
       },
       validationSchema: Yup.object({
-        password: Yup.string().required(message.requiredPassword),
+        password: Yup.string().required(messages.requiredPassword),
 
-        phoneNumber: Yup.string().required(message.requiredPhoneNumber),
+        phoneNumber: Yup.string().required(messages.requiredPhoneNumber),
       }),
       onSubmit: (values: any) => {
         navigate(routes.home, { state: { values } });
@@ -81,7 +79,7 @@ const Login: React.FC = () => {
           <Formik {...validations}>
             <Form>
               <CommonStyledBox $marginBottom="1rem">
-                <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label>
+                <Label htmlFor="phoneNumber">{labels.PHONE_NUMBER}</Label>
                 <Input
                   id="phoneNumber"
                   name="phoneNumber"
@@ -92,7 +90,7 @@ const Login: React.FC = () => {
               </CommonStyledBox>
 
               <CommonStyledBox $marginBottom="1rem">
-                <Label htmlFor="password">{label.PASSWORD}</Label> <br />
+                <Label htmlFor="password">{labels.PASSWORD}</Label> <br />
                 <Input
                   id="password"
                   name="password"
