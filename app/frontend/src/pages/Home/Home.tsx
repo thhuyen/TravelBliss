@@ -14,8 +14,15 @@ import {
   StyledGridDestinationItems,
   StyledOverlay,
   StyledArticleTitle,
+  ReasonBox,
 } from "./styles";
 import { texts, colors } from "../../constant";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faTicket,
+  faLightbulb,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Home: React.FC = () => {
   const popularDestinations = [
@@ -48,6 +55,27 @@ const Home: React.FC = () => {
       id: 6,
       url: "https://bcp.cdnchinhphu.vn/uploaded/1/truonggiangthanh/2021_10_22/tth_NHCP.jpg",
       title: "Hue",
+    },
+  ];
+
+  const reasonBoxs = [
+    {
+      icon: faTicket,
+      heading: texts.ONE_CLICK_BOOKING,
+      content:
+        " You can easily and quickly purchase train tickets with access to comprehensive details such as seat availability, routes, and timings.",
+    },
+    {
+      icon: faLightbulb,
+      heading: texts.SAFETY,
+      content:
+        "Your safety is our top priority. We work with reputable train companies to ensure that you travel in a safe and secure environment.",
+    },
+    {
+      icon: faWallet,
+      heading: texts.ONLINE_PAYMENTS,
+      content:
+        "Our payment process is simple and straightforward, with multiple secure payment options available.",
     },
   ];
 
@@ -178,9 +206,42 @@ const Home: React.FC = () => {
         ))}
       </StyledGridDestinationContainer>
 
-      <StyledArticle>
-        <StyledArticleTitle></StyledArticleTitle>
-      </StyledArticle>
+      <CommonStyledFlex
+        $alignItems="center"
+        $flexDirection="column"
+        $backgroundColor={colors.primary50}
+        $marginTop="3rem"
+        $paddingBottom="3rem"
+        $paddingTop="3rem"
+      >
+        <StyledArticleTitle $marginBottom="1rem">
+          {texts.TITLE_WHY_CHOOSE}
+        </StyledArticleTitle>
+
+        <StyledTextP $marginBottom="2rem">
+          {texts.CONTENT_WHY_CHOOSE}
+        </StyledTextP>
+
+        <CommonStyledFlex>
+          {reasonBoxs.map(({ icon, heading, content }, index) => (
+            <ReasonBox key={index}>
+              <StyledTextP
+                $color={colors.primary500}
+                $fontSize="1.5rem"
+                $marginBottom="0.5rem"
+              >
+                <FontAwesomeIcon icon={icon} />
+              </StyledTextP>
+
+              <StyledTextP $fontWeight="600" $marginBottom="1em">
+                {heading}
+              </StyledTextP>
+
+              <StyledTextP $lineHeight="1.5">{content}</StyledTextP>
+            </ReasonBox>
+          ))}
+        </CommonStyledFlex>
+      </CommonStyledFlex>
     </>
   );
 };

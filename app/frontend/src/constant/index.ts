@@ -51,10 +51,15 @@ const texts = {
   TITLE_LATEST_NEWS: "Our latest news",
   TITLE_ABOUT_TRAVELBLISS: "About TravelBliss",
   DATE_NEWS: "02 April 2023",
-  TITLE_WHY_CHOOSE: "Why choose TravelBliss?"
+  TITLE_WHY_CHOOSE: "Why choose TravelBliss?",
+  CONTENT_WHY_CHOOSE: "Our first priority is to provide you with comfort by saving time and effort to securely book train ticket",
+  ONE_CLICK_BOOKING: "One-click Booking",
+  SAFETY: "Safety",
+  ONLINE_PAYMENTS: "Online Payment",
 }
 
 const colors = {
+  primary50: '#FEF4EE',
   primary500: '#EA4E22',
   primary600: '#DC381A',
   secondary300: '#AAAEB6',

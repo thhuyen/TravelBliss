@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import {
   CommonStyledBackgroundImages,
-  CommonStyledBox,
+  CommonStyledFlex,
   StyledTextP,
 } from "../../component/StyleComponent";
 import { colors } from "../../constant";
@@ -19,7 +19,8 @@ export const StyledArticle = styled.article`
   max-width: 80rem;
   height: 30rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: "space-between";
+  flex-direction: "row";
   margin: 3rem auto;
   padding: 0 3rem;
 `;
@@ -33,7 +34,7 @@ export const StyledGridDestinationContainer = styled.section`
   margin: 0 auto;
 `;
 
-export const StyledGridDestinationHeader = styled(CommonStyledBox)`
+export const StyledGridDestinationHeader = styled.div`
   grid-column: 1 / -1;
   color: ${colors.primary500};
   font-size: 2rem;
@@ -47,7 +48,7 @@ export const StyledGridDestinationItems = styled(CommonStyledBackgroundImages)`
   background-color: #f2f2f2;
 `;
 
-export const StyledOverlay = styled(CommonStyledBox)<{
+export const StyledOverlay = styled.div<{
   $borderRadius?: string;
 }>`
   background: rgba(0, 0, 0, 0.4);
@@ -59,9 +60,23 @@ export const StyledOverlay = styled(CommonStyledBox)<{
   bottom: 0;
 `;
 
-export const StyledArticleTitle = styled(StyledTextP)`
+export const StyledArticleTitle = styled(StyledTextP)<{
+  $marginBottom?: string;
+}>`
   color: ${colors.primary500};
   font-size: 2rem;
   font-weight: 600;
-  margin-bottom: 2rem;
+  margin-bottom: ${({ $marginBottom }) => $marginBottom ?? "2rem"};
+`;
+
+export const ReasonBox = styled.div`
+  max-width: 20rem;
+  text-align: center;
+  box-shadow: 0 2px 5px ${colors.secondary300};
+  padding: 1rem;
+  background-color: white;
+
+  &:nth-child(2) {
+    margin: 0 2rem;
+  }
 `;
