@@ -18,7 +18,6 @@ export const StyledArticle = styled.article<{
   $flexDirection?: "column";
 }>`
   max-width: 80rem;
-  height: 30rem;
   display: flex;
   justify-content: "space-between";
   flex-direction: ${({ $flexDirection }) => $flexDirection ?? "row"};
@@ -90,5 +89,4 @@ export const StyledFAQ = styled.div`
   border-radius: 1rem;
   padding: 1rem;
   margin-bottom: 1rem;
-  transition-delay: 1s;
 `;

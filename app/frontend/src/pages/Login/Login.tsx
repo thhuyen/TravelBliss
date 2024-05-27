@@ -9,7 +9,6 @@ import {
   StyledTextP,
   StyledTextSpan,
 } from "../../component/StyleComponent";
-import styled from "styled-components";
 import { Formik, Form, Field } from "formik";
 import {
   Input,
@@ -17,32 +16,15 @@ import {
   Button,
   LabelForCheckbox,
 } from "../../component/StyleComponent/StyledForm";
-import { labels, routes, messages } from "../../constant";
+import { labels, routes, messages, texts } from "../../constant";
 import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-
-const CustomBackgroundImage = styled(CommonStyledBackgroundImages)`
-  width: 100%;
-  position: fixed;
-  top: -6rem;
-  left: 0;
-  bottom: 0;
-  z-index: -10;
-`;
-
-const LoginBox = styled(CommonStyledBox)`
-  width: 25rem;
-  height: fit-content;
-  background-color: white;
-  padding: 1rem;
-  position: absolute;
-  top: 40%;
-  right: 10%;
-  border-radius: 0.5rem;
-`;
+import { CustomBackgroundImage, LoginBox } from "./styles";
+import Footer from "../../component/Footer";
 
 const Login: React.FC = () => {
   const navigate = useNavigate();
+
   const validations = useMemo(
     () => ({
       initialValues: {
@@ -58,11 +40,13 @@ const Login: React.FC = () => {
         navigate(routes.home, { state: { values } });
       },
     }),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
   return (
     <>
-      <Header authenticated={false} />
+      <Header isAuthenticated={false} />
+
       <CustomBackgroundImage
         $backgroundImage="https://trithucxanh.vn/storage/post/7/0-anh144.jpg"
         $backgroundPosition="center"
@@ -74,7 +58,7 @@ const Login: React.FC = () => {
             $textAlign="center"
             $marginBottom="1rem"
           >
-            Sign in
+            {labels.SIGN_IN}
           </StyledTextP>
           <Formik {...validations}>
             <Form>
@@ -121,26 +105,26 @@ const Login: React.FC = () => {
                 </CommonStyledBox>
               </CommonStyledFlex>
 
-              <Button width="100%">sign up</Button>
+              <Button width="100%">{labels.SIGN_IN}</Button>
 
               <CommonStyledFlex
                 $alignItems="center"
                 $justifyContent="center"
                 $marginTop="1rem"
               >
-                <StyledTextSpan>
-                  <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
-                    Not a member
-                  </StyledTextSpan>
-                  <StyledLink to={routes.signUp} $fontSize="smaller">
-                    Sign up
-                  </StyledLink>
+                <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
+                  {texts.NOT_MEMBER}
                 </StyledTextSpan>
+                <StyledLink to={routes.signUp} $fontSize="smaller">
+                  {labels.SIGN_UP}
+                </StyledLink>
               </CommonStyledFlex>
             </Form>
           </Formik>
         </LoginBox>
       </CustomBackgroundImage>
+
+      <Footer />
     </>
   );
 };

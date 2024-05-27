@@ -12,10 +12,10 @@ import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { StyledHeader, NavigationBar } from "./styles";
 
 type HeaderProps = {
-  authenticated: boolean;
+  isAuthenticated: boolean;
 };
 
-const Header: React.FC<HeaderProps> = ({ authenticated }) => {
+const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
   const NavItemPaths = [routes.home, "/guide", "/contact", "/about"];
 
   const mapPathContent = (path: string) => {
@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
   return (
     <StyledHeader>
-      <StyledLink to={authenticated ? "/home" : "/"} $textDecoration="none">
+      <StyledLink to={isAuthenticated ? "/home" : "/"} $textDecoration="none">
         <CommonStyledFlex id="logo" $alignItems="center">
           <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
           <StyledTextSpan
@@ -47,7 +47,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         </CommonStyledFlex>
       </StyledLink>
 
-      {authenticated && (
+      {isAuthenticated && (
         <NavigationBar>
           {NavItemPaths.map((path, index) => (
             <StyledTextSpan key={index} $marginRight="1rem">
@@ -97,7 +97,7 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
         </NavigationBar>
       )}
 
-      {!authenticated && (
+      {!isAuthenticated && (
         <StyledTextP
           $color={colors.primary500}
           $cursor="pointer"

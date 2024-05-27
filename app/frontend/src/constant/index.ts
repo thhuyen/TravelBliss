@@ -6,6 +6,8 @@ const labels = {
   CONFIRM_PASSWORD: "Confirm password",
   VERIFICATION_CODE: "Verification code",
   RE_SEND_BTN: "Resend",
+  SIGN_IN: "Sign in",
+  SIGN_UP: "Sign up"
 } as const;
 
 const messages = {
@@ -48,6 +50,7 @@ const routes = {
 
 const texts = {
   TO_SIGN_IN_PAGE: "To Sign in page",
+  NOT_MEMBER: "Not a member?",
   TITLE_LATEST_NEWS: "Our latest news",
   TITLE_ABOUT_TRAVELBLISS: "About TravelBliss",
   DATE_NEWS: "02 April 2023",

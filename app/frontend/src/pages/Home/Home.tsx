@@ -1,5 +1,11 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+
+import Footer from "../../component/Footer";
+import { texts, colors } from "../../constant";
 import Header from "../../component/Header/Header";
+import { popularDestinations, reasonBoxs, FAQs } from "./data";
 import {
   CommonStyledBackgroundImages,
   CommonStyledBox,
@@ -18,20 +24,14 @@ import {
   StyledReasonBox,
   StyledFAQ,
 } from "./styles";
-import { texts, colors } from "../../constant";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { popularDestinations, reasonBoxs, FAQs } from "./data";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const Home: React.FC = () => {
-  const [answersDisplay, setAnswersDisplay] = useState([0]);
+  const [answersDisplay, setAnswersDisplay] = useState<number[]>([0]);
 
   const handleDisplayAnswer = (key: number) => {
     setAnswersDisplay((currentAnswerList) => {
       if (currentAnswerList.includes(key)) {
-        return currentAnswerList.filter((answer) => {
-          return answer !== key;
-        });
+        return currentAnswerList.filter((answer) => answer !== key);
       }
       return [...currentAnswerList, key];
     });
@@ -39,7 +39,7 @@ const Home: React.FC = () => {
 
   return (
     <>
-      <Header authenticated />
+      <Header isAuthenticated={true} />
       <StyledBanner />
 
       <StyledArticle>
@@ -215,19 +215,21 @@ const Home: React.FC = () => {
             <StyledTextP $marginBottom="1rem" $fontWeight="600">
               {question}
             </StyledTextP>
-            <StyledTextP
-              $display={answersDisplay.includes(index) ? "block" : "none"}
-              $color={colors.secondary500}
-            >
-              {answer}
-            </StyledTextP>
+
+            {answersDisplay.includes(index) && (
+              <StyledTextP $color={colors.secondary500}>{answer}</StyledTextP>
+            )}
+
             <CommonStyledBox $position="absolute" $right="1rem" $top="1rem">
               <FontAwesomeIcon icon={faChevronDown} />
             </CommonStyledBox>
+
             <StyledOverlay $background="transparent" />
           </StyledFAQ>
         ))}
       </StyledArticle>
+
+      <Footer />
     </>
   );
 };
