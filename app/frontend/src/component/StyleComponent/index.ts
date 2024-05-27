@@ -48,6 +48,7 @@ const commonStyle = (style: CommonStyleProps) => {
     $boxShadow,
     $color,
     $cursor,
+    $display,
     $float,
     $fontSize,
     $fontWeight,
@@ -68,6 +69,7 @@ const commonStyle = (style: CommonStyleProps) => {
     $right,
     $textAlign,
     $textTransform,
+    $transition,
     $top,
     $width,
   } = style;
@@ -80,6 +82,7 @@ const commonStyle = (style: CommonStyleProps) => {
     box-shadow: ${$boxShadow ?? "none"};
     color: ${$color};
     cursor: ${$cursor ?? "auto"};
+    display: ${$display ?? "block"};
     float: ${$float ?? "none"};
     font-size: ${$fontSize ?? "initial"};
     font-weight: ${$fontWeight ?? "500"};
@@ -97,9 +100,10 @@ const commonStyle = (style: CommonStyleProps) => {
     padding-right: ${$paddingRight};
     padding-top: ${$paddingTop};
     position: ${$position};
-    right: ${$right}
+    right: ${$right};
     text-align: ${$textAlign ?? "left"};
     text-transform: ${$textTransform};
+    transition: ${$transition ?? "none"};
     top: ${$top};
     width: ${$width};
   `;

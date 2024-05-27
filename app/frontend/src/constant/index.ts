@@ -56,7 +56,8 @@ const texts = {
   ONE_CLICK_BOOKING: "One-click Booking",
   SAFETY: "Safety",
   ONLINE_PAYMENTS: "Online Payment",
-}
+  FAQ: "FAQs"
+} as const;
 
 const colors = {
   primary50: '#FEF4EE',
@@ -64,8 +65,9 @@ const colors = {
   primary600: '#DC381A',
   secondary300: '#AAAEB6',
   secondary400: '#7f8591',
+  secondary500: '#646976',
   green100: "#dbf0e5",
   green600: "#276955"
-} as const
+} as const;
 
 export { texts, messages, labels, routes, colors }

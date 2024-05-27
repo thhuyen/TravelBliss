@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../../component/Header/Header";
 import {
   CommonStyledBackgroundImages,
+  CommonStyledBox,
   CommonStyledFlex,
   StyledLink,
   StyledTextP,
@@ -14,70 +15,27 @@ import {
   StyledGridDestinationItems,
   StyledOverlay,
   StyledArticleTitle,
-  ReasonBox,
+  StyledReasonBox,
+  StyledFAQ,
 } from "./styles";
 import { texts, colors } from "../../constant";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faTicket,
-  faLightbulb,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons";
+import { popularDestinations, reasonBoxs, FAQs } from "./data";
+import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 
 const Home: React.FC = () => {
-  const popularDestinations = [
-    {
-      id: 1,
-      url: "https://dulichkhampha24.com/wp-content/uploads/2020/06/cau-vang-da-nang-5-1.jpg",
-      title: "Da Nang",
-    },
-    {
-      id: 2,
-      url: "https://haycafe.vn/wp-content/uploads/2022/01/Hinh-anh-nen-Ha-Noi.jpg",
-      title: "Ha Noi",
-    },
-    {
-      id: 3,
-      url: "https://pix10.agoda.net/geo/city/2679/1_2679_02.jpg?ca=6&ce=1&s=1920x822",
-      title: "Nha Trang",
-    },
-    {
-      id: 4,
-      url: "https://i1-dulich.vnecdn.net/2022/06/06/1IMG-5318-5102-1654526021.jpg?w=680&h=0&q=100&dpr=1&fit=crop&s=3W45y7igU_FW7jW-ugDyLA",
-      title: "Da Lat",
-    },
-    {
-      id: 5,
-      url: "https://gonatour.vn/vnt_upload/news/01_2021/ve_dep_eo_gio_quy_nhon_gonatour.jpg",
-      title: "Quy Nhon",
-    },
-    {
-      id: 6,
-      url: "https://bcp.cdnchinhphu.vn/uploaded/1/truonggiangthanh/2021_10_22/tth_NHCP.jpg",
-      title: "Hue",
-    },
-  ];
+  const [answersDisplay, setAnswersDisplay] = useState([0]);
 
-  const reasonBoxs = [
-    {
-      icon: faTicket,
-      heading: texts.ONE_CLICK_BOOKING,
-      content:
-        " You can easily and quickly purchase train tickets with access to comprehensive details such as seat availability, routes, and timings.",
-    },
-    {
-      icon: faLightbulb,
-      heading: texts.SAFETY,
-      content:
-        "Your safety is our top priority. We work with reputable train companies to ensure that you travel in a safe and secure environment.",
-    },
-    {
-      icon: faWallet,
-      heading: texts.ONLINE_PAYMENTS,
-      content:
-        "Our payment process is simple and straightforward, with multiple secure payment options available.",
-    },
-  ];
+  const handleDisplayAnswer = (key: number) => {
+    setAnswersDisplay((currentAnswerList) => {
+      if (currentAnswerList.includes(key)) {
+        return currentAnswerList.filter((answer) => {
+          return answer !== key;
+        });
+      }
+      return [...currentAnswerList, key];
+    });
+  };
 
   return (
     <>
@@ -224,8 +182,9 @@ const Home: React.FC = () => {
 
         <CommonStyledFlex>
           {reasonBoxs.map(({ icon, heading, content }, index) => (
-            <ReasonBox key={index}>
+            <StyledReasonBox key={index}>
               <StyledTextP
+                $textAlign="center"
                 $color={colors.primary500}
                 $fontSize="1.5rem"
                 $marginBottom="0.5rem"
@@ -233,15 +192,42 @@ const Home: React.FC = () => {
                 <FontAwesomeIcon icon={icon} />
               </StyledTextP>
 
-              <StyledTextP $fontWeight="600" $marginBottom="1em">
+              <StyledTextP
+                $fontWeight="600"
+                $marginBottom="1rem"
+                $textAlign="center"
+              >
                 {heading}
               </StyledTextP>
 
-              <StyledTextP $lineHeight="1.5">{content}</StyledTextP>
-            </ReasonBox>
+              <StyledTextP $lineHeight="1.5" $textAlign="center">
+                {content}
+              </StyledTextP>
+            </StyledReasonBox>
           ))}
         </CommonStyledFlex>
       </CommonStyledFlex>
+
+      <StyledArticle $flexDirection="column">
+        <StyledArticleTitle>{texts.FAQ}</StyledArticleTitle>
+        {FAQs.map(({ question, answer }, index) => (
+          <StyledFAQ key={index} onClick={() => handleDisplayAnswer(index)}>
+            <StyledTextP $marginBottom="1rem" $fontWeight="600">
+              {question}
+            </StyledTextP>
+            <StyledTextP
+              $display={answersDisplay.includes(index) ? "block" : "none"}
+              $color={colors.secondary500}
+            >
+              {answer}
+            </StyledTextP>
+            <CommonStyledBox $position="absolute" $right="1rem" $top="1rem">
+              <FontAwesomeIcon icon={faChevronDown} />
+            </CommonStyledBox>
+            <StyledOverlay $background="transparent" />
+          </StyledFAQ>
+        ))}
+      </StyledArticle>
     </>
   );
 };

@@ -6,6 +6,7 @@ export interface CommonStyleProps {
   $boxShadow?: string;
   $color?: string;
   $cursor?: string;
+  $display?: "none" | "block" | "inline block" | "run-in" | "list-item" | "inline-table" | "table" | "contents";
   $float?: "left" | "right" | "none" | "inherit";
   $fontSize?: string;
   $fontWeight?: string;
@@ -28,6 +29,7 @@ export interface CommonStyleProps {
   $textDecoration?: string;
   $textTransform?: "capitalize" | "uppercase" | "lowercase";
   $top?: string;
+  $transition?: string;
   $width?: string;
 }
 

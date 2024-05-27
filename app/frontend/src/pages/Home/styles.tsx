@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import {
   CommonStyledBackgroundImages,
-  CommonStyledFlex,
   StyledTextP,
 } from "../../component/StyleComponent";
 import { colors } from "../../constant";
@@ -15,12 +14,14 @@ export const StyledBanner = styled.section`
   background-size: 140%;
 `;
 
-export const StyledArticle = styled.article`
+export const StyledArticle = styled.article<{
+  $flexDirection?: "column";
+}>`
   max-width: 80rem;
   height: 30rem;
   display: flex;
   justify-content: "space-between";
-  flex-direction: "row";
+  flex-direction: ${({ $flexDirection }) => $flexDirection ?? "row"};
   margin: 3rem auto;
   padding: 0 3rem;
 `;
@@ -50,28 +51,30 @@ export const StyledGridDestinationItems = styled(CommonStyledBackgroundImages)`
 
 export const StyledOverlay = styled.div<{
   $borderRadius?: string;
+  $background?: string;
 }>`
-  background: rgba(0, 0, 0, 0.4);
+  background: ${({ $background }) => $background ?? "rgba(0, 0, 0, 0.4)"};
   border-radius: ${({ $borderRadius }) => $borderRadius ?? 0};
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  cursor: ${({ $background }) => ($background ? "pointer" : "auto")};
 `;
 
 export const StyledArticleTitle = styled(StyledTextP)<{
   $marginBottom?: string;
 }>`
   color: ${colors.primary500};
+  text-align: center;
   font-size: 2rem;
   font-weight: 600;
   margin-bottom: ${({ $marginBottom }) => $marginBottom ?? "2rem"};
 `;
 
-export const ReasonBox = styled.div`
+export const StyledReasonBox = styled.div`
   max-width: 20rem;
-  text-align: center;
   box-shadow: 0 2px 5px ${colors.secondary300};
   padding: 1rem;
   background-color: white;
@@ -79,4 +82,13 @@ export const ReasonBox = styled.div`
   &:nth-child(2) {
     margin: 0 2rem;
   }
+`;
+
+export const StyledFAQ = styled.div`
+  position: relative;
+  box-shadow: 0 2px 5px ${colors.secondary300};
+  border-radius: 1rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  transition-delay: 1s;
 `;
