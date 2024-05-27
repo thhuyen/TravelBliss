@@ -1,6 +1,11 @@
 import styled, { createGlobalStyle } from "styled-components";
-import { color } from "../../constant/styles";
+import { colors } from "../../constant";
 import { Link } from "react-router-dom";
+import {
+  BackGroundImagesProps,
+  CommonStyleProps,
+  FlexStyleProps,
+} from "./types";
 
 export const GlobalStyle = createGlobalStyle`
   * {
@@ -34,197 +39,168 @@ export const RightSide = styled.div`
   overflow-y: scroll;
 `;
 
-type StyleProps = {
-  alignContent?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "space-between"
-  | "space-around"
-  | "space-evenly"
-  | "initial"
-  | "inherit";
-  alignItems?:
-  | "stretch"
-  | "center"
-  | "flex-start"
-  | "flex-end"
-  | "start"
-  | "end"
-  | "baseline"
-  | "initial"
-  | "inherit";
-  backgroundColor?: string;
-  border?: string;
-  borderRadius?: string;
-  boxShadow?: string;
-  color?: string;
-  cursor?: string;
-  display?:
-  | "flex"
-  | "inline-flex"
-  | "grid"
-  | "inline-grid"
-  | "block"
-  | "inline-block"
-  | "none";
-  flexDirection?: "row" | "column";
-  flexWrap?: "no-wrap" | "wrap";
-  float?: "left" | "right" | "none" | "inherit";
-  fontSize?: string;
-  fontWeight?: string;
-  gridGap?: string;
-  height?: string;
-  justifyContent?:
-  | "flex-start"
-  | "flex-end"
-  | "center"
-  | "space-between"
-  | "space-evenly"
-  | "space-around"
-  | "initial";
-  lineHeight?: string;
-  marginBottom?: string;
-  marginLeft?: string;
-  marginRight?: string;
-  marginTop?: string;
-  paddingBottom?: string;
-  paddingLeft?: string;
-  paddingRight?: string;
-  paddingTop?: string;
-  position?: "static" | "relative" | "fixed" | "absolute" | "sticky";
-  sm?: string;
-  xs?: string;
-  md?: string;
-  lg?: string;
-  xl?: string;
-  textAlign?: "center" | "left" | "right";
-  textTransform?: "capitalize" | "uppercase" | "lowercase";
-  width?: string;
-};
-
-const commonStyle = (style: StyleProps) => {
+const commonStyle = (style: CommonStyleProps) => {
   const {
-    alignContent,
-    alignItems,
-    backgroundColor,
-    border,
-    borderRadius,
-    boxShadow,
-    color,
-    cursor,
-    display,
-    flexDirection,
-    flexWrap,
-    float,
-    fontSize,
-    fontWeight,
-    gridGap,
-    height,
-    justifyContent,
-    lineHeight,
-    marginLeft,
-    marginBottom,
-    marginRight,
-    marginTop,
-    paddingBottom,
-    paddingLeft,
-    paddingRight,
-    paddingTop,
-    position,
-    textAlign,
-    textTransform,
-    width,
+    $backgroundColor,
+    $border,
+    $borderRadius,
+    $bottom,
+    $boxShadow,
+    $color,
+    $cursor,
+    $display,
+    $float,
+    $fontSize,
+    $fontWeight,
+    $fontStyle,
+    $height,
+    $left,
+    $letterSpacing,
+    $lineHeight,
+    $marginLeft,
+    $marginBottom,
+    $marginRight,
+    $marginTop,
+    $paddingBottom,
+    $paddingLeft,
+    $paddingRight,
+    $paddingTop,
+    $position,
+    $right,
+    $textAlign,
+    $textTransform,
+    $transition,
+    $top,
+    $width,
   } = style;
 
   return `
-    align-content: ${alignContent ?? "initial"};
-    align-items: ${alignItems ?? "initial"};
-    background-color: ${backgroundColor};
-    border: ${border};
-    border-radius: ${borderRadius};
-    box-shadow: ${boxShadow ?? "none"};
-    color: ${color};
-    cursor: ${cursor ?? "auto"};
-    display: ${display ?? "block"};
-    flex-direction: ${flexDirection ?? "row"};
-    flex-wrap: ${flexWrap ?? "initial"};
-    float: ${float ?? "none"};
-    font-size: ${fontSize ?? "initial"};
-    font-weight: ${fontWeight ?? "500"};
-    grid-gap: ${gridGap ?? 0};
-    height: ${height};
-    justify-content: ${justifyContent ?? "initial"};
-    line-height: ${lineHeight ?? "initial"};
-    margin-bottom: ${marginBottom};
-    margin-left: ${marginLeft};
-    margin-right: ${marginRight};
-    margin-top: ${marginTop};
-    padding-bottom: ${paddingBottom};
-    padding-left: ${paddingLeft};
-    padding-right: ${paddingRight};
-    padding-top: ${paddingTop};
-    position: ${position};
-    text-align: ${textAlign ?? "left"};
-    text-transform: ${textTransform};
-    width: ${width};
+    background-color: ${$backgroundColor};
+    border: ${$border};
+    border-radius: ${$borderRadius};
+    bottom: ${$bottom};
+    box-shadow: ${$boxShadow ?? "none"};
+    color: ${$color};
+    cursor: ${$cursor ?? "auto"};
+    display: ${$display ?? "block"};
+    float: ${$float ?? "none"};
+    font-size: ${$fontSize ?? "initial"};
+    font-weight: ${$fontWeight ?? "500"};
+    font-style: ${$fontStyle ?? "normal"};
+    height: ${$height};
+    left: ${$left};
+    letter-spacing: ${$letterSpacing};
+    line-height: ${$lineHeight ?? "initial"};
+    margin-bottom: ${$marginBottom};
+    margin-left: ${$marginLeft};
+    margin-right: ${$marginRight};
+    margin-top: ${$marginTop};
+    padding-bottom: ${$paddingBottom};
+    padding-left: ${$paddingLeft};
+    padding-right: ${$paddingRight};
+    padding-top: ${$paddingTop};
+    position: ${$position};
+    right: ${$right};
+    text-align: ${$textAlign ?? "left"};
+    text-transform: ${$textTransform};
+    transition: ${$transition ?? "none"};
+    top: ${$top};
+    width: ${$width};
   `;
 };
 
-export const StyledBox = styled.div<StyleProps>`
+export const CommonStyledBox = styled.div<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-export const StyledTextSpan = styled.span<StyleProps>`
+export const StyledTextSpan = styled.span<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-export const StyledTextP = styled.p<StyleProps>`
+export const StyledTextP = styled.p<CommonStyleProps>`
   ${(props) => `
     ${commonStyle(props)}
   `}
 `;
 
-type BackgroundImageStyleProps = {
-  backgroundImage?: string | "none" | "inherit" | "initial";
-  backgroundPosition?: string;
-  backgroundSize?: string;
-};
-export const BackgroundImage = styled.div<BackgroundImageStyleProps>`
+export const CommonStyledBackgroundImages = styled.div<BackGroundImagesProps>`
   ${(props) => {
-    const { backgroundImage, backgroundPosition, backgroundSize } = props;
+    const {
+      $backgroundImage,
+      $backgroundOrigin,
+      $backgroundPosition,
+      $backgroundPositionX,
+      $backgroundPositionY,
+      $backgroundRepeat,
+      $backgroundSize,
+    } = props;
     return `
-      background-image: ${backgroundImage ? `url("${backgroundImage}")` : "none"
+      ${commonStyle(props)}
+      background-image: ${$backgroundImage ? `url("${$backgroundImage}")` : "none"
       };
-      background-position: ${backgroundPosition};
-      background-size: ${backgroundSize}
+      background-position: ${$backgroundPosition};
+      background-size: ${$backgroundSize};
+      background-origin: ${$backgroundOrigin};
+      background-position-x: ${$backgroundPositionX};
+      background-position-y: ${$backgroundPositionY};
+      background-repeat: ${$backgroundRepeat}
     `;
   }}
 `;
 
+export const CommonStyledFlex = styled.div<FlexStyleProps>`
+  ${(props) => {
+    const {
+      $alignContent,
+      $alignItems,
+      $alignSelf,
+      $flexDirection,
+      $flexWrap,
+      $flexGrow,
+      $justifyContent,
+      $justifySelf
+    } = props;
+
+    return `
+      ${commonStyle(props)}
+      display: flex;
+      align-content: ${$alignContent ?? "stretch"};
+      align-items: ${$alignItems ?? "normal"};
+      align-self: ${$alignSelf ?? "auto"};
+      flex-direction: ${$flexDirection ?? "row"};
+      flex-wrap: ${$flexWrap ?? "initial"};
+      flex-grow: ${$flexGrow ?? "initial"};
+      justify-content: ${$justifyContent ?? "flex-start"};
+      justify-self: ${$justifySelf ?? "auto"}
+    `;
+  }}
+`;
+
+export const StyledLink = styled(Link) <CommonStyleProps>`
+  ${(props) => {
+    const { $color, $textDecoration, $cursor } = props
+
+    return `
+      ${commonStyle(props)}
+      color: ${$color ?? "blue"};
+      cursor: ${$cursor ?? "pointer"};
+      text-decoration: ${$textDecoration ?? "underline"};
+  ` }}
+`;
+
 export const GlobalMessage = styled.div`
   width: 70%;
-  color: ${color.green600};
+  color: ${colors.green600};
   text-align: left;
   line-height: 1.5;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
   margin-bottom: 1rem;
-  background-color: ${color.green100};
+  background-color: ${colors.green100};
   display: inline-block;
 `;
 
-export const StyledLink = styled(Link) <{
-  fontSize?: string;
-  color?: string;
-  textDecoration?: string;
-}>`
-  font-size: ${({ fontSize }) => fontSize};
-  color: ${({ color }) => color ?? "blue"};
-  text-decoration: ${({ textDecoration }) => textDecoration ?? "underline"};
-`;

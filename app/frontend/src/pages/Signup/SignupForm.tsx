@@ -2,7 +2,10 @@ import React, { useMemo } from "react";
 import { Field, Formik } from "formik";
 import * as Yup from "yup";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
-import { StyledBox } from "../../component/StyleComponent";
+import {
+  CommonStyledBox,
+  CommonStyledFlex,
+} from "../../component/StyleComponent";
 import {
   Label,
   Input,
@@ -10,9 +13,8 @@ import {
   LabelForCheckbox,
   StyledAuthenForm,
 } from "../../component/StyleComponent/StyledForm";
-import message from "../../constant/message";
 import { useNavigate } from "react-router-dom";
-import { label } from "../../constant/label";
+import { labels, messages } from "../../constant";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -28,38 +30,38 @@ const SignupForm = () => {
       },
       validationSchema: Yup.object({
         email: Yup.string()
-          .required(message.requiredEmail)
-          .email(message.invalidEmail),
+          .required(messages.requiredEmail)
+          .email(messages.invalidEmail),
         password: Yup.string()
-          .required(message.requiredPassword)
-          .min(8, message.minPassword)
-          .max(20, message.maxPassword)
-          .matches(/[0-9]/, message.noMatchPassword)
-          .matches(/[a-z]/, message.lowerCaseLetterPassword)
-          .matches(/[A-Z]/, message.upperCaseLetterPassword)
-          .matches(/[^\w]/, message.symbolPassword),
+          .required(messages.requiredPassword)
+          .min(8, messages.minPassword)
+          .max(20, messages.maxPassword)
+          .matches(/[0-9]/, messages.noMatchPassword)
+          .matches(/[a-z]/, messages.lowerCaseLetterPassword)
+          .matches(/[A-Z]/, messages.upperCaseLetterPassword)
+          .matches(/[^\w]/, messages.symbolPassword),
         confirmPassword: Yup.string()
-          .required(message.confirmPassword)
-          .oneOf([Yup.ref("password"), ""], message.noMatchPassword),
+          .required(messages.confirmPassword)
+          .oneOf([Yup.ref("password"), ""], messages.noMatchPassword),
         fullName: Yup.string()
-          .required(message.requiredFullName)
-          .min(5, message.minFullName),
+          .required(messages.requiredFullName)
+          .min(5, messages.minFullName),
         phoneNumber: Yup.string()
-          .required(message.requiredPhoneNumber)
-          .min(10, message.minPassword)
+          .required(messages.requiredPhoneNumber)
+          .min(10, messages.minPassword)
           .matches(
             /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/,
-            message.notValidPhoneNumber
+            messages.notValidPhoneNumber
           )
           .test(
             "Unique phoneNumber",
-            message.existedPhoneNumber, // <- key, message
+            messages.existedPhoneNumber, // <- key, message
             function (value) {
               //   const newUsers = users.filter((acc) => acc.Username === value);
               return true;
             }
           ),
-        acceptance: Yup.bool().oneOf([true], message.acceptance),
+        acceptance: Yup.bool().oneOf([true], messages.acceptance),
       }),
       onSubmit: (values: any) => {
         navigate("/otp", { state: { values } });
@@ -70,8 +72,8 @@ const SignupForm = () => {
   return (
     <Formik {...validations}>
       <StyledAuthenForm>
-        <StyledBox marginBottom="1.3rem">
-          <Label htmlFor="fullName">{label.FULL_NAME}</Label> <br />
+        <CommonStyledBox $marginBottom="1.3rem">
+          <Label htmlFor="fullName">{labels.FULL_NAME}</Label> <br />
           <Input
             id="fullName"
             name="fullName"
@@ -79,10 +81,10 @@ const SignupForm = () => {
             placeholder="Tran Huynh Van Anh"
           />
           <FormErrorMessage inputName="fullName" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox marginBottom="1.3rem">
-          <Label htmlFor="phoneNumber">{label.PHONE_NUMBER}</Label> <br />
+        <CommonStyledBox $marginBottom="1.3rem">
+          <Label htmlFor="phoneNumber">{labels.PHONE_NUMBER}</Label> <br />
           <Input
             id="phoneNumber"
             name="phoneNumber"
@@ -90,10 +92,10 @@ const SignupForm = () => {
             placeholder="0792908142"
           />
           <FormErrorMessage inputName="phoneNumber" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox marginBottom="1.3rem">
-          <Label htmlFor="email">{label.EMAIL}</Label> <br />
+        <CommonStyledBox $marginBottom="1.3rem">
+          <Label htmlFor="email">{labels.EMAIL}</Label> <br />
           <Input
             id="email"
             name="email"
@@ -101,10 +103,10 @@ const SignupForm = () => {
             placeholder="khoa.nguyen@gmail.com"
           />
           <FormErrorMessage inputName="email" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox marginBottom="1.3rem">
-          <Label htmlFor="password">{label.PASSWORD}</Label> <br />
+        <CommonStyledBox $marginBottom="1.3rem">
+          <Label htmlFor="password">{labels.PASSWORD}</Label> <br />
           <Input
             id="password"
             name="password"
@@ -112,10 +114,10 @@ const SignupForm = () => {
             placeholder="********"
           />
           <FormErrorMessage inputName="password" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox marginBottom="1.3rem">
-          <Label htmlFor="confirmPassword">{label.CONFIRM_PASSWORD}</Label>{" "}
+        <CommonStyledBox $marginBottom="1.3rem">
+          <Label htmlFor="confirmPassword">{labels.CONFIRM_PASSWORD}</Label>{" "}
           <br />
           <Input
             id="confirmPassword"
@@ -124,22 +126,24 @@ const SignupForm = () => {
             placeholder="********"
           />
           <FormErrorMessage inputName="confirmPassword" />
-        </StyledBox>
+        </CommonStyledBox>
 
-        <StyledBox marginBottom="1.3rem">
+        <CommonStyledBox $marginBottom="1.3rem">
           <Field id="acceptance" type="checkbox" name="acceptance" />
           &nbsp;
           <LabelForCheckbox htmlFor="acceptance">
             I agree to the <a href="/">Terms and Conditions</a>
           </LabelForCheckbox>
           <FormErrorMessage inputName="acceptance" />
-        </StyledBox>
-        <StyledBox marginBottom="1.3rem">
+        </CommonStyledBox>
+
+        <CommonStyledBox $marginBottom="1.3rem">
           <Button width="100%">sign up</Button>
-        </StyledBox>
-        <StyledBox display="flex" justifyContent="center">
+        </CommonStyledBox>
+
+        <CommonStyledFlex $justifyContent="center">
           Already have an account? &nbsp;<a href="/signin">Sign in</a>
-        </StyledBox>
+        </CommonStyledFlex>
       </StyledAuthenForm>
     </Formik>
   );

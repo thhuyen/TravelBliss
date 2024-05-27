@@ -1,26 +1,27 @@
-import { route } from "../constant/route";
+import { routes } from "../constant";
 import Congrats from "../pages/Congrats";
 import Otp from "../pages/OTP/OTP";
-import Signin from "../pages/Signin";
+import Login from "../pages/Login";
 import Signup from "../pages/Signup";
+import Home from "../pages/Home/Home";
 
 // don't need to login
 const publicRoutes = [
     {
-        path: route.signUp,
+        path: routes.signUp,
         component: Signup,
     },
     {
-        path: route.otp,
+        path: routes.otp,
         component: Otp,
     },
     {
-        path: route.congrats,
+        path: routes.congrats,
         component: Congrats,
     },
     {
-        path: route.signIn,
-        component: Signin,
+        path: routes.signIn,
+        component: Login,
     },
 
 ];
@@ -28,8 +29,8 @@ const publicRoutes = [
 // must login to view info
 const privateRoutes = [
     {
-        path: route.home,
-        component: "",
+        path: routes.home,
+        component: Home,
     }
 ];
 

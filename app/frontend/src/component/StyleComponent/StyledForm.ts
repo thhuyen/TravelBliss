@@ -1,6 +1,6 @@
 import { Form } from "formik";
 import styled from "styled-components";
-import { color } from "../../constant/styles";
+import { colors } from "../../constant";
 
 import { Field, ErrorMessage as error } from "formik";
 
@@ -17,7 +17,7 @@ export const Input = styled(Field)`
   margin-top: 0.3rem;
   border-radius: 0.5rem;
   outline: none;
-  border: 1px solid ${color.secondary300};
+  border: 1px solid ${colors.secondary300};
 `;
 export const Button = styled.button<{ width?: string; disabled?: boolean }>`
   width: ${(props) => props.width ?? "inherit"};
@@ -25,7 +25,7 @@ export const Button = styled.button<{ width?: string; disabled?: boolean }>`
   text-transform: uppercase;
   font-weight: 600;
   padding: 0.5rem 1.25rem;
-  background-color: ${(props) => props.disabled ? color.secondary300 : color.primary500};
+  background-color: ${(props) => props.disabled ? colors.secondary300 : colors.primary500};
   border-radius: 0.5rem;
   border: none;
   outline: none;
@@ -49,6 +49,6 @@ export const LabelForCheckbox = styled(Label)`
 export const ErrorMessage = styled(error)`
   margin-top: 0.3rem;
   margin-left: 0.3rem;
-  color: ${color.primary500};
+  color: ${colors.primary500};
   font-size: small;
 `;

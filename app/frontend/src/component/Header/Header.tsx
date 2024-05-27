@@ -1,44 +1,26 @@
 import React from "react";
 import {
-  StyledBox,
+  CommonStyledFlex,
   StyledLink,
   StyledTextP,
   StyledTextSpan,
 } from "../StyleComponent";
-import { color } from "../../constant/styles";
-import styled from "styled-components";
-import { route } from "../../constant/route";
+import { routes, colors } from "../../constant";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
-
-const StyledHeader = styled.header`
-  width: 100%;
-  height: 6rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 3rem;
-  box-shadow: 0 0 5px #ccc;
-  background: white;
-  z-index: 10;
-`;
-
-const NavigationBar = styled.nav`
-  display: flex;
-  align-items: center;
-`;
+import { StyledHeader, NavigationBar } from "./styles";
 
 type HeaderProps = {
-  authenticated: boolean;
+  isAuthenticated: boolean;
 };
 
-const Header: React.FC<HeaderProps> = ({ authenticated }) => {
-  const NavItemPaths = [route.home, "/guide", "/contact", "/about"];
+const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
+  const NavItemPaths = [routes.home, "/guide", "/contact", "/about"];
 
   const mapPathContent = (path: string) => {
     switch (path) {
-      case route.home:
+      case routes.home:
         return "Home";
       case "/guide":
         return "Guide";
@@ -51,72 +33,80 @@ const Header: React.FC<HeaderProps> = ({ authenticated }) => {
 
   return (
     <StyledHeader>
-      <StyledBox id="logo" display="flex" alignItems="center">
-        <img src="/imgs/logo.svg" alt="logo" width={50} height={50} />
-        <StyledTextSpan
-          color={color.primary500}
-          fontSize="1.5rem"
-          marginLeft="0.5rem"
-        >
-          TravelBliss
-        </StyledTextSpan>
-      </StyledBox>
+      <StyledLink to={isAuthenticated ? "/home" : "/"} $textDecoration="none">
+        <CommonStyledFlex id="logo" $alignItems="center">
+          <img src="/imgs/logo.svg" alt="logo" width={30} height={30} />
+          <StyledTextSpan
+            $color={colors.primary500}
+            $fontSize="1.5rem"
+            $marginLeft="0.5rem"
+            $fontWeight="600"
+          >
+            TravelBliss
+          </StyledTextSpan>
+        </CommonStyledFlex>
+      </StyledLink>
 
-      {authenticated && (
+      {isAuthenticated && (
         <NavigationBar>
-          {NavItemPaths.map((path) => (
-            <StyledTextSpan marginRight="1rem">
-              <StyledLink to={path}>{mapPathContent(path)}</StyledLink>
+          {NavItemPaths.map((path, index) => (
+            <StyledTextSpan key={index} $marginRight="1rem">
+              <StyledLink
+                to={path}
+                $textDecoration="none"
+                $color={colors.primary500}
+              >
+                {mapPathContent(path)}
+              </StyledLink>
             </StyledTextSpan>
           ))}
 
           <StyledTextSpan
-            marginRight="1rem"
-            color={color.primary500}
-            cursor="pointer"
+            $marginRight="1rem"
+            $color={colors.primary500}
+            $cursor="pointer"
           >
             <FontAwesomeIcon icon={faGlobe} />
           </StyledTextSpan>
 
           {/* User Dialog */}
-          <StyledBox
-            display="flex"
-            alignItems="center"
-            paddingLeft="1.25rem"
-            paddingRight="1.25rem"
-            paddingTop="0.625rem"
-            paddingBottom="0.625rem"
-            border={`0.125rem solid ${color.primary500}`}
-            borderRadius="3.125rem"
-            cursor="pointer"
+          <CommonStyledFlex
+            $alignItems="center"
+            $paddingLeft="1rem"
+            $paddingRight="1rem"
+            $paddingTop="0.5rem"
+            $paddingBottom="0.5rem"
+            $border={`0.125rem solid ${colors.primary500}`}
+            $borderRadius="3.125rem"
+            $cursor="pointer"
           >
             <StyledTextSpan
-              marginRight="0.5rem"
-              cursor="pointer"
-              color={color.primary500}
+              $marginRight="0.5rem"
+              $cursor="pointer"
+              $color={colors.primary500}
             >
               Hello, Anh
             </StyledTextSpan>
             <img
               src="/imgs/avatarUser.svg"
               alt="avatar"
-              width={50}
-              height={50}
+              width={30}
+              height={30}
             />
-          </StyledBox>
+          </CommonStyledFlex>
         </NavigationBar>
       )}
 
-      {!authenticated && (
+      {!isAuthenticated && (
         <StyledTextP
-          color={color.primary500}
-          cursor="pointer"
-          fontSize="1.5rem"
-          textAlign="center"
-          lineHeight="1.5"
+          $color={colors.primary500}
+          $cursor="pointer"
+          $fontSize="1.2rem"
+          $textAlign="center"
+          $lineHeight="1.5"
         >
           <FontAwesomeIcon icon={faGlobe} />
-          <StyledTextP>English</StyledTextP>
+          <StyledTextP $cursor="pointer">English</StyledTextP>
         </StyledTextP>
       )}
     </StyledHeader>

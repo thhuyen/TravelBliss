@@ -1,9 +1,8 @@
 import React from "react";
 import { Button, Title } from "../../component/StyleComponent/StyledForm";
-import message from "../../constant/message";
 import AuthenLayout from "../../component/AuthenLayout/AuthenLayout";
 import NotificationMessage from "../../component/NotificationMessage/NotificationMessage";
-import { label } from "../../constant/label";
+import { texts, messages } from "../../constant";
 import { useNavigate } from "react-router-dom";
 
 const Congrats = () => {
@@ -11,9 +10,9 @@ const Congrats = () => {
   return (
     <AuthenLayout background="/imgs/signup.jpg">
       <Title>Verification</Title>
-      <NotificationMessage>{message.congratsMessage}</NotificationMessage>
+      <NotificationMessage>{messages.congratsMessage}</NotificationMessage>
       <Button width="70%" onClick={() => navigate("/", { replace: true })}>
-        {label.TO_SIGN_IN_PAGE}
+        {texts.TO_SIGN_IN_PAGE}
       </Button>
     </AuthenLayout>
   );
