@@ -1,5 +1,4 @@
 import React, { useMemo } from "react";
-import * as Yup from "yup";
 import Header from "../../component/Header/Header";
 import {
   CommonStyledBackgroundImages,
@@ -10,6 +9,8 @@ import {
   StyledTextSpan,
 } from "../../component/StyleComponent";
 import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
+
 import {
   Input,
   Label,
