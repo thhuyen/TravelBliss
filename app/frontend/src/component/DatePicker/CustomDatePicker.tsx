@@ -3,21 +3,19 @@ import { CommonStyledBox, StyledTextSpan } from "../StyleComponent";
 import { StyledOverlay } from "../../pages/Home/styles";
 
 type Props = {
-  value: string;
-  onClick: () => void;
-  ref?: React.ForwardedRef<HTMLDivElement>;
+  value?: string;
+  onClick?: () => void;
 };
 
-const CustomDatePicker = ({ value, onClick, ref }: Props) => {
+const CustomDatePicker = ({ value = "", onClick }: Props) => {
   const [month, day] = value.split(" ");
   return (
     <CommonStyledBox
       $width="4rem"
+      $height="100%"
       onClick={onClick}
-      ref={ref}
       $backgroundColor="white"
       $borderRadius="0.5rem"
-      $boxShadow={`0 0 0 2px #ccc`}
       $paddingLeft="1rem"
       $paddingRight="1rem"
       $paddingTop="0.5rem"
