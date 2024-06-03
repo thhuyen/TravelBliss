@@ -9,6 +9,6 @@ export const StyledFooter = styled.footer`
   align-items: center;
   justify-content: space-between;
   padding: 0 3rem;
-  box-shadow: 0 0 5px #ccc;
+  box-shadow: 0 0 10px #ccc;
   background-color: white;
 `;

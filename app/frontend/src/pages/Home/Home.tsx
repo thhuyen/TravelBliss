@@ -24,6 +24,8 @@ import {
   StyledReasonBox,
   StyledFAQ,
 } from "./styles";
+import DatePicker from "../../component/DatePicker";
+import SearchTrainBar from "../../component/SearchTrainBar";
 
 const Home: React.FC = () => {
   const [answersDisplay, setAnswersDisplay] = useState<number[]>([0]);
@@ -40,7 +42,9 @@ const Home: React.FC = () => {
   return (
     <>
       <Header isAuthenticated={true} />
-      <StyledBanner />
+      <StyledBanner>
+        <SearchTrainBar />
+      </StyledBanner>
 
       <StyledArticle>
         <CommonStyledBackgroundImages

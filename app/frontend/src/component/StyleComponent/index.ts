@@ -70,6 +70,7 @@ const commonStyle = (style: CommonStyleProps) => {
     $textAlign,
     $textTransform,
     $transition,
+    $transform,
     $top,
     $width,
   } = style;
@@ -104,6 +105,7 @@ const commonStyle = (style: CommonStyleProps) => {
     text-align: ${$textAlign ?? "left"};
     text-transform: ${$textTransform};
     transition: ${$transition ?? "none"};
+    transform: ${$transform};
     top: ${$top};
     width: ${$width};
   `;

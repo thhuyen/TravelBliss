@@ -1,7 +1,6 @@
 import React, { useMemo } from "react";
 import Header from "../../component/Header/Header";
 import {
-  CommonStyledBackgroundImages,
   CommonStyledBox,
   CommonStyledFlex,
   StyledLink,

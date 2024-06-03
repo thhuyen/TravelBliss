@@ -30,6 +30,7 @@ export interface CommonStyleProps {
   $textTransform?: "capitalize" | "uppercase" | "lowercase";
   $top?: string;
   $transition?: string;
+  $transform?: string;
   $width?: string;
 }
 

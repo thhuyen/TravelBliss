@@ -12,6 +12,7 @@ export const StyledBanner = styled.section`
   background-repeat: no-repeat;
   background-position: center;
   background-size: 140%;
+  position: relative;
 `;
 
 export const StyledArticle = styled.article<{
