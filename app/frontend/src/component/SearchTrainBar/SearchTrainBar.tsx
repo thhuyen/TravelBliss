@@ -1,30 +1,47 @@
 import React from "react";
-import { CommonStyledBox, CommonStyledFlex } from "../StyleComponent";
+import { Formik, Form } from "formik";
 import DatePicker from "../DatePicker";
-import SwitchTripBar from "../SwitchTripBar/SwitchTripBar";
 import { labels } from "../../constant";
+import { StyledButton } from "./styles";
+import SwitchTripBar from "../SwitchTripBar/SwitchTripBar";
+import { CommonStyledBox, CommonStyledFlex } from "../StyleComponent";
 
 type Props = {};
 
 const SearchTrainBar = (props: Props) => {
   return (
-    <CommonStyledFlex
-      $position="absolute"
-      $bottom="5%"
-      $left="50%"
-      $transform="translateX(-50%)"
-      $height="3.5rem"
+    <Formik
+      initialValues={{ datePicker: "", departure: "", arrival: "" }}
+      onSubmit={(values) => {
+        const { departure, arrival } = values;
+        // if (!departure || !arrival) {
+        //   return alert("Please fill enough information");
+        // }
+        console.log("====values", values);
+      }}
     >
-      <CommonStyledBox $marginRight="1rem" $height="100%">
-        <DatePicker />
-      </CommonStyledBox>
+      {({ values, setFieldValue }) => (
+        <Form>
+          <CommonStyledFlex
+            $position="absolute"
+            $bottom="5%"
+            $left="50%"
+            $transform="translateX(-50%)"
+            $height="4rem"
+          >
+            <CommonStyledBox $marginRight="1rem">
+              <DatePicker setFieldValue={setFieldValue} />
+            </CommonStyledBox>
 
-      <CommonStyledBox $marginRight="1rem">
-        <SwitchTripBar />
-      </CommonStyledBox>
+            <CommonStyledBox $marginRight="1rem">
+              <SwitchTripBar values={values} setFieldValue={setFieldValue} />
+            </CommonStyledBox>
 
-      <button>{labels.SEARCH_TRAIN}</button>
-    </CommonStyledFlex>
+            <StyledButton type="submit">{labels.SEARCH_TRAIN}</StyledButton>
+          </CommonStyledFlex>
+        </Form>
+      )}
+    </Formik>
   );
 };
 

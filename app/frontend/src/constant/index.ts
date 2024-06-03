@@ -8,7 +8,7 @@ const labels = {
   RE_SEND_BTN: "Resend",
   SIGN_IN: "Sign in",
   SIGN_UP: "Sign up",
-  SEARCH_TRAIN: "Search train",
+  SEARCH_TRAIN: "Search trains",
   CHOOSE_DEPARTURE: "Choose departure city...",
   CHOOSE_ARRIVAL: "Choose arrival city..."
 } as const;
@@ -67,6 +67,8 @@ const texts = {
 
 const colors = {
   primary50: '#FEF4EE',
+  primary300: '#f4a37d',
+  primary400: '#ef7348',
   primary500: '#EA4E22',
   primary600: '#DC381A',
   secondary50: '#f5f5f6',

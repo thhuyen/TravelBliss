@@ -1,5 +1,9 @@
 import React from "react";
-import { CommonStyledBox, StyledTextSpan } from "../StyleComponent";
+import {
+  CommonStyledBox,
+  CommonStyledFlex,
+  StyledTextSpan,
+} from "../StyleComponent";
 import { StyledOverlay } from "../../pages/Home/styles";
 
 type Props = {
@@ -10,16 +14,16 @@ type Props = {
 const CustomDatePicker = ({ value = "", onClick }: Props) => {
   const [month, day] = value.split(" ");
   return (
-    <CommonStyledBox
+    <CommonStyledFlex
       $width="4rem"
-      $height="100%"
+      $height="4rem"
       onClick={onClick}
       $backgroundColor="white"
       $borderRadius="0.5rem"
       $paddingLeft="1rem"
       $paddingRight="1rem"
-      $paddingTop="0.5rem"
-      $paddingBottom="0.5rem"
+      $flexDirection="column"
+      $justifyContent="center"
     >
       <StyledTextSpan
         $fontWeight="700"
@@ -30,7 +34,7 @@ const CustomDatePicker = ({ value = "", onClick }: Props) => {
       </StyledTextSpan>
       <StyledTextSpan $textAlign="center">{month.slice(0, 3)}</StyledTextSpan>
       <StyledOverlay $borderRadius="0.5rem" $background="transparent" />
-    </CommonStyledBox>
+    </CommonStyledFlex>
   );
 };
 

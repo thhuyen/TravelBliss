@@ -1,37 +1,25 @@
 import React, { useState, useMemo } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
-import { Form, Formik } from "formik";
-import * as Yup from "yup";
 import Autosuggest, {
   ChangeEvent,
   SuggestionsFetchRequestedParams,
 } from "react-autosuggest";
 
 import { labels } from "../../constant";
-import { AutoSuggestWrapper, StyledForm, StyledInput } from "./styles";
+import { AutoSuggestWrapper } from "./styles";
 import { CommonStyledBox, CommonStyledFlex } from "../StyleComponent";
 import { stations } from "./data";
 
-type Props = {};
+type Props = {
+  values: { departure: string; arrival: string };
+  setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
+};
 
-const SwitchTripBar = (props: Props) => {
-  const validations = useMemo(
-    () => ({
-      initialValues: {
-        departure: "",
-        arrival: "",
-      },
-      validationSchema: Yup.object({
-        //  password: Yup.string().required(messages.requiredPassword),
-        //  phoneNumber: Yup.string().required(messages.requiredPhoneNumber),
-      }),
-      onSubmit: (values: any) => {},
-    }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
-
+const SwitchTripBar = ({
+  values: { departure, arrival },
+  setFieldValue,
+}: Props) => {
   const getSuggestionList = (value: string): string[] => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -50,15 +38,7 @@ const SwitchTripBar = (props: Props) => {
     <p>{suggestion}</p>
   );
 
-  const [value, setValue] = useState<string>("");
   const [suggestions, setSuggestions] = useState<string[]>([]);
-
-  const onChange = (
-    event: React.FormEvent<HTMLElement>,
-    { newValue }: ChangeEvent
-  ) => {
-    setValue(newValue);
-  };
 
   const onSuggestionsFetchRequested = ({
     value,
@@ -70,49 +50,75 @@ const SwitchTripBar = (props: Props) => {
     setSuggestions([]);
   };
 
-  const inputProps = {
+  const handleBlurInput = () => {
+    if (departure === arrival) {
+      alert("Arrival must be different from department");
+      setFieldValue("arrival", "");
+    }
+  };
+
+  const inputPropsDepartment = {
+    id: "departure",
+    name: "departure",
     placeholder: labels.CHOOSE_DEPARTURE,
-    value,
-    onChange,
+    value: departure,
+    onChange: (
+      event: React.FormEvent<HTMLElement>,
+      { newValue }: ChangeEvent
+    ) => {
+      if (arrival) {
+        setFieldValue("arrival", "");
+      }
+      setFieldValue("departure", newValue);
+    },
+  };
+
+  const inputPropsArrival = {
+    id: "arrival",
+    name: "arrival",
+    placeholder: labels.CHOOSE_ARRIVAL,
+    value: arrival,
+    onChange: (
+      event: React.FormEvent<HTMLElement>,
+      { newValue }: ChangeEvent
+    ) => {
+      setFieldValue("arrival", newValue);
+    },
+    onBlur: handleBlurInput,
   };
 
   return (
-    <Formik {...validations}>
-      <StyledForm>
-        <CommonStyledFlex
-          $alignItems="center"
-          $backgroundColor="white"
-          $height="100%"
-        >
-          <CommonStyledBox $position="relative">
-            <AutoSuggestWrapper>
-              <Autosuggest
-                suggestions={suggestions}
-                onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-                onSuggestionsClearRequested={onSuggestionsClearRequested}
-                getSuggestionValue={getSuggestion}
-                renderSuggestion={renderSuggestion}
-                inputProps={inputProps}
-              />
-            </AutoSuggestWrapper>
-          </CommonStyledBox>
+    <CommonStyledFlex
+      $alignItems="center"
+      $backgroundColor="white"
+      $height="100%"
+      $borderRadius="0.5rem"
+    >
+      <AutoSuggestWrapper>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestion}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputPropsDepartment}
+        />
+      </AutoSuggestWrapper>
 
-          <CommonStyledBox
-            $marginLeft="1rem"
-            $marginRight="1rem"
-            $cursor="pointer"
-          >
-            <FontAwesomeIcon icon={faRightLeft} />
-          </CommonStyledBox>
-          <StyledInput
-            id="arrival"
-            name="arrival"
-            type="text"
-            placeholder={labels.CHOOSE_ARRIVAL}
-          />
-        </CommonStyledFlex>
-      </StyledForm>
-    </Formik>
+      <CommonStyledBox $marginLeft="1rem" $marginRight="1rem" $cursor="pointer">
+        <FontAwesomeIcon icon={faRightLeft} />
+      </CommonStyledBox>
+      <AutoSuggestWrapper>
+        <Autosuggest
+          suggestions={suggestions}
+          onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+          onSuggestionsClearRequested={onSuggestionsClearRequested}
+          getSuggestionValue={getSuggestion}
+          renderSuggestion={renderSuggestion}
+          inputProps={inputPropsArrival}
+        />
+      </AutoSuggestWrapper>
+    </CommonStyledFlex>
   );
 };
 
