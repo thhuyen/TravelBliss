@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 import Autosuggest, {
@@ -20,6 +20,7 @@ const SwitchTripBar = ({
   values: { departure, arrival },
   setFieldValue,
 }: Props) => {
+  const departureRef = useRef<HTMLInputElement>(null);
   const getSuggestionList = (value: string): string[] => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -50,14 +51,7 @@ const SwitchTripBar = ({
     setSuggestions([]);
   };
 
-  const handleBlurInput = () => {
-    if (departure === arrival) {
-      alert("Arrival must be different from department");
-      setFieldValue("arrival", "");
-    }
-  };
-
-  const inputPropsDepartment = {
+  const inputPropsDeparture = {
     id: "departure",
     name: "departure",
     placeholder: labels.CHOOSE_DEPARTURE,
@@ -71,6 +65,7 @@ const SwitchTripBar = ({
       }
       setFieldValue("departure", newValue);
     },
+    ref: departureRef,
   };
 
   const inputPropsArrival = {
@@ -78,15 +73,32 @@ const SwitchTripBar = ({
     name: "arrival",
     placeholder: labels.CHOOSE_ARRIVAL,
     value: arrival,
+    onClick: () => {
+      if (!departure) {
+        alert("Please choose departure first!");
+        if (departureRef && departureRef.current) {
+          departureRef.current.focus();
+        }
+      }
+    },
     onChange: (
       event: React.FormEvent<HTMLElement>,
       { newValue }: ChangeEvent
     ) => {
       setFieldValue("arrival", newValue);
     },
-    onBlur: handleBlurInput,
+    onBlur: () => {
+      if (departure === arrival && !!departure) {
+        alert("Arrival must be different from department");
+        setFieldValue("arrival", "");
+      }
+    },
   };
 
+  const handleSwitchPlace = () => {
+    setFieldValue("departure", arrival);
+    setFieldValue("arrival", departure);
+  };
   return (
     <CommonStyledFlex
       $alignItems="center"
@@ -101,13 +113,19 @@ const SwitchTripBar = ({
           onSuggestionsClearRequested={onSuggestionsClearRequested}
           getSuggestionValue={getSuggestion}
           renderSuggestion={renderSuggestion}
-          inputProps={inputPropsDepartment}
+          inputProps={inputPropsDeparture}
         />
       </AutoSuggestWrapper>
 
-      <CommonStyledBox $marginLeft="1rem" $marginRight="1rem" $cursor="pointer">
+      <CommonStyledBox
+        $marginLeft="1rem"
+        $marginRight="1rem"
+        $cursor="pointer"
+        onClick={handleSwitchPlace}
+      >
         <FontAwesomeIcon icon={faRightLeft} />
       </CommonStyledBox>
+
       <AutoSuggestWrapper>
         <Autosuggest
           suggestions={suggestions}

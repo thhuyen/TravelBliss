@@ -14,9 +14,9 @@ const SearchTrainBar = (props: Props) => {
       initialValues={{ datePicker: "", departure: "", arrival: "" }}
       onSubmit={(values) => {
         const { departure, arrival } = values;
-        // if (!departure || !arrival) {
-        //   return alert("Please fill enough information");
-        // }
+        if (!departure || !arrival) {
+          return alert("Please fill enough information");
+        }
         console.log("====values", values);
       }}
     >
