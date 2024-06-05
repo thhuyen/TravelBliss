@@ -41,6 +41,10 @@ const messages = {
 
   // Congrats
   congratsMessage: "You have created account successfully. Please go back to Sign in page to proceed further.",
+
+  //Date picker trip
+  SELECT_DEPARTURE: "Please select departure first!",
+  DEPARTURE_DIFFER_ARRIVAL: "Arrival must be different from departure!"
 } as const;
 
 const routes = {

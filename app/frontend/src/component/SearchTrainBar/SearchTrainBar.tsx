@@ -11,10 +11,14 @@ type Props = {};
 const SearchTrainBar = (props: Props) => {
   return (
     <Formik
-      initialValues={{ datePicker: "", departure: "", arrival: "" }}
+      initialValues={{
+        datePicker: "",
+        selectedDeparture: "",
+        selectedArrival: "",
+      }}
       onSubmit={(values) => {
-        const { departure, arrival } = values;
-        if (!departure || !arrival) {
+        const { selectedDeparture, selectedArrival } = values;
+        if (!selectedDeparture || !selectedArrival) {
           return alert("Please fill enough information");
         }
         console.log("====values", values);

@@ -1,26 +1,31 @@
-import React, { useState, useMemo, useRef } from "react";
+import get from "lodash/get";
+import React, { useState, useRef } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRightLeft } from "@fortawesome/free-solid-svg-icons";
 import Autosuggest, {
   ChangeEvent,
+  SuggestionSelectedEventData,
   SuggestionsFetchRequestedParams,
 } from "react-autosuggest";
 
-import { labels } from "../../constant";
+import { labels, messages } from "../../constant";
 import { AutoSuggestWrapper } from "./styles";
 import { CommonStyledBox, CommonStyledFlex } from "../StyleComponent";
 import { stations } from "./data";
 
 type Props = {
-  values: { departure: string; arrival: string };
+  values: { selectedDeparture: string; selectedArrival: string };
   setFieldValue: (field: string, value: any, shouldValidate?: boolean) => void;
 };
 
 const SwitchTripBar = ({
-  values: { departure, arrival },
+  values: { selectedDeparture, selectedArrival },
   setFieldValue,
 }: Props) => {
+  const [departure, setDeparture] = useState<string>("");
+  const [arrival, setArrival] = useState<string>("");
   const departureRef = useRef<HTMLInputElement>(null);
+  const arrivalRef = useRef<HTMLInputElement>(null);
   const getSuggestionList = (value: string): string[] => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
@@ -56,49 +61,63 @@ const SwitchTripBar = ({
     name: "departure",
     placeholder: labels.CHOOSE_DEPARTURE,
     value: departure,
+    ref: departureRef,
     onChange: (
       event: React.FormEvent<HTMLElement>,
       { newValue }: ChangeEvent
-    ) => {
+    ): void => {
       if (arrival) {
+        setArrival("");
         setFieldValue("arrival", "");
       }
-      setFieldValue("departure", newValue);
+      setFieldValue("selectedDeparture", "");
+      setDeparture(newValue);
     },
-    ref: departureRef,
   };
 
   const inputPropsArrival = {
     id: "arrival",
     name: "arrival",
+    ref: arrivalRef,
     placeholder: labels.CHOOSE_ARRIVAL,
     value: arrival,
-    onClick: () => {
-      if (!departure) {
-        alert("Please choose departure first!");
-        if (departureRef && departureRef.current) {
-          departureRef.current.focus();
-        }
+    onClick: (): void => {
+      if (!selectedDeparture) {
+        alert(messages.SELECT_DEPARTURE);
+        departureRef?.current?.focus();
+        return;
       }
     },
     onChange: (
       event: React.FormEvent<HTMLElement>,
       { newValue }: ChangeEvent
-    ) => {
-      setFieldValue("arrival", newValue);
+    ): void => {
+      setFieldValue("selectedArrival", "");
+      setArrival(newValue);
     },
-    onBlur: () => {
-      if (departure === arrival && !!departure) {
-        alert("Arrival must be different from department");
-        setFieldValue("arrival", "");
+    onBlur: (): void => {
+      if (selectedDeparture === selectedArrival && !!selectedDeparture) {
+        alert(messages.DEPARTURE_DIFFER_ARRIVAL);
+        setArrival("");
+        setFieldValue("selectedArrival", "");
+
+        setTimeout(() => {
+          arrivalRef?.current?.focus();
+        }, 0);
+        return;
       }
     },
   };
 
   const handleSwitchPlace = () => {
-    setFieldValue("departure", arrival);
-    setFieldValue("arrival", departure);
+    if (!!selectedDeparture && !!selectedArrival) {
+      setDeparture(arrival);
+      setArrival(departure);
+      setFieldValue("departure", arrival);
+      setFieldValue("arrival", departure);
+    }
   };
+
   return (
     <CommonStyledFlex
       $alignItems="center"
@@ -112,6 +131,10 @@ const SwitchTripBar = ({
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
           getSuggestionValue={getSuggestion}
+          onSuggestionSelected={(
+            event: React.FormEvent<HTMLElement>,
+            data: SuggestionSelectedEventData<string>
+          ): void => setFieldValue("selectedDeparture", data.suggestionValue)}
           renderSuggestion={renderSuggestion}
           inputProps={inputPropsDeparture}
         />
@@ -131,6 +154,10 @@ const SwitchTripBar = ({
           suggestions={suggestions}
           onSuggestionsFetchRequested={onSuggestionsFetchRequested}
           onSuggestionsClearRequested={onSuggestionsClearRequested}
+          onSuggestionSelected={(
+            event: React.FormEvent<HTMLElement>,
+            data: SuggestionSelectedEventData<string>
+          ): void => setFieldValue("selectedArrival", data.suggestionValue)}
           getSuggestionValue={getSuggestion}
           renderSuggestion={renderSuggestion}
           inputProps={inputPropsArrival}
