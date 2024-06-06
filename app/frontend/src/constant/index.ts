@@ -72,6 +72,7 @@ const texts = {
 
 const colors = {
   primary50: '#FEF4EE',
+  primary200: '#F9C9AF',
   primary300: '#f4a37d',
   primary400: '#ef7348',
   primary500: '#EA4E22',

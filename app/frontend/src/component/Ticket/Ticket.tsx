@@ -81,9 +81,7 @@ const Ticket = ({
         $height="100%"
         $justifyContent="center"
       >
-        <Button width="70%" type="button">
-          Choose seat
-        </Button>
+        <Button type="button">Choose seat</Button>
       </CommonStyledFlex>
     </TicketWrapper>
   );
