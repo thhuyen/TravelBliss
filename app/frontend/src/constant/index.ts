@@ -48,11 +48,12 @@ const messages = {
 } as const;
 
 const routes = {
-  signUp: "/signup",
-  otp: "/otp",
-  congrats: "/congrats",
-  signIn: "/",
-  home: "/home",
+  SIGNUP: "/signup",
+  OTP: "/otp",
+  CONGRATS: "/congrats",
+  LOGIN: "/",
+  HOME: "/home",
+  BOOK_TICKETS: '/book_tickets'
 } as const;
 
 const texts = {
@@ -77,6 +78,7 @@ const colors = {
   primary600: '#DC381A',
   secondary50: '#f5f5f6',
   secondary100: '#e4e5e9',
+  secondary200: '#cdd0d4',
   secondary300: '#AAAEB6',
   secondary400: '#7f8591',
   secondary500: '#646976',

@@ -21,6 +21,7 @@ export const Input = styled(Field)`
 `;
 export const Button = styled.button<{ width?: string; disabled?: boolean }>`
   width: ${(props) => props.width ?? "inherit"};
+  height: fit-content;
   color: white;
   text-transform: uppercase;
   font-weight: 600;

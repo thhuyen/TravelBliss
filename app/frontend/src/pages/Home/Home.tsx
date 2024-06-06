@@ -24,7 +24,6 @@ import {
   StyledReasonBox,
   StyledFAQ,
 } from "./styles";
-import DatePicker from "../../component/DatePicker";
 import SearchTrainBar from "../../component/SearchTrainBar";
 
 const Home: React.FC = () => {

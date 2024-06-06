@@ -17,6 +17,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 `;
 
+
 export const FixedPosition = styled.div`
   position: fixed;
   top: 0;

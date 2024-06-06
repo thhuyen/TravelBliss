@@ -16,11 +16,11 @@ type HeaderProps = {
 };
 
 const Header: React.FC<HeaderProps> = ({ isAuthenticated }) => {
-  const NavItemPaths = [routes.home, "/guide", "/contact", "/about"];
+  const NavItemPaths = [routes.HOME, "/guide", "/contact", "/about"];
 
   const mapPathContent = (path: string) => {
     switch (path) {
-      case routes.home:
+      case routes.HOME:
         return "Home";
       case "/guide":
         return "Guide";
