@@ -2,6 +2,7 @@ import React from "react";
 import Ticket from "../../component/Ticket.tsx";
 import Header from "../../component/Header";
 import { CommonStyledBox } from "../../component/StyleComponent";
+import { tickets } from "./data";
 
 type Props = {};
 
@@ -15,7 +16,9 @@ const BookTickets = (props: Props) => {
         $marginLeft="auto"
         $marginRight="auto"
       >
-        <Ticket />
+        {tickets.map((ticketDetails) => (
+          <Ticket {...ticketDetails} />
+        ))}
       </CommonStyledBox>
     </>
   );

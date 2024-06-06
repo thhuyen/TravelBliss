@@ -1,29 +1,41 @@
 import React from "react";
-import { TicketDetails, TicketWrapper } from "./styles";
-import {
-  CommonStyledFlex,
-  StyledTextP,
-  StyledTextSpan,
-} from "../StyleComponent";
+import { TicketDetailsWrapper, TicketWrapper, TicketDetails } from "./styles";
+import { CommonStyledFlex, StyledTextSpan } from "../StyleComponent";
 import { Button } from "../StyleComponent/StyledForm";
 
-type Props = {};
+type Props = {
+  id: number;
+  departureTime: string;
+  arrivalTime: string;
+  departurePlace: string;
+  arrivalPlace: string;
+  train: { trainCode: string; availableSeatTotal: string };
+  price: string;
+};
 
-const Ticket = (props: Props) => {
+const Ticket = ({
+  id,
+  departureTime,
+  arrivalTime,
+  departurePlace,
+  arrivalPlace,
+  train: { trainCode, availableSeatTotal },
+  price,
+}: Props) => {
+  const [departureDate, departureSpecificTime] = departureTime.split(" ");
+  const [arrivalDate, arrivalSpecificTime] = arrivalTime.split(" ");
   return (
-    <TicketWrapper>
-      <TicketDetails>
-        <StyledTextP $lineHeight="1.5" $fontWeight="600">
-          Departure
-        </StyledTextP>
-        <StyledTextP $lineHeight="1.5" $fontWeight="600">
-          6:10
-        </StyledTextP>
-        <StyledTextP $lineHeight="1.5">May 11</StyledTextP>
-        <StyledTextP $lineHeight="1.5">Ha Noi</StyledTextP>
-      </TicketDetails>
+    <TicketWrapper key={id}>
+      <TicketDetailsWrapper className="departure">
+        <TicketDetails $fontWeight="600">Departure</TicketDetails>
+        <TicketDetails $fontWeight="600">
+          {departureSpecificTime.slice(0, 5)}
+        </TicketDetails>
+        <TicketDetails>{departureDate}</TicketDetails>
+        <TicketDetails>{departurePlace}</TicketDetails>
+      </TicketDetailsWrapper>
 
-      <TicketDetails className="arrow">
+      <TicketDetailsWrapper className="arrow">
         <CommonStyledFlex
           $alignItems="center"
           $height="100%"
@@ -31,24 +43,26 @@ const Ticket = (props: Props) => {
         >
           <img src="/imgs/arrow.png" alt="logo" width={200} height={20} />
         </CommonStyledFlex>
-      </TicketDetails>
+      </TicketDetailsWrapper>
 
-      <TicketDetails>
-        <StyledTextP $fontWeight="600">Arrival</StyledTextP>
-        <StyledTextP $fontWeight="600">17:58</StyledTextP>
-        <StyledTextP>May 12</StyledTextP>
-        <StyledTextP>Sai Gon</StyledTextP>
-      </TicketDetails>
+      <TicketDetailsWrapper className="arrival">
+        <TicketDetails $fontWeight="600">Arrival</TicketDetails>
+        <TicketDetails $fontWeight="600">
+          {arrivalSpecificTime.slice(0, 5)}
+        </TicketDetails>
+        <TicketDetails>{arrivalDate}</TicketDetails>
+        <TicketDetails>{arrivalPlace}</TicketDetails>
+      </TicketDetailsWrapper>
 
-      <TicketDetails>
-        <StyledTextP $fontWeight="600">Train</StyledTextP>
-        <StyledTextP $fontWeight="600">SE07</StyledTextP>
-        <StyledTextP>231 available seats</StyledTextP>
-      </TicketDetails>
+      <TicketDetailsWrapper>
+        <TicketDetails $fontWeight="600">Train</TicketDetails>
+        <TicketDetails $fontWeight="600">{trainCode}</TicketDetails>
+        <TicketDetails>{`${availableSeatTotal} available seats`}</TicketDetails>
+      </TicketDetailsWrapper>
 
-      <TicketDetails>
-        <StyledTextP $fontWeight="600">Price</StyledTextP>
-        <StyledTextP>
+      <TicketDetailsWrapper>
+        <TicketDetails $fontWeight="600">Price</TicketDetails>
+        <TicketDetails>
           <StyledTextSpan $display="inline-block" $marginRight="0.5rem">
             from
           </StyledTextSpan>
@@ -57,12 +71,20 @@ const Ticket = (props: Props) => {
             $fontWeight="600"
             $fontSize="1.2rem"
           >
-            895.000
+            {price.replace(/\B(?=(\d{3})+(?!\d))/g, ".")}
           </StyledTextSpan>
-        </StyledTextP>
-      </TicketDetails>
+        </TicketDetails>
+      </TicketDetailsWrapper>
 
-      <Button>Choose seat</Button>
+      <CommonStyledFlex
+        $alignItems="center"
+        $height="100%"
+        $justifyContent="center"
+      >
+        <Button width="70%" type="button">
+          Choose seat
+        </Button>
+      </CommonStyledFlex>
     </TicketWrapper>
   );
 };
