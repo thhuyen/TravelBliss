@@ -38,6 +38,8 @@ const messages = {
   otpMessage: "Please check your phone for the verification code we just sent you and enter that code in the box below.",
   invalidOtp: "Your code isn't valid, try again",
   requiredOtp: "Please fill out your OTP",
+  expiredOtp: "This OTP is expired, click 'Resent' button to get new one",
+  invalidFormat: "The OTP contains 6 digits only",
 
   // Congrats
   congratsMessage: "You have created account successfully. Please go back to Sign in page to proceed further.",
@@ -87,4 +89,8 @@ const colors = {
   green600: "#276955"
 } as const;
 
-export { texts, messages, labels, routes, colors }
+const figures = {
+  expiredOtp: 90,
+  resendTime: 10
+}
+export { texts, messages, labels, routes, colors, figures }
