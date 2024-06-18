@@ -1,5 +1,5 @@
 import get from "lodash/get";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Formik, FormikHelpers, FormikValues } from "formik";
 import emailjs from "@emailjs/browser";
 import * as Yup from "yup";
@@ -35,12 +35,14 @@ const OtpForm = () => {
   const { values: userInfo } = state;
 
   const { createUser } = useCreateUser();
-  const [otp, setOtp] = useState(() =>
-    Math.floor(100000 + Math.random() * (figures.expiredOtp * 10000)).toString()
-  );
   const [counter, setCounter] = useState<number>(figures.resendTime);
   const [expiredOtpCounter, setExpiredOtpCounter] = useState<number>(
     figures.expiredOtp
+  );
+
+  const isValidOtpRef = useRef<boolean>(false);
+  const otpValueRef = useRef<string>(
+    Math.floor(100000 + Math.random() * (figures.expiredOtp * 10000)).toString()
   );
 
   const navigate = useNavigate();
@@ -50,8 +52,11 @@ const OtpForm = () => {
       if (counter > 0) {
         setCounter((counter) => counter - 1);
       }
+
       if (expiredOtpCounter > 0) {
         setExpiredOtpCounter((counter) => counter - 1);
+      } else {
+        isValidOtpRef.current = false;
       }
     }, 1000);
 
@@ -61,7 +66,7 @@ const OtpForm = () => {
   useEffect(() => {
     const templateParams = {
       name: userInfo?.fullName,
-      message: "The OTP to verify you is " + otp,
+      message: "The OTP to verify you is " + otpValueRef.current,
       email: userInfo?.email,
     };
 
@@ -71,6 +76,7 @@ const OtpForm = () => {
 
     emailjs.send("service_r969bxl", "template_yjj5wgf", templateParams).then(
       (response) => {
+        isValidOtpRef.current = true;
         console.log("SUCCESS!", response.status, response.text);
       },
       (error) => {
@@ -78,7 +84,7 @@ const OtpForm = () => {
       }
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [otp]);
+  }, [otpValueRef.current]);
 
   const validations = useMemo(
     () => ({
@@ -89,21 +95,14 @@ const OtpForm = () => {
         otpInput: Yup.string()
           .required(messages.requiredOtp)
           .max(6, messages.invalidFormat)
-          .min(6, messages.invalidFormat)
-          .test(
-            "Expired otp",
-            messages.expiredOtp, // <- key, message
-            (value: string) => {
-              return value === otp && expiredOtpCounter === 0;
-            }
-          ),
+          .min(6, messages.invalidFormat),
       }),
       onSubmit: async (
         values: FormikValues,
         { setSubmitting, setErrors }: FormikHelpers<FormValues>
       ) => {
         const { otpInput } = values as FormValues;
-        if (otpInput !== otp) {
+        if (otpInput !== otpValueRef.current || !isValidOtpRef.current) {
           setErrors({ otpInput: messages.invalidOtp });
           setSubmitting(false);
           return;
@@ -123,11 +122,9 @@ const OtpForm = () => {
   const handleResent = () => {
     setCounter(figures.resendTime);
     setExpiredOtpCounter(figures.expiredOtp);
-    setOtp(
-      Math.floor(
-        100000 + Math.random() * (figures.expiredOtp * 10000)
-      ).toString()
-    );
+    otpValueRef.current = Math.floor(
+      100000 + Math.random() * (figures.expiredOtp * 10000)
+    ).toString();
   };
 
   return (
