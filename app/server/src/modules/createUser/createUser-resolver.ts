@@ -11,7 +11,7 @@ const resolver = {
       const { createUserInput } = args;
       const createUserService = new createUserAPI();
       const result = await createUserService.createUser(createUserInput);
-      return get(result, "data");
+      return get(result, "data.user");
     },
   },
 };

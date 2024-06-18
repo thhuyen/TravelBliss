@@ -1,6 +1,7 @@
 import get from "lodash/get";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Formik, FormikHelpers, FormikValues } from "formik";
+import emailjs from "@emailjs/browser";
 import * as Yup from "yup";
 import {
   Label,
@@ -15,59 +16,98 @@ import {
   CommonStyledFlex,
   CommonStyledBox,
 } from "../../component/StyleComponent";
-import { colors, messages, labels } from "../../constant";
+import { colors, messages, labels, figures } from "../../constant";
 import { useCreateUser } from "../../hooks/useCreateUser";
 
 type FormValues = {
-  otp: string;
+  otpInput: string;
 };
 
-const ReSendButton = styled(Button)`
+const ReSendButton = styled(Button)<{ disabled: boolean }>`
   margin-top: 0.3rem;
   margin-left: 0.5rem;
   text-transform: capitalize;
+  cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
 `;
 
 const OtpForm = () => {
-  const navigate = useNavigate();
   const { state } = useLocation();
+  const { values: userInfo } = state;
+
   const { createUser } = useCreateUser();
-  const [counter, setCounter] = useState<number>(10);
-  const [validOtpCounter, setValidOtpCounter] = useState<number>(90);
+  const [counter, setCounter] = useState<number>(figures.resendTime);
+  const [expiredOtpCounter, setExpiredOtpCounter] = useState<number>(
+    figures.expiredOtp
+  );
+
+  const isValidOtpRef = useRef<boolean>(false);
+  const otpValueRef = useRef<string>(
+    Math.floor(100000 + Math.random() * (figures.expiredOtp * 10000)).toString()
+  );
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const timer = setInterval(() => {
       if (counter > 0) {
         setCounter((counter) => counter - 1);
       }
-      if (validOtpCounter > 0) {
-        setValidOtpCounter((counter) => counter - 1);
+
+      if (expiredOtpCounter > 0) {
+        setExpiredOtpCounter((counter) => counter - 1);
+      } else {
+        isValidOtpRef.current = false;
       }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [counter, setCounter, validOtpCounter, setValidOtpCounter]);
+  }, [counter, expiredOtpCounter]);
+
+  useEffect(() => {
+    const templateParams = {
+      name: userInfo?.fullName,
+      message: "The OTP to verify you is " + otpValueRef.current,
+      email: userInfo?.email,
+    };
+
+    emailjs.init({
+      publicKey: "vSaB3z3rdQWSPNQ8P",
+    });
+
+    emailjs.send("service_r969bxl", "template_yjj5wgf", templateParams).then(
+      (response) => {
+        isValidOtpRef.current = true;
+        console.log("SUCCESS!", response.status, response.text);
+      },
+      (error) => {
+        console.log("FAILED...", error);
+      }
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [otpValueRef.current]);
 
   const validations = useMemo(
     () => ({
       initialValues: {
-        otp: "",
+        otpInput: "",
       },
       validationSchema: Yup.object({
-        otp: Yup.string().required(messages.requiredOtp),
+        otpInput: Yup.string()
+          .required(messages.requiredOtp)
+          .max(6, messages.invalidFormat)
+          .min(6, messages.invalidFormat),
       }),
       onSubmit: async (
         values: FormikValues,
         { setSubmitting, setErrors }: FormikHelpers<FormValues>
       ) => {
-        const { otp } = values as FormValues;
-        if (otp !== "123456") {
-          setErrors({ otp: messages.invalidOtp });
+        const { otpInput } = values as FormValues;
+        if (otpInput !== otpValueRef.current || !isValidOtpRef.current) {
+          setErrors({ otpInput: messages.invalidOtp });
           setSubmitting(false);
           return;
         }
 
-        const { values: userInfo } = state;
         const result = await createUser(userInfo);
 
         if (get(result, "data")) {
@@ -79,30 +119,38 @@ const OtpForm = () => {
     []
   );
 
-  const handleClick = () => {
-    setCounter(10);
-    setValidOtpCounter(90);
+  const handleResent = () => {
+    setCounter(figures.resendTime);
+    setExpiredOtpCounter(figures.expiredOtp);
+    otpValueRef.current = Math.floor(
+      100000 + Math.random() * (figures.expiredOtp * 10000)
+    ).toString();
   };
 
   return (
     <Formik {...validations}>
       <StyledAuthenForm method="post">
-        <Label htmlFor="otp">{labels.VERIFICATION_CODE}</Label> <br />
+        <Label htmlFor="otpInput">{labels.VERIFICATION_CODE}</Label> <br />
         <CommonStyledFlex>
-          <Input id="otp" name="otp" type="text" placeholder="123456" />
+          <Input
+            id="otpInput"
+            name="otpInput"
+            type="text"
+            placeholder="123456"
+          />
           <ReSendButton
             type="button"
             width="30%"
             disabled={counter !== 0}
-            onClick={handleClick}
+            onClick={handleResent}
           >
             {labels.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
         </CommonStyledFlex>
-        <FormErrorMessage inputName="otp" />
+        <FormErrorMessage inputName="otpInput" />
         <CommonStyledBox $marginTop="0.5rem" $marginLeft="0.5rem">
           <CommonStyledBox $color={colors.primary500}>
-            OTP valid {"(" + validOtpCounter + "s)"}
+            OTP valid {"(" + expiredOtpCounter + "s)"}
           </CommonStyledBox>
         </CommonStyledBox>
         <CommonStyledBox $marginTop="1.5rem">

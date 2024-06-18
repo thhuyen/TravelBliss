@@ -13,7 +13,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsxFactory": "React.createElement"
+    "jsxFactory": "React.createElement",
+    "allowImportingTsExtensions": true
   },
   "include": ["src/**/*.tsx", "src/**/*.ts"],
   "exclude": ["node_modules"]

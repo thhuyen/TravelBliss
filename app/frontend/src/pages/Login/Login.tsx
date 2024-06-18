@@ -37,7 +37,7 @@ const Login: React.FC = () => {
         phoneNumber: Yup.string().required(messages.requiredPhoneNumber),
       }),
       onSubmit: (values: any) => {
-        navigate(routes.home, { state: { values } });
+        navigate(routes.HOME, { state: { values } });
       },
     }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +115,7 @@ const Login: React.FC = () => {
                 <StyledTextSpan $fontSize="smaller" $marginRight="0.5rem">
                   {texts.NOT_MEMBER}
                 </StyledTextSpan>
-                <StyledLink to={routes.signUp} $fontSize="smaller">
+                <StyledLink to={routes.SIGNUP} $fontSize="smaller">
                   {labels.SIGN_UP}
                 </StyledLink>
               </CommonStyledFlex>

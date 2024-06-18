@@ -38,17 +38,24 @@ const messages = {
   otpMessage: "Please check your phone for the verification code we just sent you and enter that code in the box below.",
   invalidOtp: "Your code isn't valid, try again",
   requiredOtp: "Please fill out your OTP",
+  expiredOtp: "This OTP is expired, click 'Resent' button to get new one",
+  invalidFormat: "The OTP contains 6 digits only",
 
   // Congrats
   congratsMessage: "You have created account successfully. Please go back to Sign in page to proceed further.",
+
+  //Date picker trip
+  SELECT_DEPARTURE: "Please select departure first!",
+  DEPARTURE_DIFFER_ARRIVAL: "Arrival must be different from departure!"
 } as const;
 
 const routes = {
-  signUp: "/signup",
-  otp: "/otp",
-  congrats: "/congrats",
-  signIn: "/",
-  home: "/home",
+  SIGNUP: "/signup",
+  OTP: "/otp",
+  CONGRATS: "/congrats",
+  LOGIN: "/",
+  HOME: "/home",
+  BOOK_TICKETS: '/book_tickets'
 } as const;
 
 const texts = {
@@ -67,12 +74,14 @@ const texts = {
 
 const colors = {
   primary50: '#FEF4EE',
+  primary200: '#F9C9AF',
   primary300: '#f4a37d',
   primary400: '#ef7348',
   primary500: '#EA4E22',
   primary600: '#DC381A',
   secondary50: '#f5f5f6',
   secondary100: '#e4e5e9',
+  secondary200: '#cdd0d4',
   secondary300: '#AAAEB6',
   secondary400: '#7f8591',
   secondary500: '#646976',
@@ -80,4 +89,8 @@ const colors = {
   green600: "#276955"
 } as const;
 
-export { texts, messages, labels, routes, colors }
+const figures = {
+  expiredOtp: 90,
+  resendTime: 10
+}
+export { texts, messages, labels, routes, colors, figures }
