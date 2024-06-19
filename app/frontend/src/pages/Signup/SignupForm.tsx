@@ -16,6 +16,7 @@ import {
 } from "../../component/StyleComponent/StyledForm";
 import { useNavigate } from "react-router-dom";
 import { labels, messages } from "../../constant";
+import { UserInfo } from "./types";
 
 const SignupForm = () => {
   const navigate = useNavigate();
@@ -64,7 +65,7 @@ const SignupForm = () => {
           ),
         acceptance: Yup.bool().oneOf([true], messages.acceptance),
       }),
-      onSubmit: (values: any) => {
+      onSubmit: (values: UserInfo) => {
         navigate("/otp", { state: { values } });
       },
     }),

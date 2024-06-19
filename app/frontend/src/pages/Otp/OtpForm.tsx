@@ -9,8 +9,7 @@ import {
   StyledAuthenForm,
   Button,
 } from "../../component/StyleComponent/StyledForm";
-import { useLocation, useNavigate } from "react-router-dom";
-import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import FormErrorMessage from "../../component/FormErrorMessage/FormErrorMessage";
 import {
   CommonStyledFlex,
@@ -18,22 +17,18 @@ import {
 } from "../../component/StyleComponent";
 import { colors, messages, labels, figures } from "../../constant";
 import { useCreateUser } from "../../hooks/useCreateUser";
+import { ReSendButton } from "./styles";
+import { UserInfo } from "../Signup/types";
 
 type FormValues = {
   otpInput: string;
 };
 
-const ReSendButton = styled(Button)<{ disabled: boolean }>`
-  margin-top: 0.3rem;
-  margin-left: 0.5rem;
-  text-transform: capitalize;
-  cursor: ${({ disabled }) => (disabled ? "no-drop" : "pointer")};
-`;
+type OtpFormProps = {
+  userInfo: UserInfo;
+};
 
-const OtpForm = () => {
-  const { state } = useLocation();
-  const { values: userInfo } = state;
-
+const OtpForm = ({ userInfo }: OtpFormProps) => {
   const { createUser } = useCreateUser();
   const [counter, setCounter] = useState<number>(figures.resendTime);
   const [expiredOtpCounter, setExpiredOtpCounter] = useState<number>(
