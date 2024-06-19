@@ -22,13 +22,11 @@ const Otp = () => {
     return null; // Render nothing or a loading indicator while redirecting
   }
 
-  const { values } = state;
-
   return (
     <AuthenLayout background="/imgs/signup.jpg">
       <Title>Verification</Title>
       <NotificationMessage>{messages.otpMessage}</NotificationMessage>
-      <OtpForm userInfo={values} />
+      <OtpForm userInfo={state.values} />
     </AuthenLayout>
   );
 };

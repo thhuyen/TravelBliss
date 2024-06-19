@@ -19,6 +19,7 @@ import { colors, messages, labels, figures } from "../../constant";
 import { useCreateUser } from "../../hooks/useCreateUser";
 import { ReSendButton } from "./styles";
 import { UserInfo } from "../Signup/types";
+import useSessionStorage from "../../hooks/useSessionStorage";
 
 type FormValues = {
   otpInput: string;
@@ -30,12 +31,13 @@ type OtpFormProps = {
 
 const OtpForm = ({ userInfo }: OtpFormProps) => {
   const { createUser } = useCreateUser();
+  const { setSessionStorageWithExpiry, getSessionStorageWithExpiry } =
+    useSessionStorage();
   const [counter, setCounter] = useState<number>(figures.resendTime);
   const [expiredOtpCounter, setExpiredOtpCounter] = useState<number>(
     figures.expiredOtp
   );
 
-  const isValidOtpRef = useRef<boolean>(false);
   const otpValueRef = useRef<string>(
     Math.floor(100000 + Math.random() * (figures.expiredOtp * 10000)).toString()
   );
@@ -50,8 +52,6 @@ const OtpForm = ({ userInfo }: OtpFormProps) => {
 
       if (expiredOtpCounter > 0) {
         setExpiredOtpCounter((counter) => counter - 1);
-      } else {
-        isValidOtpRef.current = false;
       }
     }, 1000);
 
@@ -71,7 +71,7 @@ const OtpForm = ({ userInfo }: OtpFormProps) => {
 
     emailjs.send("service_r969bxl", "template_yjj5wgf", templateParams).then(
       (response) => {
-        isValidOtpRef.current = true;
+        setSessionStorageWithExpiry("expiredOtp", "false", figures.expiredOtp);
         console.log("SUCCESS!", response.status, response.text);
       },
       (error) => {
@@ -97,7 +97,8 @@ const OtpForm = ({ userInfo }: OtpFormProps) => {
         { setSubmitting, setErrors }: FormikHelpers<FormValues>
       ) => {
         const { otpInput } = values as FormValues;
-        if (otpInput !== otpValueRef.current || !isValidOtpRef.current) {
+        const isValid = getSessionStorageWithExpiry("expiredOtp");
+        if (otpInput !== otpValueRef.current || !isValid) {
           setErrors({ otpInput: messages.invalidOtp });
           setSubmitting(false);
           return;
@@ -114,9 +115,10 @@ const OtpForm = ({ userInfo }: OtpFormProps) => {
     []
   );
 
-  const handleResent = () => {
+  const handleResend = () => {
     setCounter(figures.resendTime);
     setExpiredOtpCounter(figures.expiredOtp);
+    setSessionStorageWithExpiry("expiredOtp", "false", 90);
     otpValueRef.current = Math.floor(
       100000 + Math.random() * (figures.expiredOtp * 10000)
     ).toString();
@@ -137,7 +139,7 @@ const OtpForm = ({ userInfo }: OtpFormProps) => {
             type="button"
             width="30%"
             disabled={counter !== 0}
-            onClick={handleResent}
+            onClick={handleResend}
           >
             {labels.RE_SEND_BTN + " (" + counter + "s)"}
           </ReSendButton>
